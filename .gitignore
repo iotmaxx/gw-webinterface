@@ -128,6 +128,9 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
+# vscode
+.vscode/
+
 # Don't check auto-generated stuff into git
 coverage
 build
