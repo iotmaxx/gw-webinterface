@@ -55,7 +55,7 @@ function LocalNetworkIpConfigForm() {
   });
 
   const toggleCheckbox = event => {
-    setEnableIPv6(event.target.checked)
+    setEnableIPv6(event.target.checked);
   }
 
   return (

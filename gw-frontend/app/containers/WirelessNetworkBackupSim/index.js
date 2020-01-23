@@ -7,16 +7,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { FormattedMessage } from 'react-intl';
 import { compose } from 'redux';
 
-import messages from './messages';
+import WirelessNetworkSimConfigForm from 'components/WirelessNetworkSimConfigForm';
 
 export function WirelessNetworkBackupSim() {
   return (
-    <div>
-      <FormattedMessage {...messages.header} />
-    </div>
+    <WirelessNetworkSimConfigForm />
   );
 }
 
