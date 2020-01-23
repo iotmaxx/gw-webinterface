@@ -141,3 +141,6 @@ stats.json
 .DS_Store
 npm-debug.log
 .idea
+
+# static folder since it contains generated files
+static
