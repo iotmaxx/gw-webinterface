@@ -11,16 +11,20 @@ import PropTypes from 'prop-types';
 
 import styled from 'styled-components';
 
-const StyledLink = styled(Link)`
-  color: #e16720;
-  text-decoration: none;
-`;
+function MenuDropdownItem({to, caption, depth=1}) {
+  const StyledLink = styled(Link)`
+    color: #e16720;
+    text-decoration: none;
+  `;
 
-function MenuDropdownItem({to, caption}) {
+  const StyledDD = styled.dd`
+    margin-left: ${depth * 20}px;
+  `;
+
   return (
-    <dd>
+    <StyledDD>
       <StyledLink to={to}>{caption}</StyledLink>
-    </dd>
+    </StyledDD>
   );
 }
 
