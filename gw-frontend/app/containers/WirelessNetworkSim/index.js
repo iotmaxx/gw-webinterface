@@ -10,6 +10,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 
 import WirelessNetworkSimConfigForm from 'components/WirelessNetworkSimConfigForm';
+import PukForm from 'components/PukForm';
 
 // TODO: Remove needPuk Mockup
 export function WirelessNetworkSim() {
@@ -25,15 +26,9 @@ export function WirelessNetworkSim() {
 
   return (
     <div>
-      {simEnabled ? (
-        <WirelessNetworkSimConfigForm />
-      ) : (
-        <div>
-          <label htmlFor="puk">Please provide PUK</label>
-          <input name="puk" />
-          <button onClick={clickHandler}>Apply</button>
-        </div>
-      ) }
+      {
+        simEnabled ? <WirelessNetworkSimConfigForm /> : <PukForm clickHandler={clickHandler}/>
+      }
       <br/>
       <label htmlFor="simEnabled">SIM card enabled?</label>
       <input name="simEnabled" checked={simEnabled} onChange={(event) => toggleCheckbox(event)} type="checkbox" />
