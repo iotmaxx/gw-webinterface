@@ -1,5 +1,7 @@
 import { createGlobalStyle } from 'styled-components';
 
+import { MAIN_COLORS } from 'containers/App/constants';
+
 const GlobalStyle = createGlobalStyle`
   html,
   body {
@@ -17,17 +19,30 @@ const GlobalStyle = createGlobalStyle`
 
   #app {
     background-color: #fafafa;
-    min-height: 100%;
+    height: 100%;
     min-width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
   }
 
   p,
   label {
-    font-family: Georgia, Times, 'Times New Roman', serif;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     line-height: 1.5em;
+  }
+
+  button {
+    background-color: ${MAIN_COLORS.orange};
+    border-radius: 10px;
+    border-width: 0px;
+    padding: 6px;
+    margin-top: 20px;
+  }
+
+  label {
+    margin-top: 16px;
+  }
+
+  form {
+    justify-content: center;
   }
 `;
 

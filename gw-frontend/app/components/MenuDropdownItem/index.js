@@ -9,13 +9,24 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-// import styled from 'styled-components';
+import styled from 'styled-components';
 
-function MenuDropdownItem({to, caption}) {
+import { MAIN_COLORS } from 'containers/App/constants';
+
+function MenuDropdownItem({to, caption, depth=1}) {
+  const StyledLink = styled(Link)`
+    color: ${MAIN_COLORS.orange};
+    text-decoration: none;
+  `;
+
+  const StyledDD = styled.dd`
+    margin-left: ${depth * 20}px;
+  `;
+
   return (
-    <dd>
-      <Link to={to}>{caption}</Link>
-    </dd>
+    <StyledDD>
+      <StyledLink to={to}>{caption}</StyledLink>
+    </StyledDD>
   );
 }
 

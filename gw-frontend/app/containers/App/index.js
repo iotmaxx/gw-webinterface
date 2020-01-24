@@ -67,80 +67,106 @@ import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import { ACCESS_TOKEN, ROUTES } from './constants';
 
 import SideNav from 'components/SideNav/Loadable';
+import Header from 'components/Header';
 
 import GlobalStyle from '../../global-styles';
+
+import styled from 'styled-components';
+
+const MainWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: inherit;
+`;
+
+const BodyWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  height: calc(100% - 10vh);
+  justify-content: flex-start;
+`;
+
+const ContentWrapper = styled.div`
+  margin-left: 1vw;
+  width: 100%;
+`;
 
 export default function App() {
   const accessToken = localStorage.getItem(ACCESS_TOKEN);
   return (
-    <div>
+    <MainWrapper>
+      <Header/>
+      <BodyWrapper>
       <SideNav/>
-      <Switch>
-        <Route exact path="/">
-          {accessToken && <Redirect to={ROUTES.dashboard} />}
-          {!accessToken && <Redirect to={ROUTES.login} />}
-        </Route>
-        <Route exact path={ROUTES.login} component={LoginView} />
-        
-        <AuthRoute exact path={ROUTES.dashboard} component={Dashboard} />
-        
-        <AuthRoute exact path={ROUTES.status.radio} component={StatusRadio} />
-        <AuthRoute exact path={ROUTES.status.networkConnection} component={StatusNetworkConnections} />
-        <AuthRoute exact path={ROUTES.status.ioStatus} component={StatusIoStats} />
-        <AuthRoute exact path={ROUTES.status.comServer} component={StatusComServer} />
-        <AuthRoute exact path={ROUTES.status.routingTable} component={StatusRoutingTable} />
-        <AuthRoute exact path={ROUTES.status.dhcpLease} component={StatusDhcpLeases} />
-        <AuthRoute exact path={ROUTES.status.systemInfo} component={StatusSystemInfo} />
+      <ContentWrapper>
+          <Switch>
+            <Route exact path="/">
+              {accessToken && <Redirect to={ROUTES.dashboard} />}
+              {!accessToken && <Redirect to={ROUTES.login} />}
+            </Route>
+            <Route exact path={ROUTES.login} component={LoginView} />
+            
+            <AuthRoute exact path={ROUTES.dashboard} component={Dashboard} />
+            
+            <AuthRoute exact path={ROUTES.status.radio} component={StatusRadio} />
+            <AuthRoute exact path={ROUTES.status.networkConnection} component={StatusNetworkConnections} />
+            <AuthRoute exact path={ROUTES.status.ioStatus} component={StatusIoStats} />
+            <AuthRoute exact path={ROUTES.status.comServer} component={StatusComServer} />
+            <AuthRoute exact path={ROUTES.status.routingTable} component={StatusRoutingTable} />
+            <AuthRoute exact path={ROUTES.status.dhcpLease} component={StatusDhcpLeases} />
+            <AuthRoute exact path={ROUTES.status.systemInfo} component={StatusSystemInfo} />
 
-        <AuthRoute exact path={ROUTES.localNetwork.ipConfig} component={LocalNetworkIpConfig} />
-        <AuthRoute exact path={ROUTES.localNetwork.dhcpServer} component={LocalNetworkDhcpServer} />
-        <AuthRoute exact path={ROUTES.localNetwork.staticRoutes} component={LocalNetworkStaticRoutes} />
+            <AuthRoute exact path={ROUTES.localNetwork.ipConfig} component={LocalNetworkIpConfig} />
+            <AuthRoute exact path={ROUTES.localNetwork.dhcpServer} component={LocalNetworkDhcpServer} />
+            <AuthRoute exact path={ROUTES.localNetwork.staticRoutes} component={LocalNetworkStaticRoutes} />
 
-        <AuthRoute exact path={ROUTES.wifi.radioSetup} component={WirelessNetworkRadioSetup} />
-        <AuthRoute exact path={ROUTES.wifi.sim} component={WirelessNetworkSim} />
-        <AuthRoute exact path={ROUTES.wifi.backupSim} component={WirelessNetworkBackupSim} />
-        <AuthRoute exact path={ROUTES.wifi.smsConfig} component={WirelessNetworkSmsConfig} />
-        <AuthRoute exact path={ROUTES.wifi.packetDataSetup} component={WirelessNetworkPacketDataSetup} />
-        <AuthRoute exact path={ROUTES.wifi.staticRoutes} component={WirelessNetworkStaticRoutes} />
-        <AuthRoute exact path={ROUTES.wifi.dynDns} component={WirelessNetworkDynDns} />
-        <AuthRoute exact path={ROUTES.wifi.connectionCheck} component={WirelessNetworkConnectionCheck} />
+            <AuthRoute exact path={ROUTES.wifi.radioSetup} component={WirelessNetworkRadioSetup} />
+            <AuthRoute exact path={ROUTES.wifi.sim} component={WirelessNetworkSim} />
+            <AuthRoute exact path={ROUTES.wifi.backupSim} component={WirelessNetworkBackupSim} />
+            <AuthRoute exact path={ROUTES.wifi.smsConfig} component={WirelessNetworkSmsConfig} />
+            <AuthRoute exact path={ROUTES.wifi.packetDataSetup} component={WirelessNetworkPacketDataSetup} />
+            <AuthRoute exact path={ROUTES.wifi.staticRoutes} component={WirelessNetworkStaticRoutes} />
+            <AuthRoute exact path={ROUTES.wifi.dynDns} component={WirelessNetworkDynDns} />
+            <AuthRoute exact path={ROUTES.wifi.connectionCheck} component={WirelessNetworkConnectionCheck} />
 
-        <AuthRoute exact path={ROUTES.networkSecurity.general} component={NetworkSecurityGeneralSetup} />
-        <AuthRoute exact path={ROUTES.networkSecurity.firewall} component={NetworkSecurityFirewall} />
-        <AuthRoute exact path={ROUTES.networkSecurity.ipPortForwarding} component={NetworkSecurityIpAndPortForwarding} />
+            <AuthRoute exact path={ROUTES.networkSecurity.general} component={NetworkSecurityGeneralSetup} />
+            <AuthRoute exact path={ROUTES.networkSecurity.firewall} component={NetworkSecurityFirewall} />
+            <AuthRoute exact path={ROUTES.networkSecurity.ipPortForwarding} component={NetworkSecurityIpAndPortForwarding} />
 
-        <AuthRoute exact path={ROUTES.ipSec.connection} component={VpnIPsecConnections} />
-        <AuthRoute exact path={ROUTES.ipSec.certificates} component={VpnIPsecCertificates} />
-        <AuthRoute exact path={ROUTES.ipSec.status} component={VpnIPsecStatus} />
+            <AuthRoute exact path={ROUTES.ipSec.connection} component={VpnIPsecConnections} />
+            <AuthRoute exact path={ROUTES.ipSec.certificates} component={VpnIPsecCertificates} />
+            <AuthRoute exact path={ROUTES.ipSec.status} component={VpnIPsecStatus} />
 
-        <AuthRoute exact path={ROUTES.openVpn.connections} component={VpnOpenVpnConnections} />
-        <AuthRoute exact path={ROUTES.openVpn.portForwarding} component={VpnOpenVpnPortForwarding} />
-        <AuthRoute exact path={ROUTES.openVpn.certificates} component={VpnOpenVpnCertificates} />
-        <AuthRoute exact path={ROUTES.openVpn.staticKeys} component={VpnOpenVpnStaticKeys} />
-        <AuthRoute exact path={ROUTES.openVpn.status} component={VpnOpenVpnStatus} />
+            <AuthRoute exact path={ROUTES.openVpn.connections} component={VpnOpenVpnConnections} />
+            <AuthRoute exact path={ROUTES.openVpn.portForwarding} component={VpnOpenVpnPortForwarding} />
+            <AuthRoute exact path={ROUTES.openVpn.certificates} component={VpnOpenVpnCertificates} />
+            <AuthRoute exact path={ROUTES.openVpn.staticKeys} component={VpnOpenVpnStaticKeys} />
+            <AuthRoute exact path={ROUTES.openVpn.status} component={VpnOpenVpnStatus} />
 
-        <AuthRoute exact path={ROUTES.io.inputs} component={IoInputs} />
-        <AuthRoute exact path={ROUTES.io.outputs} component={IoOutputs} />
-        <AuthRoute exact path={ROUTES.io.phonebook} component={IoPhonebook} />
-        <AuthRoute exact path={ROUTES.io.socketServer} component={IoSocketServer} />
-        <AuthRoute exact path={ROUTES.io.comServer} component={IoComServer} />
+            <AuthRoute exact path={ROUTES.io.inputs} component={IoInputs} />
+            <AuthRoute exact path={ROUTES.io.outputs} component={IoOutputs} />
+            <AuthRoute exact path={ROUTES.io.phonebook} component={IoPhonebook} />
+            <AuthRoute exact path={ROUTES.io.socketServer} component={IoSocketServer} />
+            <AuthRoute exact path={ROUTES.io.comServer} component={IoComServer} />
 
-        <AuthRoute exact path={ROUTES.system.hardware} component={SystemHardware} />
-        <AuthRoute exact path={ROUTES.system.software} component={SystemSoftware} />
-        <AuthRoute exact path={ROUTES.system.systemConfiguration} component={SystemSystemConfiguration} />
-        <AuthRoute exact path={ROUTES.system.user} component={SystemUser} />
-        <AuthRoute exact path={ROUTES.system.logFiles} component={SystemLogFile} />
-        <AuthRoute exact path={ROUTES.system.snmpConfig} component={SystemSnmpConfiguration} />
-        <AuthRoute exact path={ROUTES.system.smtpConfig} component={SystemSmtpConfiguration} />
-        <AuthRoute exact path={ROUTES.system.config} component={SystemConfiguration} />
-        <AuthRoute exact path={ROUTES.system.upDownload} component={SystemUpAndDownload} />
-        <AuthRoute exact path={ROUTES.system.rtc} component={SystemRtc} />
-        <AuthRoute exact path={ROUTES.system.reboot} component={SystemReboot} />
-        <AuthRoute exact path={ROUTES.system.firmwareUpdate} component={SystemFirmwareUpdate} />
+            <AuthRoute exact path={ROUTES.system.hardware} component={SystemHardware} />
+            <AuthRoute exact path={ROUTES.system.software} component={SystemSoftware} />
+            <AuthRoute exact path={ROUTES.system.systemConfiguration} component={SystemSystemConfiguration} />
+            <AuthRoute exact path={ROUTES.system.user} component={SystemUser} />
+            <AuthRoute exact path={ROUTES.system.logFiles} component={SystemLogFile} />
+            <AuthRoute exact path={ROUTES.system.snmpConfig} component={SystemSnmpConfiguration} />
+            <AuthRoute exact path={ROUTES.system.smtpConfig} component={SystemSmtpConfiguration} />
+            <AuthRoute exact path={ROUTES.system.config} component={SystemConfiguration} />
+            <AuthRoute exact path={ROUTES.system.upDownload} component={SystemUpAndDownload} />
+            <AuthRoute exact path={ROUTES.system.rtc} component={SystemRtc} />
+            <AuthRoute exact path={ROUTES.system.reboot} component={SystemReboot} />
+            <AuthRoute exact path={ROUTES.system.firmwareUpdate} component={SystemFirmwareUpdate} />
 
-        <Route component={NotFoundPage} />
-      </Switch>
+            <Route component={NotFoundPage} />
+          </Switch>
+        </ContentWrapper>
+      </BodyWrapper>
       <GlobalStyle />
-    </div>
+    </MainWrapper>
   );
 }

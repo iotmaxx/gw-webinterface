@@ -13,17 +13,22 @@ import MenuDropDownGroup from 'components/MenuDropdownGroup';
 import MenuDropDownItem from 'components/MenuDropdownItem';
 import MenuDropdownGroup from 'components/MenuDropdownGroup';
 
-import { ACCESS_TOKEN, ROUTES } from 'containers/App/constants';
+import { ACCESS_TOKEN, ROUTES, MAIN_COLORS } from 'containers/App/constants';
 
 const Wrapper = styled.div`
-  position: fixed;
   left: 0px;
   padding-left: 10px;
   padding-right: 10px;
+  width: 20vw;
   height: 100%;
-  width: 10%;
-  background-color: #3ab49b;
+  background-color: ${MAIN_COLORS.dark};
   overflow-y: scroll;
+  top: 10vh;
+`;
+
+const StyledP = styled.p`
+  font-weight: 600;
+  color: ${MAIN_COLORS.cyan};
 `;
 
 function SideNav(props) {
@@ -39,7 +44,7 @@ function SideNav(props) {
     <div>
       {accessToken ? (
         <Wrapper>
-          <p onClick={logout}>Logout</p>
+          <StyledP onClick={logout}>Logout</StyledP>
           <MenuDropDownGroup caption="Status">
             <MenuDropDownItem to={ROUTES.status.radio} caption="Radio"/>
             <MenuDropDownItem to={ROUTES.status.networkConnection} caption="Network Connection"/>
@@ -70,12 +75,12 @@ function SideNav(props) {
             <MenuDropDownItem to={ROUTES.networkSecurity.ipPortForwarding} caption="IP and Port Forwarding"/>
           </MenuDropDownGroup>
           <MenuDropDownGroup caption="VPN">
-            <MenuDropdownGroup caption="IPSec">
+            <MenuDropdownGroup caption="IPSec" subcategory={true}>
               <MenuDropDownItem to={ROUTES.ipSec.connection} caption="Connections"/>
               <MenuDropDownItem to={ROUTES.ipSec.certificates} caption="Certificates"/>
               <MenuDropDownItem to={ROUTES.ipSec.status} caption="Status"/>
             </MenuDropdownGroup>
-            <MenuDropdownGroup caption="OpenVPN">
+            <MenuDropdownGroup caption="OpenVPN" subcategory={true}>
               <MenuDropDownItem to={ROUTES.openVpn.connections} caption="Connections"/>
               <MenuDropDownItem to={ROUTES.openVpn.portForwarding} caption="Port Forwarding"/>
               <MenuDropDownItem to={ROUTES.openVpn.certificates} caption="Certificates"/>

@@ -15,9 +15,15 @@ const FormWrapper = styled.form`
 `;
 
 const CheckboxWrapper = styled.input`
-  margin-left: 10px
+  margin-left: 10px;
+  height: 20px;
+  width: 20px;
+  vertical-align: text-bottom;
 `;
 
+const IpV6Wrapper = styled.div`
+  display: contents;
+`;
 
 // TODO: Add alias address form
 function LocalNetworkIpConfigForm() {
@@ -55,7 +61,7 @@ function LocalNetworkIpConfigForm() {
   });
 
   const toggleCheckbox = event => {
-    setEnableIPv6(event.target.checked)
+    setEnableIPv6(event.target.checked);
   }
 
   return (
@@ -93,14 +99,14 @@ function LocalNetworkIpConfigForm() {
       </label>
 
       {enableIPv6 ? (
-        <div>
+        <IpV6Wrapper>
           <label htmlFor="ipAddressV6">IPv6 static address</label>
           <input name="ipAddressV6" {...formik.getFieldProps('ipAddressV6')} />
           {formik.touched.ipAddressV6 && formik.errors.ipAddressV6 ? (
               <div>{formik.errors.ipAddressV6}</div>
             ) : null
           }
-        </div>
+        </IpV6Wrapper>
       ) : null}
 
       <button type="submit">Apply</button>

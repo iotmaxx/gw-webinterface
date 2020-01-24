@@ -76,3 +76,9 @@ export const ROUTES = {
         firmwareUpdate: "/system-firmware-update"
     }
 }
+
+export const MAIN_COLORS = {
+    dark: '#003a40',
+    cyan: '#00bab3',
+    orange: '#e16720'
+}
