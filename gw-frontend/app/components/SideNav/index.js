@@ -16,14 +16,14 @@ import MenuDropdownGroup from 'components/MenuDropdownGroup';
 import { ACCESS_TOKEN, ROUTES } from 'containers/App/constants';
 
 const Wrapper = styled.div`
-  position: fixed;
   left: 0px;
   padding-left: 10px;
   padding-right: 10px;
+  width: 20vw;
   height: 100%;
-  width: 20%;
   background-color: #003a40;
   overflow-y: scroll;
+  top: 10vh;
 `;
 
 const StyledP = styled.p`

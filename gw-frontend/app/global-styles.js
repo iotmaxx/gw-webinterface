@@ -17,11 +17,8 @@ const GlobalStyle = createGlobalStyle`
 
   #app {
     background-color: #fafafa;
-    min-height: 100%;
+    height: 100%;
     min-width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
   }
 
   p,
