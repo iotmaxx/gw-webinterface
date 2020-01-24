@@ -13,7 +13,7 @@ import MenuDropDownGroup from 'components/MenuDropdownGroup';
 import MenuDropDownItem from 'components/MenuDropdownItem';
 import MenuDropdownGroup from 'components/MenuDropdownGroup';
 
-import { ACCESS_TOKEN, ROUTES } from 'containers/App/constants';
+import { ACCESS_TOKEN, ROUTES, MAIN_COLORS } from 'containers/App/constants';
 
 const Wrapper = styled.div`
   left: 0px;
@@ -21,13 +21,14 @@ const Wrapper = styled.div`
   padding-right: 10px;
   width: 20vw;
   height: 100%;
-  background-color: #003a40;
+  background-color: ${MAIN_COLORS.dark};
   overflow-y: scroll;
   top: 10vh;
 `;
 
 const StyledP = styled.p`
   font-weight: 600;
+  color: ${MAIN_COLORS.cyan};
 `;
 
 function SideNav(props) {

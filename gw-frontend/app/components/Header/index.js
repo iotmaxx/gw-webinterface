@@ -7,19 +7,27 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { FormattedMessage } from 'react-intl';
-import messages from './messages';
+import Logo from '../../assets/icons/Logo.svg';
+
+import { MAIN_COLORS } from 'containers/App/constants';
 
 const StyledHeader = styled.div`
-  background-color: #e16720;
+  background-color: ${MAIN_COLORS.orange};
   width: 100%;
-  min-height: 10vh;
+  height: 10vh;
+  display: flex;
+  justify-content: flex-start;
+`;
+
+const StyledImage = styled.img`
+  width: 50%;
+  height: 100%;
 `;
 
 function Header() {
   return (
     <StyledHeader>
-      <FormattedMessage {...messages.header} />
+      <StyledImage src={Logo} />
     </StyledHeader>
   );
 }

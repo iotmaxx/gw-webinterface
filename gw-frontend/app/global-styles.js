@@ -1,5 +1,7 @@
 import { createGlobalStyle } from 'styled-components';
 
+import { MAIN_COLORS } from 'containers/App/constants';
+
 const GlobalStyle = createGlobalStyle`
   html,
   body {
@@ -28,7 +30,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   button {
-    background-color: #e16720;
+    background-color: ${MAIN_COLORS.orange};
     border-radius: 10px;
     border-width: 0px;
     padding: 6px;

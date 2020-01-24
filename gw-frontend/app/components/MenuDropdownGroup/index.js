@@ -8,6 +8,8 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
+import { MAIN_COLORS } from 'containers/App/constants';
+
 function MenuDropdownGroup({caption, children, subcategory=false}) {
 
   const [isOpen, setIsOpen] = useState(false);
@@ -16,6 +18,7 @@ function MenuDropdownGroup({caption, children, subcategory=false}) {
     font-weight: 600;
     margin-top: 10px;
     margin-left: ${subcategory ? 10 : 0}px;
+    color: ${MAIN_COLORS.cyan};
   `;
 
   const ArrowDown = styled.span`

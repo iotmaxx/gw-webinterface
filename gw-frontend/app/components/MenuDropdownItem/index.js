@@ -11,9 +11,11 @@ import PropTypes from 'prop-types';
 
 import styled from 'styled-components';
 
+import { MAIN_COLORS } from 'containers/App/constants';
+
 function MenuDropdownItem({to, caption, depth=1}) {
   const StyledLink = styled(Link)`
-    color: #e16720;
+    color: ${MAIN_COLORS.orange};
     text-decoration: none;
   `;
 
