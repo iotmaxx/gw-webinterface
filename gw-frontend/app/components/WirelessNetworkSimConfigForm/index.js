@@ -16,7 +16,10 @@ const FormWrapper = styled.form`
 `;
 
 const CheckboxWrapper = styled.input`
-  margin-left: 10px
+  margin-left: 10px;
+  height: 20px;
+  width: 20px;
+  vertical-align: text-bottom;
 `;
 
 const PROVIDERS = [

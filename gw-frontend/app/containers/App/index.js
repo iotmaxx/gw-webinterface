@@ -88,6 +88,7 @@ const BodyWrapper = styled.div`
 
 const ContentWrapper = styled.div`
   margin-left: 1vw;
+  width: 100%;
 `;
 
 export default function App() {
