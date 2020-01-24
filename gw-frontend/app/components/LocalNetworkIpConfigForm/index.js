@@ -67,28 +67,28 @@ function LocalNetworkIpConfigForm() {
   return (
     <FormWrapper onSubmit={formik.handleSubmit}>
       <label htmlFor="hostname">Hostname</label>
-      <input name="hostname" {...formik.getFieldProps('hostname')} />
+      <input type="text" name="hostname" {...formik.getFieldProps('hostname')} />
       {formik.touched.hostname && formik.errors.hostname ? (
           <div>{formik.errors.hostname}</div>
         ) : null
       }
 
       <label htmlFor="ipAddress">IP Address</label>
-      <input name="ipAddress" {...formik.getFieldProps('ipAddress')} />
+      <input type="text" name="ipAddress" {...formik.getFieldProps('ipAddress')} />
       {formik.touched.ipAddress && formik.errors.ipAddress ? (
           <div>{formik.errors.ipAddress}</div>
         ) : null
       }
 
       <label htmlFor="subnetMask">Subnet Mask</label>
-      <input name="subnetMask" {...formik.getFieldProps('subnetMask')} />
+      <input type="text" name="subnetMask" {...formik.getFieldProps('subnetMask')} />
       {formik.touched.subnetMask && formik.errors.subnetMask ? (
           <div>{formik.errors.subnetMask}</div>
         ) : null
       }
 
       <label htmlFor="mtu">MTU</label>
-      <input name="mtu" {...formik.getFieldProps('mtu')} />
+      <input type="number" name="mtu" {...formik.getFieldProps('mtu')} />
       {formik.touched.mtu && formik.errors.mtu ? (
           <div>{formik.errors.mtu}</div>
         ) : null
@@ -101,7 +101,7 @@ function LocalNetworkIpConfigForm() {
       {enableIPv6 ? (
         <IpV6Wrapper>
           <label htmlFor="ipAddressV6">IPv6 static address</label>
-          <input name="ipAddressV6" {...formik.getFieldProps('ipAddressV6')} />
+          <input type="text" name="ipAddressV6" {...formik.getFieldProps('ipAddressV6')} />
           {formik.touched.ipAddressV6 && formik.errors.ipAddressV6 ? (
               <div>{formik.errors.ipAddressV6}</div>
             ) : null

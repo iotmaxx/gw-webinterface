@@ -13,7 +13,9 @@ import LocalNetworkDhcpConfigForm from 'components/LocalNetworkDhcpConfigForm';
 
 export function LocalNetworkDhcpServer() {
   return (
-    <LocalNetworkDhcpConfigForm />
+    <div>
+      <LocalNetworkDhcpConfigForm />
+    </div>
   );
 }
 

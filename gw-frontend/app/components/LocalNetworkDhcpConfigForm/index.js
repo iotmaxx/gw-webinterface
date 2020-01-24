@@ -48,42 +48,42 @@ function LocalNetworkDhcpConfigForm() {
   return (
     <FormWrapper onSubmit={formik.handleSubmit}>
       <label htmlFor="domainName">Domain Name</label>
-      <input name="domainName" {...formik.getFieldProps('domainName')} />
+      <input type="text" name="domainName" {...formik.getFieldProps('domainName')} />
       {formik.touched.domainName && formik.errors.domainName ? (
           <div>{formik.errors.domainName}</div>
         ) : null
       }
 
       <label htmlFor="leaseTime">Lease Time</label>
-      <input name="leaseTime" {...formik.getFieldProps('leaseTime')} />
+      <input type="text" name="leaseTime" {...formik.getFieldProps('leaseTime')} />
       {formik.touched.leaseTime && formik.errors.leaseTime ? (
           <div>{formik.errors.leaseTime}</div>
         ) : null
       }
 
       <label htmlFor="beginIpRange">Begin IP Range</label>
-      <input name="beginIpRange" {...formik.getFieldProps('beginIpRange')} />
+      <input type="text" name="beginIpRange" {...formik.getFieldProps('beginIpRange')} />
       {formik.touched.beginIpRange && formik.errors.beginIpRange ? (
           <div>{formik.errors.beginIpRange}</div>
         ) : null
       }
 
       <label htmlFor="endIpRange">End IP Range</label>
-      <input name="endIpRange" {...formik.getFieldProps('endIpRange')} />
+      <input type="text" name="endIpRange" {...formik.getFieldProps('endIpRange')} />
       {formik.touched.endIpRange && formik.errors.endIpRange ? (
           <div>{formik.errors.endIpRange}</div>
         ) : null
       }
 
       <label htmlFor="clientMacAddress">Client MAC address</label>
-      <input name="clientMacAddress" {...formik.getFieldProps('clientMacAddress')} />
+      <input type="text" name="clientMacAddress" {...formik.getFieldProps('clientMacAddress')} />
       {formik.touched.clientMacAddress && formik.errors.clientMacAddress ? (
           <div>{formik.errors.clientMacAddress}</div>
         ) : null
       }
 
       <label htmlFor="clientIpAddress">Client IP address</label>
-      <input name="clientIpAddress" {...formik.getFieldProps('clientIpAddress')} />
+      <input type="text" name="clientIpAddress" {...formik.getFieldProps('clientIpAddress')} />
       {formik.touched.clientIpAddress && formik.errors.clientIpAddress ? (
           <div>{formik.errors.clientIpAddress}</div>
         ) : null

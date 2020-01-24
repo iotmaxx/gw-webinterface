@@ -82,7 +82,7 @@ function WirelessNetworkSimConfigForm() {
   return (
     <FormWrapper>
       <label htmlFor="pin">PIN</label>
-      <input name="pin" {...formik.getFieldProps('pin')} />
+      <input type="text" name="pin" {...formik.getFieldProps('pin')} />
       {formik.touched.pin && formik.errors.pin ? (
           <div>{formik.errors.pin}</div>
         ) : null
@@ -100,7 +100,7 @@ function WirelessNetworkSimConfigForm() {
       </select>
 
       <label htmlFor="apn">APN</label>
-      <input name="apn" {...formik.getFieldProps('apn')} />
+      <input type="text" name="apn" {...formik.getFieldProps('apn')} />
       {formik.touched.apn && formik.errors.apn ? (
           <div>{formik.errors.apn}</div>
         ) : null

@@ -80,5 +80,6 @@ export const ROUTES = {
 export const MAIN_COLORS = {
     dark: '#003a40',
     cyan: '#00bab3',
-    orange: '#e16720'
+    orange: '#e16720',
+    transparentlyDark: '#d6d6d673'
 }

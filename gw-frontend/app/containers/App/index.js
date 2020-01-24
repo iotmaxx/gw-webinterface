@@ -89,6 +89,8 @@ const BodyWrapper = styled.div`
 const ContentWrapper = styled.div`
   margin-left: 1vw;
   width: 100%;
+  display: flex;
+  justify-content: center;
 `;
 
 export default function App() {

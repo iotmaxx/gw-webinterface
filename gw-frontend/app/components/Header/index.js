@@ -20,7 +20,7 @@ const StyledHeader = styled.div`
 `;
 
 const StyledImage = styled.img`
-  width: 50%;
+  width: 20%;
   height: 100%;
 `;
 
