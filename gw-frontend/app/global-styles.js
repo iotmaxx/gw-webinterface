@@ -51,6 +51,7 @@ const GlobalStyle = createGlobalStyle`
 
   form {
     justify-content: center;
+    width: 400px;
   }
 
   input[type=text], input[type=number], input[type=password] {
@@ -60,6 +61,7 @@ const GlobalStyle = createGlobalStyle`
     padding-left: 10px;
     padding-top: 5px;
     padding-bottom: 5px;
+    width: inherit;
   }
 
   select {
