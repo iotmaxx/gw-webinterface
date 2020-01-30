@@ -98,6 +98,22 @@ const GlobalStyle = createGlobalStyle`
     width: max-content;
     min-width: 50vw;
   }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px ${MAIN_COLORS.customWebkitScrollbar};
+    border-radius: 10px;
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: ${MAIN_COLORS.customWebkitScrollbar};
+    border-radius: 10px;
+  }
 `;
 
 export default GlobalStyle;
