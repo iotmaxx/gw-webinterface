@@ -86,7 +86,8 @@ export const MAIN_COLORS = {
     transparentlyDark: '#d6d6d636',
     transparentlyBeige: '#f5f5dc24',
     tableEvenRowBackground: '#dddddd45',
-    tableBorder: '#dddddd'
+    tableBorder: '#dddddd',
+    customWebkitScrollbar: '#c3c4c4'
 }
 
 export const YUP_VALIDATORS = {
