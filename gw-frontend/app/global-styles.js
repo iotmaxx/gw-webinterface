@@ -78,6 +78,26 @@ const GlobalStyle = createGlobalStyle`
     background-color: ${MAIN_COLORS.transparentlyDark};
     color: ${MAIN_COLORS.dark};
   }
+
+  caption {
+    font-weight: bold;
+    font-size: larger;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    text-align: left;
+  }
+
+  th {
+    text-align: left;
+    border: 1px solid ${MAIN_COLORS.tableBorder};
+    padding: 8px;
+    font-size: medium;
+  }
+
+  table {
+    width: max-content;
+    min-width: 50vw;
+  }
 `;
 
 export default GlobalStyle;

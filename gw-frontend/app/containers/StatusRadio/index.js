@@ -7,16 +7,45 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { FormattedMessage } from 'react-intl';
 import { compose } from 'redux';
 
-import messages from './messages';
+import StatusOverview from 'components/StatusOverview';
+
+const VALUES = [
+  {
+    caption: 'Provider',
+    value: 'Beispiel-Provider',
+  },
+  {
+    caption: 'Network Status',
+    value: 'busy'
+  },
+  {
+    caption: 'Signal Level',
+    value: '-83 dBm'
+  },
+  {
+    caption: 'Packet Data',
+    value: 'offline'
+  },
+  {
+    caption: 'SIM #1 IMSI',
+    value: '123456789012345'
+  },
+  {
+    caption: 'Local area code',
+    value: '579'
+  },
+  {
+    caption: 'Cell ID',
+    value: '2606587'
+  }
+]
 
 export function StatusRadio() {
+
   return (
-    <div>
-      <FormattedMessage {...messages.header} />
-    </div>
+      <StatusOverview caption="Radio Status" values={VALUES}/>
   );
 }
 

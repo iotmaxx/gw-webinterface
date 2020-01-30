@@ -85,6 +85,8 @@ export const MAIN_COLORS = {
     orange: '#e16720',
     transparentlyDark: '#d6d6d636',
     transparentlyBeige: '#f5f5dc24',
+    tableEvenRowBackground: '#dddddd45',
+    tableBorder: '#dddddd'
 }
 
 export const YUP_VALIDATORS = {

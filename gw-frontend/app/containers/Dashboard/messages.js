@@ -11,6 +11,6 @@ export const scope = 'app.containers.Dashboard';
 export default defineMessages({
   header: {
     id: `${scope}.header`,
-    defaultMessage: 'Welcome to the gw-gateway dashboard!',
+    defaultMessage: 'Welcome to the GW-Gateway dashboard!',
   },
 });
