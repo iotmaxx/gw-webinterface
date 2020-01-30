@@ -5,11 +5,14 @@
  */
 
 import React, { useState } from 'react';
-// import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+
+import FormFieldError from 'components/FormFieldError';
+
+import {YUP_VALIDATORS} from 'containers/App/constants';
 
 const FormWrapper = styled.form`
   display: grid;
@@ -46,8 +49,7 @@ function WirelessNetworkSimConfigForm() {
   const [auth, setAuth] = useState(AUTHENTICATION[0]);
 
   const schema = Yup.object({
-    pin: Yup.number()
-      .positive('Please enter a positive number'),
+    pin: YUP_VALIDATORS.positiveNumber,
     apn: Yup.string()
       .required('Required'),
     username: Yup.string(),
@@ -80,13 +82,13 @@ function WirelessNetworkSimConfigForm() {
   }
 
   return (
-    <FormWrapper>
+    <FormWrapper onSubmit={formik.handleSubmit}>
       <label htmlFor="pin">PIN</label>
-      <input name="pin" {...formik.getFieldProps('pin')} />
-      {formik.touched.pin && formik.errors.pin ? (
-          <div>{formik.errors.pin}</div>
-        ) : null
-      }
+      <input type="text" name="pin" {...formik.getFieldProps('pin')} />
+      <FormFieldError 
+        touched={formik.touched.pin}
+        errors={formik.errors.pin}
+      />
 
       <label htmlFor="enableRoaming">Roaming enabled
         <CheckboxWrapper name="enableRoaming" checked={roamingEnabled} onChange={(event) => toggleCheckbox(event)} type="checkbox" />
@@ -100,11 +102,11 @@ function WirelessNetworkSimConfigForm() {
       </select>
 
       <label htmlFor="apn">APN</label>
-      <input name="apn" {...formik.getFieldProps('apn')} />
-      {formik.touched.apn && formik.errors.apn ? (
-          <div>{formik.errors.apn}</div>
-        ) : null
-      }
+      <input type="text" name="apn" {...formik.getFieldProps('apn')} />
+      <FormFieldError 
+        touched={formik.touched.apn}
+        errors={formik.errors.apn}
+      />
 
       <label htmlFor="authentication">Authentication</label>
       <select value={auth} onChange={(event) => changeAuth(event)}>

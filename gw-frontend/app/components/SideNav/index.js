@@ -76,16 +76,16 @@ function SideNav(props) {
           </MenuDropDownGroup>
           <MenuDropDownGroup caption="VPN">
             <MenuDropdownGroup caption="IPSec" subcategory={true}>
-              <MenuDropDownItem to={ROUTES.ipSec.connection} caption="Connections"/>
-              <MenuDropDownItem to={ROUTES.ipSec.certificates} caption="Certificates"/>
-              <MenuDropDownItem to={ROUTES.ipSec.status} caption="Status"/>
+              <MenuDropDownItem to={ROUTES.ipSec.connection} caption="Connections" depth={2}/>
+              <MenuDropDownItem to={ROUTES.ipSec.certificates} caption="Certificates" depth={2}/>
+              <MenuDropDownItem to={ROUTES.ipSec.status} caption="Status" depth={2}/>
             </MenuDropdownGroup>
             <MenuDropdownGroup caption="OpenVPN" subcategory={true}>
-              <MenuDropDownItem to={ROUTES.openVpn.connections} caption="Connections"/>
-              <MenuDropDownItem to={ROUTES.openVpn.portForwarding} caption="Port Forwarding"/>
-              <MenuDropDownItem to={ROUTES.openVpn.certificates} caption="Certificates"/>
-              <MenuDropDownItem to={ROUTES.openVpn.staticKeys} caption="Static Keys"/>
-              <MenuDropDownItem to={ROUTES.openVpn.status} caption="Status"/>
+              <MenuDropDownItem to={ROUTES.openVpn.connections} caption="Connections" depth={2}/>
+              <MenuDropDownItem to={ROUTES.openVpn.portForwarding} caption="Port Forwarding" depth={2}/>
+              <MenuDropDownItem to={ROUTES.openVpn.certificates} caption="Certificates" depth={2}/>
+              <MenuDropDownItem to={ROUTES.openVpn.staticKeys} caption="Static Keys" depth={2}/>
+              <MenuDropDownItem to={ROUTES.openVpn.status} caption="Status" depth={2}/>
             </MenuDropdownGroup>
           </MenuDropDownGroup>
           <MenuDropDownGroup caption="I/O">

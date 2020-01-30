@@ -25,19 +25,30 @@ function MenuDropdownGroup({caption, children, subcategory=false}) {
     display: inline-block;  
     transform: rotate(90deg);
     -webkit-transform: rotate(90deg);
+    color: ${MAIN_COLORS.cyan};
+  `;
+
+  const ArrowRight = styled.span`
+    color: ${MAIN_COLORS.cyan};
+  `;
+
+  const StyledDL = styled.dl`
+    display: ${isOpen ? 'block' : 'none'};
+    margin-top: 16px;
+    margin-bottom: 16px;
   `;
 
   return (
     <div>
       <StyledDT onClick={() => setIsOpen(!isOpen)}>
         {
-          isOpen ? <ArrowDown>&#10148; </ArrowDown> : <span>&#10148; </span>
+          isOpen ? <ArrowDown>&#10148; </ArrowDown> : <ArrowRight>&#10148; </ArrowRight>
         }
         {caption}
       </StyledDT>
-      <dl style={{ display: isOpen ? "block" : "none" }}>
+      <StyledDL>
         {children}
-      </dl>
+      </StyledDL>
     </div>
   );
 }

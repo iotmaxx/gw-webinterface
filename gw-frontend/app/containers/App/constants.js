@@ -8,6 +8,8 @@
  * Follow this format:
  * export const YOUR_ACTION_CONSTANT = 'yourproject/YourContainer/YOUR_ACTION_CONSTANT';
  */
+import * as Yup from 'yup';
+
 export const ACCESS_TOKEN = 'ACCESS_TOKEN';
 
 export const ROUTES = {
@@ -80,5 +82,17 @@ export const ROUTES = {
 export const MAIN_COLORS = {
     dark: '#003a40',
     cyan: '#00bab3',
-    orange: '#e16720'
+    orange: '#e16720',
+    transparentlyDark: '#d6d6d636',
+    transparentlyBeige: '#f5f5dc24',
+    tableEvenRowBackground: '#dddddd45',
+    tableBorder: '#dddddd'
+}
+
+export const YUP_VALIDATORS = {
+    ipV4Field: Yup.string()
+        .matches(/(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/, 'Not a valid IPv4 address'),
+    positiveNumber: Yup.number()
+      .typeError('Only numeric values allowed')
+      .positive('Please enter a number bigger 0')
 }

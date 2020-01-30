@@ -14,6 +14,8 @@ import { withRouter } from "react-router-dom";
 
 import { ACCESS_TOKEN, ROUTES } from 'containers/App/constants';
 
+import FormFieldError from 'components/FormFieldError';
+
 const FormWrapper = styled.form`
   display: grid;
 `;
@@ -44,17 +46,18 @@ function LoginForm(props) {
   return (
     <FormWrapper onSubmit={formik.handleSubmit}>
       <label htmlFor="name">Name</label>
-      <input name="name" {...formik.getFieldProps('name')} />
-      {formik.touched.name && formik.errors.name ? (
-          <div>{formik.errors.name}</div>
-        ) : null
-      }
+      <input type="text" name="name" {...formik.getFieldProps('name')} />
+      <FormFieldError 
+        touched={formik.touched.name}
+        errors={formik.errors.name}
+      />
+
       <label htmlFor="password">Password</label>
-      <input name="password" type="password" {...formik.getFieldProps('password')} />
-      {formik.touched.password && formik.errors.password ? (
-          <div>{formik.errors.password}</div>
-        ) : null
-      }
+      <input type="password" name="password" {...formik.getFieldProps('password')} />
+      <FormFieldError 
+        touched={formik.touched.password}
+        errors={formik.errors.password}
+      />
       <button type="submit">Login</button>
     </FormWrapper>
   );

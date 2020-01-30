@@ -16,7 +16,9 @@ import messages from './messages';
 
 export function LoginView() {
   return (
-    <LoginForm/>
+    <div>
+      <LoginForm/>
+    </div>
   );
 }
 

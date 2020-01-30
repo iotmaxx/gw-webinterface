@@ -7,15 +7,31 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { FormattedMessage } from 'react-intl';
 import { compose } from 'redux';
 
-import messages from './messages';
+import StatusOverview from 'components/StatusOverview';
+
+const IN_VALUES = [
+  {
+    caption: '#1',
+    value: 'low',
+    additionalValues: ['SMS', 'eMail']
+  }
+]
+
+const OUT_VALUES = [
+  {
+    caption: '#2',
+    value: 'off',
+    additionalValues: ['manual']
+  }
+]
 
 export function StatusIoStats() {
   return (
     <div>
-      <FormattedMessage {...messages.header} />
+      <StatusOverview caption="Input" values={IN_VALUES} />
+      <StatusOverview caption="Output" values={OUT_VALUES} />
     </div>
   );
 }

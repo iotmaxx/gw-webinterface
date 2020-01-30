@@ -11,6 +11,10 @@ import styled from 'styled-components';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 
+import FormFieldError from 'components/FormFieldError';
+
+import {YUP_VALIDATORS} from 'containers/App/constants';
+
 const FormWrapper = styled.form`
   display: grid;
 `;
@@ -19,8 +23,8 @@ const FormWrapper = styled.form`
 function PukForm({clickHandler}) {
 
   const schema = Yup.object({
-    pin: Yup.number()
-      .positive('Please enter a positive number')
+    puk: YUP_VALIDATORS.positiveNumber
+      .required('Required')
   });
 
   const formik = useFormik({
@@ -29,19 +33,20 @@ function PukForm({clickHandler}) {
     },
     onSubmit: values => {
       console.log(values);
+      clickHandler();
     },
     validationSchema: schema
   });
 
   return (
-    <FormWrapper>
+    <FormWrapper onSubmit={formik.handleSubmit}>
       <label htmlFor="puk">Please provide PUK</label>
-      <input name="puk" {...formik.getFieldProps('puk')} />
-      {formik.touched.puk && formik.errors.puk ? (
-          <div>{formik.errors.puk}</div>
-        ) : null
-      }
-      <button onClick={clickHandler}>Apply</button>
+      <input type="text" name="puk" {...formik.getFieldProps('puk')} />
+      <FormFieldError 
+        touched={formik.touched.puk}
+        errors={formik.errors.puk}
+      />
+      <button type="submit">Apply</button>
     </FormWrapper>
   );
 }

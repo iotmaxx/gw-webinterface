@@ -13,7 +13,9 @@ import LocalNetworkIpConfigForm from 'components/LocalNetworkIpConfigForm';
 
 export function LocalNetworkIpConfig() {
   return (
-    <LocalNetworkIpConfigForm />
+    <div>
+      <LocalNetworkIpConfigForm />
+    </div>
   );
 }
 
