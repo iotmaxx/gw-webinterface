@@ -52,6 +52,14 @@ const GlobalStyle = createGlobalStyle`
   form {
     justify-content: center;
     width: 400px;
+    margin-top: 20px;
+    padding: 50px;
+    box-sizing: content-box;
+    border-color: ${MAIN_COLORS.orange};
+    border-width: 2px;
+    border-style: outset;
+    border-radius: 15px;
+    background-color: ${MAIN_COLORS.transparentlyBeige};
   }
 
   input[type=text], input[type=number], input[type=password] {

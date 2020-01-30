@@ -83,7 +83,8 @@ export const MAIN_COLORS = {
     dark: '#003a40',
     cyan: '#00bab3',
     orange: '#e16720',
-    transparentlyDark: '#d6d6d673'
+    transparentlyDark: '#d6d6d636',
+    transparentlyBeige: '#f5f5dc24',
 }
 
 export const YUP_VALIDATORS = {
