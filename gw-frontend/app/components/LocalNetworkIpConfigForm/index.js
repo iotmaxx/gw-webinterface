@@ -69,28 +69,28 @@ function LocalNetworkIpConfigForm() {
   return (
     <FormWrapper onSubmit={formik.handleSubmit}>
       <label htmlFor="hostname">Hostname</label>
-      <input type="text" name="hostname" {...formik.getFieldProps('hostname')} />
+      <input type="text" name="hostname" placeholder="localhost" {...formik.getFieldProps('hostname')} />
       <FormFieldError 
         touched={formik.touched.hostname}
         errors={formik.errors.hostname}
       />
 
       <label htmlFor="ipAddress">IP Address</label>
-      <input type="text" name="ipAddress" {...formik.getFieldProps('ipAddress')} />
+      <input type="text" name="ipAddress" placeholder="127.0.0.1" {...formik.getFieldProps('ipAddress')} />
       <FormFieldError 
         touched={formik.touched.ipAddress}
         errors={formik.errors.ipAddress}
       />
 
       <label htmlFor="subnetMask">Subnet Mask</label>
-      <input type="text" name="subnetMask" {...formik.getFieldProps('subnetMask')} />
+      <input type="text" name="subnetMask" placeholder="255.255.255.0" {...formik.getFieldProps('subnetMask')} />
       <FormFieldError 
         touched={formik.touched.subnetMask}
         errors={formik.errors.subnetMask}
       />
 
       <label htmlFor="mtu">MTU</label>
-      <input type="number" name="mtu" {...formik.getFieldProps('mtu')} />
+      <input type="number" name="mtu" placeholder="1500" {...formik.getFieldProps('mtu')} />
       <FormFieldError 
         touched={formik.touched.mtu}
         errors={formik.errors.mtu}
@@ -103,7 +103,7 @@ function LocalNetworkIpConfigForm() {
       {enableIPv6 ? (
         <IpV6Wrapper>
           <label htmlFor="ipAddressV6">IPv6 static address</label>
-          <input type="text" name="ipAddressV6" {...formik.getFieldProps('ipAddressV6')} />
+          <input type="text" name="ipAddressV6" placeholder="00:00:00:00:00:00" {...formik.getFieldProps('ipAddressV6')} />
           <FormFieldError 
             touched={formik.touched.ipAddressV6}
             errors={formik.errors.ipAddressV6}

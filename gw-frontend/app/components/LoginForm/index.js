@@ -46,14 +46,14 @@ function LoginForm(props) {
   return (
     <FormWrapper onSubmit={formik.handleSubmit}>
       <label htmlFor="name">Name</label>
-      <input type="text" name="name" {...formik.getFieldProps('name')} />
+      <input type="text" name="name" placeholder="Usernanme" {...formik.getFieldProps('name')} />
       <FormFieldError 
         touched={formik.touched.name}
         errors={formik.errors.name}
       />
 
       <label htmlFor="password">Password</label>
-      <input type="password" name="password" {...formik.getFieldProps('password')} />
+      <input type="password" name="password" placeholder="Password" {...formik.getFieldProps('password')} />
       <FormFieldError 
         touched={formik.touched.password}
         errors={formik.errors.password}
