@@ -25,6 +25,10 @@ const CheckboxWrapper = styled.input`
   vertical-align: text-bottom;
 `;
 
+const AuthenticationWrapper = styled.div`
+  display: contents;
+`;
+
 const PROVIDERS = [
   'auto',
   '26201 - T-Mobile D',
@@ -60,6 +64,8 @@ function WirelessNetworkSimConfigForm() {
     initialValues: {
       pin: '',
       apn: '',
+      provider: '',
+      authentication: '',
       username: '',
       password: ''
     },
@@ -84,7 +90,7 @@ function WirelessNetworkSimConfigForm() {
   return (
     <FormWrapper onSubmit={formik.handleSubmit}>
       <label htmlFor="pin">PIN</label>
-      <input type="text" name="pin" {...formik.getFieldProps('pin')} />
+      <input type="text" name="pin" placeholder="1234" {...formik.getFieldProps('pin')} />
       <FormFieldError 
         touched={formik.touched.pin}
         errors={formik.errors.pin}
@@ -102,7 +108,7 @@ function WirelessNetworkSimConfigForm() {
       </select>
 
       <label htmlFor="apn">APN</label>
-      <input type="text" name="apn" {...formik.getFieldProps('apn')} />
+      <input type="text" name="apn" placeholder="internet.x-mobile" {...formik.getFieldProps('apn')} />
       <FormFieldError 
         touched={formik.touched.apn}
         errors={formik.errors.apn}
@@ -114,6 +120,23 @@ function WirelessNetworkSimConfigForm() {
           AUTHENTICATION.map(aut => <option value={aut} key={aut}>{aut}</option>)
         }
       </select>
+      
+      {auth !== 'None' ? (
+        <AuthenticationWrapper>
+          <label htmlFor="username">Username</label>
+          <input type="text" name="username" placeholder="Username" {...formik.getFieldProps('username')} />
+          <FormFieldError 
+            touched={formik.touched.username}
+            errors={formik.errors.username}
+          />
+          <label htmlFor="password">Password</label>
+          <input type="password" name="password" placeholder="Password" {...formik.getFieldProps('password')} />
+          <FormFieldError 
+            touched={formik.touched.password}
+            errors={formik.errors.password}
+          />
+        </AuthenticationWrapper>
+      ) : null}
 
       <button type="submit">Apply</button>
     </FormWrapper>

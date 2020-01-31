@@ -41,7 +41,7 @@ function PukForm({clickHandler}) {
   return (
     <FormWrapper onSubmit={formik.handleSubmit}>
       <label htmlFor="puk">Please provide PUK</label>
-      <input type="text" name="puk" {...formik.getFieldProps('puk')} />
+      <input type="text" name="puk" placeholder="1234" {...formik.getFieldProps('puk')} />
       <FormFieldError 
         touched={formik.touched.puk}
         errors={formik.errors.puk}
