@@ -6,6 +6,7 @@
 
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
@@ -47,7 +48,7 @@ const AUTHENTICATION = [
 
 // TODO: Remove Mockup Auth and Providers
 // TODO: Add Country
-function WirelessNetworkSimConfigForm() {
+function WirelessNetworkSimConfigForm({submit}) {
   const [roamingEnabled, setRoamingEnabled] = useState(true);
   const [provider, setProvider] = useState(PROVIDERS[0]);
   const [auth, setAuth] = useState(AUTHENTICATION[0]);
@@ -70,7 +71,7 @@ function WirelessNetworkSimConfigForm() {
       password: ''
     },
     onSubmit: values => {
-      console.log(values);
+      submit(values);
     },
     validationSchema: schema
   });
@@ -143,6 +144,8 @@ function WirelessNetworkSimConfigForm() {
   );
 }
 
-WirelessNetworkSimConfigForm.propTypes = {};
+WirelessNetworkSimConfigForm.propTypes = {
+  submit: PropTypes.func
+};
 
 export default WirelessNetworkSimConfigForm;

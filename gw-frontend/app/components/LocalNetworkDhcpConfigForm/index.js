@@ -6,6 +6,7 @@
 
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
@@ -18,7 +19,7 @@ const FormWrapper = styled.form`
   display: grid;
 `;
 
-function LocalNetworkDhcpConfigForm() {
+function LocalNetworkDhcpConfigForm({submit}) {
 
   const schema = Yup.object({
     domainName: Yup.string()
@@ -41,7 +42,7 @@ function LocalNetworkDhcpConfigForm() {
       clientIpAddress: ''
     },
     onSubmit: values => {
-      console.log(values);
+      submit(values);
     },
     validationSchema: schema
   });
@@ -95,6 +96,8 @@ function LocalNetworkDhcpConfigForm() {
   );
 }
 
-LocalNetworkDhcpConfigForm.propTypes = {};
+LocalNetworkDhcpConfigForm.propTypes = {
+  submit: PropTypes.func
+};
 
 export default LocalNetworkDhcpConfigForm;

@@ -11,10 +11,18 @@ import { compose } from 'redux';
 
 import LocalNetworkDhcpConfigForm from 'components/LocalNetworkDhcpConfigForm';
 
+import {ToastsContainer, ToastsStore, ToastsContainerPosition} from 'react-toasts';
+
 export function LocalNetworkDhcpServer() {
+  const submit = values => {
+    console.log(values);
+    ToastsStore.success("Success, your changes have been submitted!");
+  }
+  
   return (
     <div>
-      <LocalNetworkDhcpConfigForm />
+      <LocalNetworkDhcpConfigForm submit={submit} />
+      <ToastsContainer store={ToastsStore} position={ToastsContainerPosition.BOTTOM_RIGHT} />
     </div>
   );
 }
