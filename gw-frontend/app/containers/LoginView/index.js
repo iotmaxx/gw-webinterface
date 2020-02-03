@@ -7,17 +7,35 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { FormattedMessage } from 'react-intl';
 import { compose } from 'redux';
 
 import LoginForm from 'components/LoginForm';
 
+import { FormattedMessage } from 'react-intl';
 import messages from './messages';
 
-export function LoginView() {
+import { ACCESS_TOKEN, ROUTES } from 'containers/App/constants';
+
+import {ToastsContainer, ToastsStore, ToastsContainerPosition} from 'react-toasts';
+
+import { withRouter } from "react-router-dom";
+
+export function LoginView(props) {
+
+  const submit = values => {
+    console.log(values)
+    if (values.name === "admin" && values.password === "admin") {
+      localStorage.setItem(ACCESS_TOKEN, ACCESS_TOKEN);
+      props.history.push(ROUTES.dashboard);
+    } else {
+      ToastsStore.error("Sorry, wrong credentials")
+    }
+  }
+
   return (
     <div>
-      <LoginForm/>
+      <LoginForm submit={submit} />
+      <ToastsContainer store={ToastsStore} position={ToastsContainerPosition.BOTTOM_RIGHT} />
     </div>
   );
 }
@@ -37,4 +55,4 @@ const withConnect = connect(
   mapDispatchToProps,
 );
 
-export default compose(withConnect)(LoginView);
+export default compose(withConnect)(withRouter(LoginView));

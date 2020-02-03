@@ -11,10 +11,19 @@ import { compose } from 'redux';
 
 import LocalNetworkIpConfigForm from 'components/LocalNetworkIpConfigForm';
 
+import {ToastsContainer, ToastsStore, ToastsContainerPosition} from 'react-toasts';
+
 export function LocalNetworkIpConfig() {
+
+  const submit = values => {
+    console.log(values);
+    ToastsStore.success("Success, your changes have been submitted!");
+  };
+
   return (
     <div>
-      <LocalNetworkIpConfigForm />
+      <LocalNetworkIpConfigForm submit={submit} />
+      <ToastsContainer store={ToastsStore} position={ToastsContainerPosition.BOTTOM_RIGHT} />
     </div>
   );
 }

@@ -6,13 +6,10 @@
 
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-
-import { withRouter } from "react-router-dom";
-
-import { ACCESS_TOKEN, ROUTES } from 'containers/App/constants';
 
 import FormFieldError from 'components/FormFieldError';
 
@@ -20,7 +17,7 @@ const FormWrapper = styled.form`
   display: grid;
 `;
 
-function LoginForm(props) {
+function LoginForm({submit}) {
 
   const schema = Yup.object({
     name: Yup.string()
@@ -35,10 +32,7 @@ function LoginForm(props) {
       password: ''
     },
     onSubmit: values => {
-      if (values.name === "admin" && values.password === "admin") {
-        localStorage.setItem(ACCESS_TOKEN, ACCESS_TOKEN);
-        props.history.push(ROUTES.dashboard);
-      }
+      submit(values);
     },
     validationSchema: schema
   })
@@ -63,6 +57,8 @@ function LoginForm(props) {
   );
 }
 
-LoginForm.propTypes = {};
+LoginForm.propTypes = {
+  submit: PropTypes.func
+};
 
-export default withRouter(LoginForm)
+export default LoginForm

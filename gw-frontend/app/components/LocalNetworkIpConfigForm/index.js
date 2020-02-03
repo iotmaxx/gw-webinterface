@@ -6,6 +6,7 @@
 
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
@@ -30,7 +31,7 @@ const IpV6Wrapper = styled.div`
 `;
 
 // TODO: Add alias address form
-function LocalNetworkIpConfigForm() {
+function LocalNetworkIpConfigForm({submit}) {
 
   const [enableIPv6, setEnableIPv6] = useState(false);
 
@@ -57,7 +58,7 @@ function LocalNetworkIpConfigForm() {
       hostname: ''
     },
     onSubmit: values => {
-      console.log(values);
+      submit(values);
     },
     validationSchema: schema
   });
@@ -116,6 +117,8 @@ function LocalNetworkIpConfigForm() {
   );
 }
 
-LocalNetworkIpConfigForm.propTypes = {};
+LocalNetworkIpConfigForm.propTypes = {
+  submit: PropTypes.func
+};
 
 export default LocalNetworkIpConfigForm;
