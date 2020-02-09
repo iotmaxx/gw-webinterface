@@ -15,6 +15,8 @@ import MenuDropdownGroup from 'components/MenuDropdownGroup';
 
 import { ACCESS_TOKEN, ROUTES, MAIN_COLORS } from 'containers/App/constants';
 
+import Logout from '../../assets/icons/Logout.svg';
+
 const Wrapper = styled.div`
   left: 0px;
   padding-left: 10px;
@@ -26,9 +28,19 @@ const Wrapper = styled.div`
   top: 10vh;
 `;
 
+const LogoutContainer = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
 const StyledP = styled.p`
   font-weight: 600;
   color: ${MAIN_COLORS.cyan};
+`;
+
+const StyledLogout = styled.img`
+  height: 1.4rem;
+  margin-right: 0.5rem;
 `;
 
 function SideNav(props) {
@@ -44,7 +56,10 @@ function SideNav(props) {
     <div>
       {accessToken ? (
         <Wrapper>
-          <StyledP onClick={logout}>Logout</StyledP>
+          <LogoutContainer onClick={logout}>
+            <StyledLogout src={Logout} />
+            <StyledP>Logout</StyledP>
+          </LogoutContainer>
           <MenuDropDownGroup caption="Status">
             <MenuDropDownItem to={ROUTES.status.radio} caption="Radio"/>
             <MenuDropDownItem to={ROUTES.status.networkConnection} caption="Network Connection"/>
@@ -76,16 +91,16 @@ function SideNav(props) {
           </MenuDropDownGroup>
           <MenuDropDownGroup caption="VPN">
             <MenuDropdownGroup caption="IPSec" subcategory={true}>
-              <MenuDropDownItem to={ROUTES.ipSec.connection} caption="Connections" depth={2}/>
-              <MenuDropDownItem to={ROUTES.ipSec.certificates} caption="Certificates" depth={2}/>
-              <MenuDropDownItem to={ROUTES.ipSec.status} caption="Status" depth={2}/>
+              <MenuDropDownItem to={ROUTES.ipSec.connection} caption="Connections" depth={1}/>
+              <MenuDropDownItem to={ROUTES.ipSec.certificates} caption="Certificates" depth={1}/>
+              <MenuDropDownItem to={ROUTES.ipSec.status} caption="Status" depth={1}/>
             </MenuDropdownGroup>
             <MenuDropdownGroup caption="OpenVPN" subcategory={true}>
-              <MenuDropDownItem to={ROUTES.openVpn.connections} caption="Connections" depth={2}/>
-              <MenuDropDownItem to={ROUTES.openVpn.portForwarding} caption="Port Forwarding" depth={2}/>
-              <MenuDropDownItem to={ROUTES.openVpn.certificates} caption="Certificates" depth={2}/>
-              <MenuDropDownItem to={ROUTES.openVpn.staticKeys} caption="Static Keys" depth={2}/>
-              <MenuDropDownItem to={ROUTES.openVpn.status} caption="Status" depth={2}/>
+              <MenuDropDownItem to={ROUTES.openVpn.connections} caption="Connections" depth={1}/>
+              <MenuDropDownItem to={ROUTES.openVpn.portForwarding} caption="Port Forwarding" depth={1}/>
+              <MenuDropDownItem to={ROUTES.openVpn.certificates} caption="Certificates" depth={1}/>
+              <MenuDropDownItem to={ROUTES.openVpn.staticKeys} caption="Static Keys" depth={1}/>
+              <MenuDropDownItem to={ROUTES.openVpn.status} caption="Status" depth={1}/>
             </MenuDropdownGroup>
           </MenuDropDownGroup>
           <MenuDropDownGroup caption="I/O">
