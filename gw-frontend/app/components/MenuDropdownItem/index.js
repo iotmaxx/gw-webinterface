@@ -14,13 +14,14 @@ import styled from 'styled-components';
 import { MAIN_COLORS } from 'containers/App/constants';
 
 function MenuDropdownItem({to, caption, depth=1}) {
+  
   const StyledLink = styled(Link)`
     color: ${MAIN_COLORS.orange};
     text-decoration: none;
   `;
 
   const StyledDD = styled.dd`
-    margin-left: ${depth * 20}px;
+    margin-left: ${depth * 2}rem;
   `;
 
   return (
