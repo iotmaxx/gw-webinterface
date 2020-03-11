@@ -13,7 +13,21 @@ import LocalNetworkIpConfigForm from 'components/LocalNetworkIpConfigForm';
 
 import {ToastsContainer, ToastsStore, ToastsContainerPosition} from 'react-toasts';
 
-export function LocalNetworkIpConfig() {
+import injectSaga from 'utils/injectSaga';
+import { DAEMON } from 'utils/constants';
+import saga from './saga';
+
+import {
+  setHostname,
+  setIpAddress,
+  setMTU
+} from './actions';
+
+export function LocalNetworkIpConfig({
+  doSetHostname,
+  doSetIpAddress,
+  doSetMTU
+}) {
 
   const submit = values => {
     console.log(values);
@@ -34,7 +48,15 @@ LocalNetworkIpConfig.propTypes = {
 
 function mapDispatchToProps(dispatch) {
   return {
-    dispatch,
+    doSetHostname: (hostname) => {
+      dispatch(setHostname(hostname))
+    },
+    doSetIpAddress: (ipAddress, subnetMask) => {
+      dispatch(setIpAddress(ipAddress, subnetMask))
+    },
+    doSetMTU: (mtu) => {
+      dispatch(setMTU(mtu))
+    }
   };
 }
 
@@ -43,4 +65,6 @@ const withConnect = connect(
   mapDispatchToProps,
 );
 
-export default compose(withConnect)(LocalNetworkIpConfig);
+const withSaga = injectSaga({ key: 'LocalNetworkIpConfig', saga, mode: DAEMON });
+
+export default compose(withSaga, withConnect)(LocalNetworkIpConfig);
