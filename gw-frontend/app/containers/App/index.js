@@ -105,7 +105,7 @@ export default function App() {
               {accessToken && <Redirect to={ROUTES.dashboard} />}
               {!accessToken && <Redirect to={ROUTES.login} />}
             </Route>
-            <Route exact path={ROUTES.login} component={LoginView} />
+            <Route exact path={ROUTES.login} component={!accessToken ? LoginView : Dashboard} />
             
             <AuthRoute exact path={ROUTES.dashboard} component={Dashboard} />
             

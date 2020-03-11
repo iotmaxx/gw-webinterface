@@ -13,7 +13,7 @@ import MenuDropDownGroup from 'components/MenuDropdownGroup';
 import MenuDropDownItem from 'components/MenuDropdownItem';
 import MenuDropdownGroup from 'components/MenuDropdownGroup';
 
-import { ACCESS_TOKEN, ROUTES, MAIN_COLORS } from 'containers/App/constants';
+import { ACCESS_TOKEN, ROUTES, MAIN_COLORS, REFRESH_TOKEN } from 'containers/App/constants';
 
 import Logout from '../../assets/icons/Logout.svg';
 
@@ -54,6 +54,7 @@ export class SideNav extends React.Component {
 
   logout = () => {
     localStorage.removeItem(ACCESS_TOKEN);
+    localStorage.removeItem(REFRESH_TOKEN);
     this.setState({accessToken: null});
     this.props.history.push(ROUTES.login);
   }
