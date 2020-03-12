@@ -1,7 +1,7 @@
 import {
     LOGIN,
     LOGOUT,
-    SET_AUTH
+    LOGIN_SUCCESS
 } from './constants';
 
 export function login(username, password) {
@@ -18,9 +18,8 @@ export function logout() {
     }
 }
 
-export function setAuth(auth) {
+export function loginSuccess() {
     return {
-        type: SET_AUTH,
-        auth
+        type: LOGIN_SUCCESS
     }
 }

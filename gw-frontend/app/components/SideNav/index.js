@@ -6,6 +6,7 @@
 
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 import { withRouter } from "react-router-dom";
 
@@ -13,7 +14,10 @@ import MenuDropDownGroup from 'components/MenuDropdownGroup';
 import MenuDropDownItem from 'components/MenuDropdownItem';
 import MenuDropdownGroup from 'components/MenuDropdownGroup';
 
-import { ACCESS_TOKEN, ROUTES, MAIN_COLORS, REFRESH_TOKEN } from 'containers/App/constants';
+import {
+  ROUTES,
+  MAIN_COLORS
+} from 'containers/App/constants';
 
 import Logout from '../../assets/icons/Logout.svg';
 
@@ -47,36 +51,21 @@ export class SideNav extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      accessToken: localStorage.getItem(ACCESS_TOKEN)
-    };
-  }
-
-  logout = () => {
-    localStorage.removeItem(ACCESS_TOKEN);
-    localStorage.removeItem(REFRESH_TOKEN);
-    this.setState({accessToken: null});
-    this.props.history.push(ROUTES.login);
-  }
-
-  componentWillReceiveProps(nextProps) {
-    this.setState({accessToken: localStorage.getItem(ACCESS_TOKEN)})
   }
 
   shouldComponentUpdate(nextProps, nextState, nextContext) {
-    if(this.state.accessToken !== nextState.accessToken)
+    if(this.props.loggedIn !== nextProps.loggedIn)
       return true;
     else
       return false;
   }
 
   render() {
-    const accessToken = localStorage.getItem(ACCESS_TOKEN);
     return (
       <div>
-        {accessToken ? (
+        {this.props.loggedIn ? (
           <Wrapper>
-            <LogoutContainer onClick={this.logout}>
+            <LogoutContainer onClick={this.props.logout}>
               <StyledLogout src={Logout} />
               <StyledP>Logout</StyledP>
             </LogoutContainer>
@@ -151,7 +140,9 @@ export class SideNav extends React.Component {
   }
 }
 
-SideNav.propTypes = {};
+SideNav.propTypes = {
+  loggedIn: PropTypes.bool
+};
 
 export default withRouter(SideNav);
 

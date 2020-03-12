@@ -17,7 +17,6 @@ import { takeLatest, call, put } from 'redux-saga/effects';
 import request from 'utils/request';
 
 function* getSystemInfo() {
-    console.log('getSystemInfo')
     try {
         const requestURL = `${API_URL}system_info`;
         const accessToken = localStorage.getItem(ACCESS_TOKEN);

@@ -14,14 +14,11 @@ import LoginForm from 'components/LoginForm';
 import { FormattedMessage } from 'react-intl';
 import messages from './messages';
 
-import { login } from './actions';
+import { login } from '../App/actions';
 
 import {ToastsContainer, ToastsStore, ToastsContainerPosition} from 'react-toasts';
 
 import { withRouter } from "react-router-dom";
-
-import injectReducer from 'utils/injectReducer';
-import LoginReducer from './reducers';
 
 import injectSaga from 'utils/injectSaga';
 import { DAEMON } from 'utils/constants';
@@ -64,7 +61,6 @@ const withConnect = connect(
   mapDispatchToProps,
 );
 
-const withReducer = injectReducer({ key: 'LoginView', reducer: LoginReducer });
 const withSaga = injectSaga({ key: 'LoginView', saga, mode: DAEMON });
 
-export default compose(withReducer, withSaga, withConnect)(withRouter(LoginView));
+export default compose(withSaga, withConnect)(withRouter(LoginView));

@@ -101,6 +101,11 @@ export const REFRESH_TOKEN = 'REFRESH_TOKEN';
 export const REFRESH_TOKEN_SUCCESS = 'REFRESH_TOKEN_SUCCESS';
 export const REFRESH_TOKEN_ERROR = 'REFRESH_TOKEN_ERROR';
 
+export const LOGIN = 'LOGIN';
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
+export const LOGIN_ERROR = 'LOGIN_ERROR';
+export const LOGOUT = 'LOGOUT';
+
 export const API_URL =
   process.env.NODE_ENV === 'development'
     ? 'http://127.0.0.1:5000/api/v1/'

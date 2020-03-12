@@ -1,17 +1,16 @@
 import {
     LOGIN,
     LOGIN_ERROR,
-    LOGOUT
-} from './constants';
-
-import { getSystemInfo } from '../StatusSystemInfo/actions';
-
-import {
+    LOGOUT,
     API_URL,
     ACCESS_TOKEN,
     REFRESH_TOKEN,
     ROUTES
 } from '../App/constants';
+
+import {
+    loginSuccess
+} from '../App/actions';
 
 import { takeLatest, call, put } from 'redux-saga/effects';
 
@@ -34,6 +33,7 @@ function* login({username, password}) {
         localStorage.setItem(ACCESS_TOKEN, user.access);
         localStorage.setItem(REFRESH_TOKEN, user.refresh);
         history.push(ROUTES.dashboard);
+        yield put({type: 'LOGIN_SUCCESS'})
     } catch(error) {
         console.log(error)
         yield put({type: LOGIN_ERROR, error});
