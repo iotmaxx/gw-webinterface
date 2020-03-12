@@ -5,7 +5,7 @@ from flask_jwt_extended import jwt_required
 
 mtu_route = Blueprint('mtu', __name__)
 
-@app.route(API_PATH + 'setMTU', methods = ['POST'])
+@mtu_route.route(API_PATH + 'setMTU', methods = ['POST'])
 @jwt_required
 def set_mtu():
     request_data = request.get_json()

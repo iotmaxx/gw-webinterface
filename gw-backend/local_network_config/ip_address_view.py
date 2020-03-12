@@ -5,7 +5,6 @@ from flask_jwt_extended import jwt_required
 
 ip_address_route = Blueprint('ip_address', __name__)
 
-
 @ip_address_route.route(API_PATH + 'setIp', methods = ['POST'])
 @jwt_required
 def set_ip():

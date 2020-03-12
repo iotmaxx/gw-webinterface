@@ -9,7 +9,7 @@ function parseJSON(response) {
   if (response.status === 204 || response.status === 205) {
     return { status: response.status };
   }
-  return response.json();
+  return response.json()
 }
 
 async function checkStatus(response) {
@@ -62,7 +62,7 @@ function doRefreshToken(refrToken) {
   const data = {
     refresh: refrToken,
   };
-  const endpoint = 'auth/token/refresh/';
+  const endpoint = 'auth/refresh';
   const requestURL = `${API_URL}${endpoint}`;
   const options = {
     method: 'POST',

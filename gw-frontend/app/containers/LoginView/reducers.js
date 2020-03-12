@@ -1,8 +1,7 @@
 import {
     SET_AUTH,
-    LOGOUT,
-    LOGIN
-  } from './actions';
+    LOGOUT
+  } from './constants';
   
   const initialState = {
     loggedIn: false,

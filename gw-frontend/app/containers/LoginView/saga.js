@@ -2,7 +2,9 @@ import {
     LOGIN,
     LOGIN_ERROR,
     LOGOUT
-  } from './actions';
+} from './constants';
+
+import { getSystemInfo } from '../StatusSystemInfo/actions';
 
 import {
     API_URL,
