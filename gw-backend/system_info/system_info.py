@@ -23,7 +23,9 @@ def get_memory():
 
 system_info_route = Blueprint('system_info', __name__)
 
-@system_info_route.route(API_PATH + 'system_info', methods = ['GET'])
+PATH_SUFFIX = 'system/'
+
+@system_info_route.route(API_PATH + PATH_SUFFIX + 'info', methods = ['GET'])
 @jwt_required
 def get_system_information():
     disk_info = get_disk_usage()

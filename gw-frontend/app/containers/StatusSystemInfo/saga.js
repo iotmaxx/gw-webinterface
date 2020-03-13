@@ -18,7 +18,7 @@ import request from 'utils/request';
 
 function* getSystemInfo() {
     try {
-        const requestURL = `${API_URL}system_info`;
+        const requestURL = `${API_URL}system/info`;
         const accessToken = localStorage.getItem(ACCESS_TOKEN);
         const options = {
             method: 'GET',

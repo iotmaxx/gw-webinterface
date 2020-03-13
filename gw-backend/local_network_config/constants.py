@@ -1,0 +1,1 @@
+PATH_SUFFIX = 'local_network/'

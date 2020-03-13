@@ -7,7 +7,9 @@ from auth.login import auth_route
 from local_network_config.hostname_view import hostname_route
 from local_network_config.ip_address_view import ip_address_route
 from local_network_config.mtu_view import mtu_route
+from local_network_config.subnetmask_view import subnet_mask_route
 from system_info.system_info import system_info_route
+
 from config.constants import *
 
 import os
@@ -23,6 +25,7 @@ app.register_blueprint(hostname_route)
 app.register_blueprint(ip_address_route)
 app.register_blueprint(mtu_route)
 app.register_blueprint(system_info_route)
+app.register_blueprint(subnet_mask_route)
 
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
