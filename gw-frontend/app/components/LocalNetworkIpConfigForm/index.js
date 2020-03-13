@@ -124,7 +124,11 @@ function LocalNetworkIpConfigForm({
 }
 
 LocalNetworkIpConfigForm.propTypes = {
-  submit: PropTypes.func
+  submit: PropTypes.func,
+  mtu: PropTypes.positiveNumber,
+  hostname: PropTypes.string,
+  ipAddress: PropTypes.string,
+  subnetMask: PropTypes.string
 };
 
 export default LocalNetworkIpConfigForm;
