@@ -96,7 +96,6 @@ const withConnect = connect(
 );
 
 const withSaga = injectSaga({ key: 'LocalNetworkIpConfig', saga, mode: DAEMON });
-
 const withReducer = injectReducer({ key: 'LocalNetworkIpConfig', reducer: LocalNetworkReducer });
 
 export default compose(withReducer, withSaga, withConnect)(LocalNetworkIpConfig);
