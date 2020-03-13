@@ -1,6 +1,9 @@
-export const SET_HOSTNAME = 'SET_HOSTNAME';
-export const SET_IP_ADDRESS = 'SET_IP_ADDRESS';
-export const SET_MTU = 'SET_MTU';
+import {
+    SET_IP_ADDRESS,
+    SET_HOSTNAME,
+    SET_MTU,
+    SET_SUBNETMASK
+} from './constants';
 
 export function setHostname(hostname) {
     return {
@@ -21,5 +24,12 @@ export function setMTU(mtu) {
     return {
         type: SET_MTU,
         mtu
+    }
+}
+
+export function setSubnetmask(subnetMask) {
+    return {
+        type: SET_SUBNETMASK,
+        subnetMask
     }
 }
