@@ -35,16 +35,16 @@ export default async function request(url, options) {
       if (Date.now() >= decodedRefreshToken.exp * 1000) {
         localStorage.removeItem(ACCESS_TOKEN);
         localStorage.removeItem(REFRESH_TOKEN);
-        localStorage.removeItem(USER_TYPE);
         window.location.reload();
       }
       /* refresh access token */
-      const user = await doRefreshToken(refreshToken);
-      localStorage.setItem(ACCESS_TOKEN, user.access);
+      const token_pair = await doRefreshToken(refreshToken);
+      localStorage.setItem(ACCESS_TOKEN, token_pair.access);
+      localStorage.setItem(REFRESH_TOKEN, token_pair.refresh);
       const newHeader = {
         Accept: 'application/json',
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${user.access}`,
+        Authorization: `Bearer ${token_pair.access}`,
       };
       /* make api call */
       return fetch(url, Object.assign(options, { headers: newHeader }))
@@ -59,17 +59,14 @@ export default async function request(url, options) {
 }
 
 function doRefreshToken(refrToken) {
-  const data = {
-    refresh: refrToken,
-  };
   const endpoint = 'auth/refresh';
   const requestURL = `${API_URL}${endpoint}`;
   const options = {
     method: 'POST',
-    body: JSON.stringify(data),
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
+      Authorization: `Bearer ${user.access}`,
     },
   };
   return fetch(requestURL, options)

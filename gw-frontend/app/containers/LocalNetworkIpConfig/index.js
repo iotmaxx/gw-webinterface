@@ -57,7 +57,11 @@ export function LocalNetworkIpConfig({
 LocalNetworkIpConfig.propTypes = {
   doSetHostname: PropTypes.func,
   doSetIpAddress: PropTypes.func,
-  doSetMTU: PropTypes.func
+  doSetMTU: PropTypes.func,
+  mtu: PropTypes.number,
+  hostname: PropTypes.string,
+  ipAddress: PropTypes.string,
+  subnetMask: PropTypes.string
 };
 
 function mapDispatchToProps(dispatch) {

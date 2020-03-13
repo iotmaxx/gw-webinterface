@@ -8,12 +8,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Route, Redirect } from 'react-router-dom';
 
-const AuthRoute = ({ component: Component, loggedIn: loggedIn, ...rest }) => {
+import { ACCESS_TOKEN } from '../../containers/App/constants';
+
+const AuthRoute = ({ component: Component, ...rest }) => {
+  const accessToken = localStorage.getItem(ACCESS_TOKEN);
   return (
     <Route
       {...rest}
       render={props =>
-        loggedIn ? (
+        accessToken ? (
           <Component {...props} />
         ) : (
           <Redirect to={{ pathname: '/login' }} />

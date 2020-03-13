@@ -5,8 +5,8 @@ import {
     REFRESH_TOKEN
 } from './constants';
   
-  const initialState = {
-    loggedIn: false
+const initialState = {
+  loggedIn: false
 };
 
 function LoginReducer(state = initialState, action) {

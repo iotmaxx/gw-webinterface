@@ -10,6 +10,14 @@ from flask_jwt_extended import (
 
 auth_route = Blueprint('auth', __name__)
 
+def create_token_pair(identity=None):
+    access_token = create_access_token(identity=identity)
+    refresh_token = create_refresh_token(identity=identity)
+    return {
+        'access': access_token,
+        'refresh': refresh_token
+        }    
+
 @auth_route.route(API_PATH + 'auth/login', methods = ['POST'])
 def login():
     request_data = request.get_json()
@@ -18,18 +26,12 @@ def login():
     if not request_data.get('username') == TEST_USER\
         and not request_data.get('password') == TEST_PASSWORD:
         return abort(401)
-    access_token = create_access_token(identity = request_data.get('username'))
-    refresh_token = create_refresh_token(identity = request_data.get('username'))
-    resp = {
-        'access': access_token,
-        'refresh': refresh_token
-        }
-    return jsonify(resp)
+    token_pair = create_token_pair(identity=request_data.get('username'))
+    return jsonify(token_pair)
 
 @auth_route.route(API_PATH + 'auth/refresh', methods = ['POST'])
 @jwt_refresh_token_required
-def refresh_token(self):
+def refresh_token():
     current_user = get_jwt_identity()
-    access_token = create_access_token(identity = current_user)
-    resp = {'access': access_token}
-    return jsonify(resp)
+    token_pair = create_token_pair(identity=current_user)
+    return jsonify(token_pair)

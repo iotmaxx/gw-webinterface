@@ -125,7 +125,7 @@ function LocalNetworkIpConfigForm({
 
 LocalNetworkIpConfigForm.propTypes = {
   submit: PropTypes.func,
-  mtu: PropTypes.positiveNumber,
+  mtu: PropTypes.number,
   hostname: PropTypes.string,
   ipAddress: PropTypes.string,
   subnetMask: PropTypes.string

@@ -29,11 +29,11 @@ function* login({username, password}) {
                 'Content-Type': 'application/json',
               },
         };
-        const user = yield call(request, requestURL, options);
-        localStorage.setItem(ACCESS_TOKEN, user.access);
-        localStorage.setItem(REFRESH_TOKEN, user.refresh);
+        const token_pair = yield call(request, requestURL, options);
+        localStorage.setItem(ACCESS_TOKEN, token_pair.access);
+        localStorage.setItem(REFRESH_TOKEN, token_pair.refresh);
         history.push(ROUTES.dashboard);
-        yield put({type: 'LOGIN_SUCCESS'})
+        yield put(loginSuccess());
     } catch(error) {
         console.log(error)
         yield put({type: LOGIN_ERROR, error});
