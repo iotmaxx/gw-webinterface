@@ -4,11 +4,15 @@ from flask_jwt_extended import JWTManager
 from flask_jwt_extended import jwt_required
 
 from auth.login import auth_route
+from system_info.system_info import system_info_route
 from local_network_config.hostname_view import hostname_route
 from local_network_config.ip_address_view import ip_address_route
 from local_network_config.mtu_view import mtu_route
 from local_network_config.subnetmask_view import subnet_mask_route
-from system_info.system_info import system_info_route
+from dhcp_config.domain_name_view import domain_name_route
+from dhcp_config.client_address_view import dhcp_client_address_route
+from dhcp_config.ip_range_view import dhcp_ip_range_route
+from dhcp_config.lease_time_view import dhcp_lease_time_route
 
 from config.constants import *
 
@@ -26,6 +30,10 @@ app.register_blueprint(ip_address_route)
 app.register_blueprint(mtu_route)
 app.register_blueprint(system_info_route)
 app.register_blueprint(subnet_mask_route)
+app.register_blueprint(domain_name_route)
+app.register_blueprint(dhcp_client_address_route)
+app.register_blueprint(dhcp_ip_range_route)
+app.register_blueprint(dhcp_lease_time_route)
 
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')

@@ -5,13 +5,13 @@ from flask_jwt_extended import jwt_required
 
 from .constants import PATH_SUFFIX
 
-hostname_route = Blueprint('hostname', __name__)
+dhcp_lease_time_route = Blueprint('leaseTime', __name__)
 
-@hostname_route.route(API_PATH + PATH_SUFFIX + 'hostname', methods = ['POST'])
+@dhcp_lease_time_route.route(API_PATH + PATH_SUFFIX + 'leaseTime', methods = ['POST'])
 @jwt_required
-def set_hostname():
+def set_lease_time():
     request_data = request.get_json()
-    if not 'hostname' in request_data:
+    if not 'leaseTime' in request_data:
         abort(400)
     resp = {'message': 'Success'}
     return jsonify(resp)

@@ -6,7 +6,7 @@ import {
     SET_CLIENT_MAC_ADDRESS,
     SET_CLIENT_IP_ADDRESS,
     LOCAL_NETWORK_PATH_SUFFIX
-  } from './constants';
+} from './constants';
 
 import {
     API_URL

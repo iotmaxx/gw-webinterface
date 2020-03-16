@@ -5,13 +5,13 @@ from flask_jwt_extended import jwt_required
 
 from .constants import PATH_SUFFIX
 
-hostname_route = Blueprint('hostname', __name__)
+domain_name_route = Blueprint('domainName', __name__)
 
-@hostname_route.route(API_PATH + PATH_SUFFIX + 'hostname', methods = ['POST'])
+@domain_name_route.route(API_PATH + PATH_SUFFIX + 'domainName', methods = ['POST'])
 @jwt_required
-def set_hostname():
+def set_domain_name():
     request_data = request.get_json()
-    if not 'hostname' in request_data:
+    if not 'domainName' in request_data:
         abort(400)
     resp = {'message': 'Success'}
     return jsonify(resp)

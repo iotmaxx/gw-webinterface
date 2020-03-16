@@ -4,7 +4,7 @@ import {
     SET_MTU,
     SET_SUBNETMASK,
     LOCAL_NETWORK_PATH_SUFFIX
-  } from './constants';
+} from './constants';
 
 import {
     API_URL
