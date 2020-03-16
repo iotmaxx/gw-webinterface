@@ -43,7 +43,7 @@ function* login({username, password}) {
 function* logout() {
     localStorage.removeItem(ACCESS_TOKEN);
     localStorage.removeItem(REFRESH_TOKEN);
-    window.location.reload();
+    history.push(ROUTES.login);
 }
 
 // Root saga

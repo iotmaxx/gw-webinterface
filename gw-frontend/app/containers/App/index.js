@@ -109,8 +109,6 @@ export function App({ loggedIn, doLogout, doLoginSuccess }) {
       doLoginSuccess();
   })
 
-  const accessToken = localStorage.getItem(ACCESS_TOKEN);
-
   return (
     <MainWrapper>
       <Header/>
@@ -121,7 +119,7 @@ export function App({ loggedIn, doLogout, doLoginSuccess }) {
             <Route exact path="/">
               <Redirect to={ROUTES.dashboard} />
             </Route>
-            <Route exact path={ROUTES.login} component={!accessToken ? LoginView : Dashboard} />
+            <Route exact path={ROUTES.login} component={LoginView} />
             
             <AuthRoute exact path={ROUTES.dashboard} component={Dashboard} />
             
