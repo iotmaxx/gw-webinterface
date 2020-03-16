@@ -1,3 +1,8 @@
-export const SET_SOMETING = 'SET_SOMETING';
+export const SET_DOMAIN_NAME = 'SET_DOMAIN_NAME';
+export const SET_LEASE_TIME = 'SET_LEASE_TIME';
+export const SET_BEGIN_IP_RANGE = 'SET_BEGIN_IP_RANGE';
+export const SET_END_IP_RANGE = 'SET_END_IP_RANGE';
+export const SET_CLIENT_MAC_ADDRESS = 'SET_CLIENT_MAC_ADDRESS';
+export const SET_CLIENT_IP_ADDRESS = 'SET_CLIENT_IP_ADDRESS';
 
 export const LOCAL_NETWORK_PATH_SUFFIX = 'local_network/';
