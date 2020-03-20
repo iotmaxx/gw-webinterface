@@ -58,7 +58,7 @@ export default async function request(url, options) {
     .then(parseJSON);
 }
 
-function doRefreshToken(refrToken) {
+function doRefreshToken(refreshToken) {
   const endpoint = 'auth/refresh';
   const requestURL = `${API_URL}${endpoint}`;
   const options = {
@@ -66,7 +66,7 @@ function doRefreshToken(refrToken) {
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${user.access}`,
+      Authorization: `Bearer ${refreshToken}`,
     },
   };
   return fetch(requestURL, options)
