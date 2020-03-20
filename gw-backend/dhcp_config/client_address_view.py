@@ -13,7 +13,7 @@ def set_client_mac_address():
     request_data = request.get_json()
     if not 'clientMacAddress' in request_data:
         abort(400)
-    resp = {'message': 'Success'}
+    resp = {'clientMacAddress': request_data.get('clientMacAddress')}
     return jsonify(resp)
 
 @dhcp_client_address_route.route(API_PATH + PATH_SUFFIX + 'clientIpAddress', methods = ['POST'])
@@ -22,5 +22,5 @@ def set_client_ip_address():
     request_data = request.get_json()
     if not 'clientIpAddress' in request_data:
         abort(400)
-    resp = {'message': 'Success'}
+    resp = {'clientIpAddress': request_data.get('clientIpAddress')}
     return jsonify(resp)

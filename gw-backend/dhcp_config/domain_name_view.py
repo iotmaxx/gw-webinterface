@@ -13,5 +13,5 @@ def set_domain_name():
     request_data = request.get_json()
     if not 'domainName' in request_data:
         abort(400)
-    resp = {'message': 'Success'}
+    resp = {'domainName': request_data.get('domainName')}
     return jsonify(resp)

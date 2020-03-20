@@ -19,7 +19,15 @@ const FormWrapper = styled.form`
   display: grid;
 `;
 
-function LocalNetworkDhcpConfigForm({submit}) {
+function LocalNetworkDhcpConfigForm({
+  submit,
+  domainName,
+  beginIpRange,
+  endIpRange,
+  leaseTime,
+  clientMacAddress,
+  clientIpAddress
+}) {
 
   const schema = Yup.object({
     domainName: Yup.string()
@@ -34,15 +42,15 @@ function LocalNetworkDhcpConfigForm({submit}) {
 
   const formik = useFormik({
     initialValues: {
-      domainName: '',
-      leaseTime: '',
-      beginIpRange: '',
-      endIpRange: '',
-      clientMacAddress: '',
-      clientIpAddress: ''
+      domainName: domainName,
+      leaseTime: leaseTime,
+      beginIpRange: beginIpRange,
+      endIpRange: endIpRange,
+      clientMacAddress: clientMacAddress,
+      clientIpAddress: clientIpAddress
     },
     onSubmit: values => {
-      submit(values);
+      submit(values);dom
     },
     validationSchema: schema
   });

@@ -4,7 +4,13 @@ import {
     SET_END_IP_RANGE,
     SET_LEASE_TIME,
     SET_CLIENT_MAC_ADDRESS,
-    SET_CLIENT_IP_ADDRESS
+    SET_CLIENT_IP_ADDRESS,
+    SUCCESS_SET_DOMAIN_NAME,
+    SUCCESS_SET_BEGIN_IP_RANGE,
+    SUCCESS_SET_END_IP_RANGE,
+    SUCCESS_SET_LEASE_TIME,
+    SUCCESS_SET_CLIENT_MAC_ADDRESS,
+    SUCCESS_SET_CLIENT_IP_ADDRESS
 } from './constants';
 
 export function setDomainName(domainName) {
@@ -45,6 +51,48 @@ export function setClientMacAddress(clientMacAddress) {
 export function setClientIpAddress(clientIpAddress) {
     return {
         type: SET_CLIENT_IP_ADDRESS,
+        clientIpAddress
+    }
+}
+
+export function successSetDomainName(domainName) {
+    return {
+        type: SUCCESS_SET_DOMAIN_NAME,
+        domainName
+    }
+}
+
+export function successSetBeginIpRange(beginIpRange) {
+    return {
+        type: SUCCESS_SET_BEGIN_IP_RANGE,
+        beginIpRange
+    }
+}
+
+export function successSetEndIpRange(endIpRange) {
+    return {
+        type: SUCCESS_SET_END_IP_RANGE,
+        endIpRange
+    }
+}
+
+export function successSetLeaseTime(leaseTime) {
+    return {
+        type: SUCCESS_SET_LEASE_TIME,
+        leaseTime
+    }
+}
+
+export function successSetClientMacAddress(clientMacAddress) {
+    return {
+        type: SUCCESS_SET_CLIENT_MAC_ADDRESS,
+        clientMacAddress
+    }
+}
+
+export function successSetClientIpAddress(clientIpAddress) {
+    return {
+        type: SUCCESS_SET_CLIENT_IP_ADDRESS,
         clientIpAddress
     }
 }

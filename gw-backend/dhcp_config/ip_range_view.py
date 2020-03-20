@@ -13,7 +13,7 @@ def set_begin_ip_range():
     request_data = request.get_json()
     if not 'beginIpRange' in request_data:
         abort(400)
-    resp = {'message': 'Success'}
+    resp = {'beginIpRange': request_data.get('beginIpRange')}
     return jsonify(resp)
 
 @dhcp_ip_range_route.route(API_PATH + PATH_SUFFIX + 'endIpRange', methods = ['POST'])
@@ -22,5 +22,5 @@ def set_begin_mac_range():
     request_data = request.get_json()
     if not 'endIpRange' in request_data:
         abort(400)
-    resp = {'message': 'Success'}
+    resp = {'endIpRange': request_data.get('endIpRange')}
     return jsonify(resp)

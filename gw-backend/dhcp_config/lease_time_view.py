@@ -13,5 +13,5 @@ def set_lease_time():
     request_data = request.get_json()
     if not 'leaseTime' in request_data:
         abort(400)
-    resp = {'message': 'Success'}
+    resp = {'leaseTime': request_data.get('leaseTime')}
     return jsonify(resp)

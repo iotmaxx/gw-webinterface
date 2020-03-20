@@ -1,34 +1,34 @@
 import {
-    SET_DOMAIN_NAME,
-    SET_BEGIN_IP_RANGE,
-    SET_END_IP_RANGE,
-    SET_LEASE_TIME,
-    SET_CLIENT_MAC_ADDRESS,
-    SET_CLIENT_IP_ADDRESS
+    SUCCESS_SET_DOMAIN_NAME,
+    SUCCESS_SET_BEGIN_IP_RANGE,
+    SUCCESS_SET_END_IP_RANGE,
+    SUCCESS_SET_LEASE_TIME,
+    SUCCESS_SET_CLIENT_MAC_ADDRESS,
+    SUCCESS_SET_CLIENT_IP_ADDRESS
 } from './constants';
   
   const initialState = {
-    domainName: '',
-    beginIpRange: '',
-    endIpRange: '',
-    leaseTime: '',
-    clientMacAddress: '',
-    clientIpAddress: ''
+    domainName: 'localhost',
+    beginIpRange: '127.0.0.1',
+    endIpRange: '127.0.0.254',
+    leaseTime: '1d',
+    clientMacAddress: '00:00:00:00:00:00',
+    clientIpAddress: '127.0.0.1'
 };
 
 function LocalDhcpServerReducer(state = initialState, action) {
     switch(action.type) {
-        case SET_DOMAIN_NAME:
+        case SUCCESS_SET_DOMAIN_NAME:
             return {...state, domainName: action.domainName};
-        case SET_BEGIN_IP_RANGE:
+        case SUCCESS_SET_BEGIN_IP_RANGE:
             return {...state, beginIpRange: action.beginIpRange};
-        case SET_END_IP_RANGE:
+        case SUCCESS_SET_END_IP_RANGE:
             return {...state, endIpRange: action.endIpRange};
-        case SET_LEASE_TIME:
+        case SUCCESS_SET_LEASE_TIME:
             return {...state, leaseTime: action.leaseTime};
-        case SET_CLIENT_MAC_ADDRESS:
+        case SUCCESS_SET_CLIENT_MAC_ADDRESS:
             return {...state, clientMacAddress: action.clientMacAddress};
-        case SET_CLIENT_IP_ADDRESS:
+        case SUCCESS_SET_CLIENT_IP_ADDRESS:
             return {...state, clientIpAddress: action.clientIpAddress};
         default:
             return state;
