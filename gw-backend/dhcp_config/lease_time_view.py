@@ -1,3 +1,12 @@
+# -*- coding:utf-8 -*-
+# @Script: lease_time_view.py
+# @Author: Andre Litty
+# @Email: alittysw@gmail.com
+# @Create At: 2020-03-21 13:46:56
+# @Last Modified By: Andre Litty
+# @Last Modified At: 2020-03-21 14:12:28
+# @Description: Blueprint for lease time logic.
+
 from config.constants import API_PATH
 
 from flask import Blueprint, request, abort, jsonify

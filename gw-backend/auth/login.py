@@ -1,3 +1,12 @@
+# -*- coding:utf-8 -*-
+# @Script: login.py
+# @Author: Andre Litty
+# @Email: alittysw@gmail.com
+# @Create At: 2020-03-21 13:44:03
+# @Last Modified By: Andre Litty
+# @Last Modified At: 2020-03-21 14:13:00
+# @Description: Blueprint for login and token refresh logic.
+
 from config.constants import API_PATH, TEST_USER, TEST_PASSWORD
 
 from flask import Blueprint, request, abort, jsonify

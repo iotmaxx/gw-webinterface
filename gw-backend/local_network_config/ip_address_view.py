@@ -1,3 +1,12 @@
+# -*- coding:utf-8 -*-
+# @Script: ip_address_view.py
+# @Author: Andre Litty
+# @Email: alittysw@gmail.com
+# @Create At: 2020-03-21 13:47:39
+# @Last Modified By: Andre Litty
+# @Last Modified At: 2020-03-21 14:11:48
+# @Description: Blueprint for ip address logic.
+
 from config.constants import API_PATH
 
 from flask import Blueprint, request, abort, jsonify

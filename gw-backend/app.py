@@ -1,3 +1,12 @@
+# -*- coding:utf-8 -*-
+# @Script: app.py
+# @Author: Andre Litty
+# @Email: alittysw@gmail.com
+# @Create At: 2020-03-21 13:48:57
+# @Last Modified By: Andre Litty
+# @Last Modified At: 2020-03-21 13:49:28
+# @Description: Main application and entry point to run program.
+
 from flask import Flask, send_from_directory, request, abort, jsonify
 from flask_jwt_extended import JWTManager
 
