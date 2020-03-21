@@ -4,7 +4,7 @@
 # @Email: alittysw@gmail.com
 # @Create At: 2020-03-21 13:48:57
 # @Last Modified By: Andre Litty
-# @Last Modified At: 2020-03-21 13:49:28
+# @Last Modified At: 2020-03-21 14:34:03
 # @Description: Main application and entry point to run program.
 
 from flask import Flask, send_from_directory, request, abort, jsonify
@@ -14,14 +14,8 @@ from flask_jwt_extended import jwt_required
 
 from auth.login import auth_route
 from system_info.system_info import system_info_route
-from local_network_config.hostname_view import hostname_route
-from local_network_config.ip_address_view import ip_address_route
-from local_network_config.mtu_view import mtu_route
-from local_network_config.subnetmask_view import subnet_mask_route
-from dhcp_config.domain_name_view import domain_name_route
-from dhcp_config.client_address_view import dhcp_client_address_route
-from dhcp_config.ip_range_view import dhcp_ip_range_route
-from dhcp_config.lease_time_view import dhcp_lease_time_route
+from local_network_config.local_network_config_view import local_network_route
+from dhcp_config.dhcp_config_view import dhcp_config_route
 
 from config.constants import *
 
@@ -34,15 +28,9 @@ app.secret_key = SECRET_KEY
 jwt = JWTManager(app)
 
 app.register_blueprint(auth_route)
-app.register_blueprint(hostname_route)
-app.register_blueprint(ip_address_route)
-app.register_blueprint(mtu_route)
+app.register_blueprint(local_network_route)
 app.register_blueprint(system_info_route)
-app.register_blueprint(subnet_mask_route)
-app.register_blueprint(domain_name_route)
-app.register_blueprint(dhcp_client_address_route)
-app.register_blueprint(dhcp_ip_range_route)
-app.register_blueprint(dhcp_lease_time_route)
+app.register_blueprint(dhcp_config_route)
 
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
