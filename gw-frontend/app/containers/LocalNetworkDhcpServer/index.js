@@ -24,9 +24,7 @@ import {
   setDomainName,
   setBeginIpRange,
   setEndIpRange,
-  setLeaseTime,
-  setClientMacAddress,
-  setClientIpAddress
+  setLeaseTime
 } from './actions';
 
 export function LocalNetworkDhcpServer({
@@ -34,14 +32,10 @@ export function LocalNetworkDhcpServer({
   beginIpRange,
   endIpRange,
   leaseTime,
-  clientMacAddress,
-  clientIpAddress,
   doSetDomainName,
   doSetBeginIpRange,
   doSetEndIpRange,
-  doSetLeaseTime,
-  doSetClientMacAddress,
-  doSetClientIpAddress
+  doSetLeaseTime
 }) {
   const submit = values => {
     if (values.domainName !== domainName)
@@ -52,16 +46,12 @@ export function LocalNetworkDhcpServer({
       doSetEndIpRange(endIpRange)
     if (values.leaseTime !== leaseTime)
       doSetLeaseTime(leaseTime)
-    if (values.clientMacAddress !== clientMacAddress)
-      doSetClientMacAddress(clientMacAddress)
-    if (values.clientIpAddress !== clientIpAddress)
-      doSetClientIpAddress(clientIpAddress)
     ToastsStore.success("Success, your changes have been submitted!");
   }
   
   return (
     <div>
-      <LocalNetworkDhcpConfigForm submit={submit} domainName={domainName} beginIpRange={beginIpRange} endIpRange={endIpRange} leaseTime={leaseTime} clientMacAddress={clientMacAddress} clientIpAddress={clientIpAddress}/>
+      <LocalNetworkDhcpConfigForm submit={submit} domainName={domainName} beginIpRange={beginIpRange} endIpRange={endIpRange} leaseTime={leaseTime} />
       <ToastsContainer store={ToastsStore} position={ToastsContainerPosition.BOTTOM_RIGHT} />
     </div>
   );
@@ -72,14 +62,10 @@ LocalNetworkDhcpServer.propTypes = {
   beginIpRange: PropTypes.string,
   endIpRange: PropTypes.string,
   leaseTime: PropTypes.string,
-  clientMacAddress: PropTypes.string,
-  clientIpAddress: PropTypes.string,
   doSetDomainName: PropTypes.func,
   doSetBeginIpRange: PropTypes.func,
   doSetEndIpRange: PropTypes.func,
-  doSetLeaseTime: PropTypes.func,
-  doSetClientMacAddress: PropTypes.func,
-  doSetClientIpAddress: PropTypes.func
+  doSetLeaseTime: PropTypes.func
 };
 
 function mapDispatchToProps(dispatch) {
@@ -95,12 +81,6 @@ function mapDispatchToProps(dispatch) {
     },
     doSetLeaseTime: (leaseTime) => {
       dispatch(setLeaseTime(leaseTime));
-    },
-    doSetClientMacAddress: (macAddress) => {
-      dispatch(setClientMacAddress(macAddress));
-    },
-    doSetClientIpAddress: (ipAddress) => {
-      dispatch(setClientIpAddress(ipAddress));
     }
   };
 }
@@ -110,9 +90,7 @@ const mapStateToProps = state => {
     domainName: state.LocalNetworkDhcpServer.domainName,
     beginIpRange: state.LocalNetworkDhcpServer.beginIpRange,
     endIpRange: state.LocalNetworkDhcpServer.endIpRange,
-    leaseTime: state.LocalNetworkDhcpServer.leaseTime,
-    clientMacAddress: state.LocalNetworkDhcpServer.clientMacAddress,
-    clientIpAddress: state.LocalNetworkDhcpServer.clientIpAddress
+    leaseTime: state.LocalNetworkDhcpServer.leaseTime
   }
 }
 

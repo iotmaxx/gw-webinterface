@@ -3,8 +3,6 @@ import {
     SET_BEGIN_IP_RANGE,
     SET_END_IP_RANGE,
     SET_LEASE_TIME,
-    SET_CLIENT_MAC_ADDRESS,
-    SET_CLIENT_IP_ADDRESS,
     DHCP_PATH_SUFFIX
 } from './constants';
 
@@ -12,9 +10,7 @@ import {
     successSetDomainName,
     successSetBeginIpRange,
     successSetEndIpRange,
-    successSetLeaseTime,
-    successSetClientMacAddress,
-    successSetClientIpAddress
+    successSetLeaseTime
 } from './actions';
 
 import {
@@ -114,58 +110,12 @@ function* setLeaseTime({leaseTime}) {
     }
 }
 
-function* setClientMacAddress({clientMacAddress}) {
-    try {
-        const data = {clientMacAddress};
-        const requestURL = `${API_URL}${DHCP_PATH_SUFFIX}clientMacAddress`;
-        const accessToken = localStorage.getItem(ACCESS_TOKEN);
-        const options = {
-            method: 'POST',
-            body: JSON.stringify(data),
-            headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${accessToken}`,
-              },
-        };
-        const response = yield call(request, requestURL, options);
-        yield put(successSetClientMacAddress(response.clientMacAddress));
-    } catch(error) {
-        console.log(error)
-        yield put({type: LOGIN_ERROR, error});
-    }
-}
-
-function* setClientIpAddress({clientIpAddress}) {
-    try {
-        const data = {clientIpAddress};
-        const requestURL = `${API_URL}${DHCP_PATH_SUFFIX}clientIpAddress`;
-        const accessToken = localStorage.getItem(ACCESS_TOKEN);
-        const options = {
-            method: 'POST',
-            body: JSON.stringify(data),
-            headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${accessToken}`,
-              },
-        };
-        const response = yield call(request, requestURL, options);
-        yield put(successSetClientIpAddress(response.clientIpAddress));
-    } catch(error) {
-        console.log(error)
-        yield put({type: LOGIN_ERROR, error});
-    }
-}
-
 // Root saga
 export default function* rootSaga() {
     yield [
         yield takeLatest(SET_DOMAIN_NAME, setDomainName),
         yield takeLatest(SET_BEGIN_IP_RANGE, setBeginIpRange),
         yield takeLatest(SET_END_IP_RANGE, setEndIpRange),
-        yield takeLatest(SET_LEASE_TIME, setLeaseTime),
-        yield takeLatest(SET_CLIENT_MAC_ADDRESS, setClientMacAddress),
-        yield takeLatest(SET_CLIENT_IP_ADDRESS, setClientIpAddress)
+        yield takeLatest(SET_LEASE_TIME, setLeaseTime)
     ];
 }

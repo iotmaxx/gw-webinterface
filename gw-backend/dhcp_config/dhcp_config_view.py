@@ -4,7 +4,7 @@
 # @Email: alittysw@gmail.com
 # @Create At: 2020-03-21 14:30:29
 # @Last Modified By: Andre Litty
-# @Last Modified At: 2020-03-21 14:32:06
+# @Last Modified At: 2020-03-23 22:51:31
 # @Description: Logic related to dhcp configuration.
 
 from config.constants import API_PATH
@@ -50,22 +50,4 @@ def set_lease_time():
     if not 'leaseTime' in request_data:
         abort(400)
     resp = {'leaseTime': request_data.get('leaseTime')}
-    return jsonify(resp)
-
-@dhcp_config_route.route(API_PATH + PATH_SUFFIX + 'clientMacAddress', methods = ['POST'])
-@jwt_required
-def set_client_mac_address():
-    request_data = request.get_json()
-    if not 'clientMacAddress' in request_data:
-        abort(400)
-    resp = {'clientMacAddress': request_data.get('clientMacAddress')}
-    return jsonify(resp)
-
-@dhcp_config_route.route(API_PATH + PATH_SUFFIX + 'clientIpAddress', methods = ['POST'])
-@jwt_required
-def set_client_ip_address():
-    request_data = request.get_json()
-    if not 'clientIpAddress' in request_data:
-        abort(400)
-    resp = {'clientIpAddress': request_data.get('clientIpAddress')}
     return jsonify(resp)
