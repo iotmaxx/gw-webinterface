@@ -4,13 +4,13 @@
 # @Email: alittysw@gmail.com
 # @Create At: 2020-03-21 14:26:14
 # @Last Modified By: Andre Litty
-# @Last Modified At: 2020-03-21 14:28:42
+# @Last Modified At: 2020-03-24 02:04:23
 # @Description: Logic related to local network configuration.
-
-from config.constants import API_PATH
 
 from flask import Blueprint, request, abort, jsonify
 from flask_jwt_extended import jwt_required
+
+from gw_backend.config.constants import API_PATH
 
 from .constants import PATH_SUFFIX
 

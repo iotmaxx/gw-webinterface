@@ -4,10 +4,10 @@
 # @Email: alittysw@gmail.com
 # @Create At: 2020-03-21 13:44:03
 # @Last Modified By: Andre Litty
-# @Last Modified At: 2020-03-21 14:13:00
+# @Last Modified At: 2020-03-24 02:04:42
 # @Description: Blueprint for login and token refresh logic.
 
-from config.constants import API_PATH, TEST_USER, TEST_PASSWORD
+from gw_backend.config.constants import API_PATH, TEST_USER, TEST_PASSWORD
 
 from flask import Blueprint, request, abort, jsonify
 from flask_jwt_extended import (

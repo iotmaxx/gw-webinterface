@@ -1,29 +1,81 @@
-<!doctype html>
-<html lang="en">
-
-<head>
-  <!-- The first thing in any HTML file should be the charset -->
-  <meta charset="utf-8">
-
-  <!-- Make the page mobile compatible -->
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <!-- Allow installing the app to the homescreen -->
-  <meta name="mobile-web-app-capable" content="yes">
-
-  <link rel="icon" href="/favicon.ico" />
-  <title>GW-Webinterface</title>
-</head>
-
-<body>
-  <!-- Display a message if JS has been disabled on the browser. -->
-  <noscript>If you're seeing this message, that means
-    <strong>JavaScript has been disabled on your browser</strong>, please
-    <strong>enable JS</strong> to make this app work.</noscript>
-
-  <!-- The app hooks into this div -->
-  <div id="app"></div>
-  <!-- A lot of magic happens in this file. HtmlWebpackPlugin automatically injects all assets (e.g. bundle.js, main.css) with the correct HTML tags, which is why they are missing in this file. Don't add any assets here! (Check out webpack.dev.babel.js and webpack.prod.babel.js if you want to know more) -->
-<script type="text/javascript" src="/vendors~main.chunk.js"></script><script type="text/javascript" src="/main.js"></script></body>
-
-</html>
+Html Webpack Plugin:
+<pre>
+  Error: Child compilation failed:
+  Entry module not found: Error: Can't resolve '/home/andre/Work/iotmaxx/gw-webinterface/gw-backend/templates/index.html' in '/home/andre/Work/iotmaxx/gw-webinterface/gw-frontend':
+  Error: Can't resolve '/home/andre/Work/iotmaxx/gw-webinterface/gw-backend/templates/index.html' in '/home/andre/Work/iotmaxx/gw-webinterface/gw-frontend'
+  
+  - compiler.js:79 childCompiler.runAsChild
+    [gw-frontend]/[html-webpack-plugin]/lib/compiler.js:79:16
+  
+  - Compiler.js:306 compile
+    [gw-frontend]/[webpack]/lib/Compiler.js:306:11
+  
+  - Compiler.js:631 hooks.afterCompile.callAsync.err
+    [gw-frontend]/[webpack]/lib/Compiler.js:631:15
+  
+  
+  - Hook.js:154 AsyncSeriesHook.lazyCompileHook
+    [gw-frontend]/[webpack]/[tapable]/lib/Hook.js:154:20
+  
+  - Compiler.js:628 compilation.seal.err
+    [gw-frontend]/[webpack]/lib/Compiler.js:628:31
+  
+  
+  - Hook.js:154 AsyncSeriesHook.lazyCompileHook
+    [gw-frontend]/[webpack]/[tapable]/lib/Hook.js:154:20
+  
+  - Compilation.js:1329 hooks.optimizeAssets.callAsync.err
+    [gw-frontend]/[webpack]/lib/Compilation.js:1329:35
+  
+  
+  - Hook.js:154 AsyncSeriesHook.lazyCompileHook
+    [gw-frontend]/[webpack]/[tapable]/lib/Hook.js:154:20
+  
+  - Compilation.js:1320 hooks.optimizeChunkAssets.callAsync.err
+    [gw-frontend]/[webpack]/lib/Compilation.js:1320:32
+  
+  
+  - Hook.js:154 AsyncSeriesHook.lazyCompileHook
+    [gw-frontend]/[webpack]/[tapable]/lib/Hook.js:154:20
+  
+  - Compilation.js:1315 hooks.additionalAssets.callAsync.err
+    [gw-frontend]/[webpack]/lib/Compilation.js:1315:36
+  
+  
+  - Hook.js:154 AsyncSeriesHook.lazyCompileHook
+    [gw-frontend]/[webpack]/[tapable]/lib/Hook.js:154:20
+  
+  - Compilation.js:1311 hooks.optimizeTree.callAsync.err
+    [gw-frontend]/[webpack]/lib/Compilation.js:1311:32
+  
+  
+  - Hook.js:154 AsyncSeriesHook.lazyCompileHook
+    [gw-frontend]/[webpack]/[tapable]/lib/Hook.js:154:20
+  
+  - Compilation.js:1248 Compilation.seal
+    [gw-frontend]/[webpack]/lib/Compilation.js:1248:27
+  
+  - Compiler.js:625 compilation.finish.err
+    [gw-frontend]/[webpack]/lib/Compiler.js:625:18
+  
+  - Compilation.js:1171 hooks.finishModules.callAsync.err
+    [gw-frontend]/[webpack]/lib/Compilation.js:1171:4
+  
+  
+  - Hook.js:154 AsyncSeriesHook.lazyCompileHook
+    [gw-frontend]/[webpack]/[tapable]/lib/Hook.js:154:20
+  
+  - Compilation.js:1163 Compilation.finish
+    [gw-frontend]/[webpack]/lib/Compilation.js:1163:28
+  
+  - Compiler.js:622 hooks.make.callAsync.err
+    [gw-frontend]/[webpack]/lib/Compiler.js:622:17
+  
+  
+  - Compilation.js:1095 _addModuleChain
+    [gw-frontend]/[webpack]/lib/Compilation.js:1095:12
+  
+  - Compilation.js:947 errorAndCallback.bail.err
+    [gw-frontend]/[webpack]/lib/Compilation.js:947:6
+  
+</pre><script type="text/javascript" src="/vendors~main.chunk.js"></script><script type="text/javascript" src="/main.js"></script>
