@@ -4,7 +4,7 @@
 # @Email: alittysw@gmail.com
 # @Create At: 2020-03-21 14:26:14
 # @Last Modified By: Andre Litty
-# @Last Modified At: 2020-03-24 02:04:23
+# @Last Modified At: 2020-03-29 18:09:24
 # @Description: Logic related to local network configuration.
 
 from flask import Blueprint, request, abort, jsonify
@@ -38,7 +38,7 @@ def set_mtu():
 @jwt_required
 def set_subnetmask():
     request_data = request.get_json()
-    if not 'subnet_mask' in request_data:
+    if not 'subnetMask' in request_data:
         abort(400)
     resp = {'message': 'Success'}
     return jsonify(resp)
@@ -47,7 +47,7 @@ def set_subnetmask():
 @jwt_required
 def set_ip():
     request_data = request.get_json()
-    if not 'ip_address' in request_data:
+    if not 'ipAddress' in request_data:
         abort(400)
     resp = {'message': 'Success'}
     return jsonify(resp)

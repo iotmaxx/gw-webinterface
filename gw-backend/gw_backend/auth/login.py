@@ -4,7 +4,7 @@
 # @Email: alittysw@gmail.com
 # @Create At: 2020-03-21 13:44:03
 # @Last Modified By: Andre Litty
-# @Last Modified At: 2020-03-24 02:04:42
+# @Last Modified At: 2020-03-29 17:12:30
 # @Description: Blueprint for login and token refresh logic.
 
 from gw_backend.config.constants import API_PATH, TEST_USER, TEST_PASSWORD
@@ -30,6 +30,8 @@ def create_token_pair(identity=None):
 @auth_route.route(API_PATH + 'auth/login', methods = ['POST'])
 def login():
     request_data = request.get_json()
+    if not request_data:
+        return abort(400)
     if not 'username' in request_data or 'password' not in request_data:
         return abort(400)
     if not request_data.get('username') == TEST_USER\

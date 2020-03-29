@@ -43,9 +43,9 @@ function* setHostname({hostname}) {
     }
 }
 
-function* setIpAddress({ipAddress, subnetMask}) {
+function* setIpAddress({ipAddress}) {
     try {
-        const data = {ipAddress, subnetMask};
+        const data = {ipAddress};
         const requestURL = `${API_URL}${LOCAL_NETWORK_PATH_SUFFIX}ipAddress`;
         const accessToken = localStorage.getItem(ACCESS_TOKEN);
         const options = {
