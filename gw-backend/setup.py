@@ -4,7 +4,7 @@
 # @Email: alittysw@gmail.com
 # @Create At: 2020-03-23 23:04:49
 # @Last Modified By: Andre Litty
-# @Last Modified At: 2020-03-24 00:13:01
+# @Last Modified At: 2020-03-29 13:55:02
 # @Description: Setupfile to install gw-webserver backend.
 
 from setuptools import setup, find_packages
@@ -18,5 +18,8 @@ setup(
         'flask',
         'flask-jwt-extended',
         'psutil'
+    ],
+    dependecy_links=[
+        #'https://github.com/iotmaxx/gw-cli/tarball/master#egg=package-1.0'
     ]
 )
