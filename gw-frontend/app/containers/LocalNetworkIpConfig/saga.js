@@ -1,16 +1,14 @@
 import {
     SET_HOSTNAME,
-    SET_IP_ADDRESS,
+    SET_ADDRESS,
     SET_MTU,
-    SET_SUBNETMASK,
     LOCAL_NETWORK_PATH_SUFFIX
 } from './constants';
 
 import {
     successSetHostname,
     successSetMTU,
-    successSetSubnetmask,
-    successSetIpAddress
+    successsetAddress
 } from './actions';
 
 import {
@@ -43,10 +41,10 @@ function* setHostname({hostname}) {
     }
 }
 
-function* setIpAddress({ipAddress}) {
+function* setAddress({ipAddress, subnetMask}) {
     try {
-        const data = {ipAddress};
-        const requestURL = `${API_URL}${LOCAL_NETWORK_PATH_SUFFIX}ipAddress`;
+        const data = {ipAddress, subnetMask};
+        const requestURL = `${API_URL}${LOCAL_NETWORK_PATH_SUFFIX}address`;
         const accessToken = localStorage.getItem(ACCESS_TOKEN);
         const options = {
             method: 'POST',
@@ -58,7 +56,7 @@ function* setIpAddress({ipAddress}) {
               },
         };
         const response = yield call(request, requestURL, options);
-        yield put(successSetIpAddress(response.ipAddress, response.subnetMask));
+        yield put(successsetAddress(response.ipAddress, response.subnetMask));
     } catch(error) {
         console.log(error)
         yield put({type: LOGIN_ERROR, error});
@@ -87,34 +85,11 @@ function* setMTU({mtu}) {
     }
 }
 
-function* setSubnetmask({subnetMask}) {
-    try {
-        const data = {subnetMask};
-        const requestURL = `${API_URL}${LOCAL_NETWORK_PATH_SUFFIX}subnetMask`;
-        const accessToken = localStorage.getItem(ACCESS_TOKEN);
-        const options = {
-            method: 'POST',
-            body: JSON.stringify(data),
-            headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${accessToken}`,
-              },
-        };
-        const response = yield call(request, requestURL, options);
-        yield put(successSetSubnetmask(response.subnetMask));
-    } catch(error) {
-        console.log(error)
-        yield put({type: LOGIN_ERROR, error});
-    }
-}
-
 // Root saga
 export default function* rootSaga() {
     yield [
         yield takeLatest(SET_HOSTNAME, setHostname),
-        yield takeLatest(SET_IP_ADDRESS, setIpAddress),
+        yield takeLatest(SET_ADDRESS, setAddress),
         yield takeLatest(SET_MTU, setMTU),
-        yield takeLatest(SET_SUBNETMASK, setSubnetmask),
     ];
 }

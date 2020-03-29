@@ -1,8 +1,7 @@
 import {
-    SUCCESS_SET_IP_ADDRESS,
+    SUCCESS_SET_ADDRESS,
     SUCCESS_SET_HOSTNAME,
-    SUCCESS_SET_MTU,
-    SUCCESS_SET_SUBNETMASK
+    SUCCESS_SET_MTU
 } from './constants';
   
   const initialState = {
@@ -16,12 +15,10 @@ function LocalNetworkReducer(state = initialState, action) {
     switch(action.type) {
         case SUCCESS_SET_MTU:
             return {...state, mtu: action.mtu};
-        case SUCCESS_SET_IP_ADDRESS:
+        case SUCCESS_SET_ADDRESS:
             return {...state, ipAddress: action.ipAddress};
         case SUCCESS_SET_HOSTNAME:
             return {...state, hostname: action.hostname};
-        case SUCCESS_SET_SUBNETMASK:
-            return {...state, subnetMask: action.subnetMask};
         default:
             return state;
     }

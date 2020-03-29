@@ -21,16 +21,14 @@ import injectReducer from 'utils/injectReducer';
 import LocalNetworkReducer from './reducers';
 import {
   setHostname,
-  setIpAddress,
-  setMTU,
-  setSubnetmask
+  setAddress,
+  setMTU
 } from './actions';
 
 export function LocalNetworkIpConfig({
   doSetHostname,
-  doSetIpAddress,
+  doSetAddress,
   doSetMTU,
-  doSetSubnetmask,
   mtu,
   hostname,
   ipAddress,
@@ -40,9 +38,8 @@ export function LocalNetworkIpConfig({
   const submit = values => {
     console.log(values);
     doSetHostname();
-    doSetIpAddress();
+    doSetAddress();
     doSetMTU();
-    doSetSubnetmask();
     ToastsStore.success("Success, your changes have been submitted!");
   };
 
@@ -56,7 +53,7 @@ export function LocalNetworkIpConfig({
 
 LocalNetworkIpConfig.propTypes = {
   doSetHostname: PropTypes.func,
-  doSetIpAddress: PropTypes.func,
+  doSetAddress: PropTypes.func,
   doSetMTU: PropTypes.func,
   mtu: PropTypes.number,
   hostname: PropTypes.string,
@@ -69,14 +66,11 @@ function mapDispatchToProps(dispatch) {
     doSetHostname: (hostname) => {
       dispatch(setHostname(hostname))
     },
-    doSetIpAddress: (ipAddress, subnetMask) => {
-      dispatch(setIpAddress(ipAddress, subnetMask))
+    doSetAddress: (ipAddress, subnetMask) => {
+      dispatch(setAddress(ipAddress, subnetMask))
     },
     doSetMTU: (mtu) => {
       dispatch(setMTU(mtu))
-    },
-    doSetSubnetmask: (subnetMask) => {
-      dispatch(setSubnetmask(subnetMask))
     }
   };
 }

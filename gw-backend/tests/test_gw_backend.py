@@ -167,38 +167,23 @@ def test_set_mtu_fail(client):
     response = client.post('api/v1/local_network/mtu', headers=auth_header, json=data)
     assert response.status_code == 400
 
-def test_set_subnetmask_success(client):
-    auth_header = make_auth_header(client)
-    data = {
-        'subnetMask': '255.255.255.0'
-    }
-    response = client.post('api/v1/local_network/subnetmask', headers=auth_header, json=data)
-    json_response = json.loads(response.data.decode())
-    assert response.status_code == 200
-
-def test_set_subnetmask_fail(client):
-    auth_header = make_auth_header(client)
-    data = {
-        'invalidData': '255.255.255.0'
-    }
-    response = client.post('api/v1/local_network/subnetmask', headers=auth_header, json=data)
-    assert response.status_code == 400
-
 def test_set_ipAddress_success(client):
     auth_header = make_auth_header(client)
     data = {
-        'ipAddress': '127.0.0.1'
+        'ipAddress': '127.0.0.1',
+        'subnetMask': '255.255.255.0'
     }
-    response = client.post('api/v1/local_network/ipAddress', headers=auth_header, json=data)
+    response = client.post('api/v1/local_network/address', headers=auth_header, json=data)
     json_response = json.loads(response.data.decode())
     assert response.status_code == 200
 
 def test_set_ipAddress_fail(client):
     auth_header = make_auth_header(client)
     data = {
-        'invalidData': '127.0.0.1'
+        'invalidData': '127.0.0.1',
+        'subnetMask': '255.255.255.0'
     }
-    response = client.post('api/v1/local_network/ipAddress', headers=auth_header, json=data)
+    response = client.post('api/v1/local_network/address', headers=auth_header, json=data)
     assert response.status_code == 400
 
 def test_get_system_info(client):

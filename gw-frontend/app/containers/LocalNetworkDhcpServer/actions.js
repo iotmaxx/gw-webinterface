@@ -3,8 +3,6 @@ import {
     SET_BEGIN_IP_RANGE,
     SET_END_IP_RANGE,
     SET_LEASE_TIME,
-    SET_CLIENT_MAC_ADDRESS,
-    SET_CLIENT_IP_ADDRESS,
     SUCCESS_SET_DOMAIN_NAME,
     SUCCESS_SET_BEGIN_IP_RANGE,
     SUCCESS_SET_END_IP_RANGE,
@@ -36,20 +34,6 @@ export function setLeaseTime(leaseTime) {
     return {
         type: SET_LEASE_TIME,
         leaseTime
-    }
-}
-
-export function setClientMacAddress(clientMacAddress) {
-    return {
-        type: SET_CLIENT_MAC_ADDRESS,
-        clientMacAddress
-    }
-}
-
-export function setClientIpAddress(clientIpAddress) {
-    return {
-        type: SET_CLIENT_IP_ADDRESS,
-        clientIpAddress
     }
 }
 
