@@ -4,7 +4,7 @@
 # @Email: alittysw@gmail.com
 # @Create At: 2020-03-21 13:48:57
 # @Last Modified By: Andre Litty
-# @Last Modified At: 2020-03-29 16:20:46
+# @Last Modified At: 2020-03-29 21:40:12
 # @Description: Main application and entry point to run program.
 
 from flask import Flask, send_from_directory
@@ -16,6 +16,7 @@ from gw_backend.config.constants import *
 from gw_backend.config.settings import DevelopmentSettings, ProductionSettings
 
 import os
+
 
 def create_app():
 
