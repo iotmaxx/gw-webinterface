@@ -1,5 +1,5 @@
 #!/bin/sh
-# Author : Zara Ali
+# Author : Andre Litty
 
 HOME_PATH=`pwd`
 
