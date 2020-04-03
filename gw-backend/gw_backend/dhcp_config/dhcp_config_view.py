@@ -4,7 +4,7 @@
 # @Email: alittysw@gmail.com
 # @Create At: 2020-03-21 14:30:29
 # @Last Modified By: Andre Litty
-# @Last Modified At: 2020-03-29 22:09:07
+# @Last Modified At: 2020-04-03 10:47:38
 # @Description: Logic related to dhcp configuration.
 
 from flask import Blueprint, request, abort, jsonify
@@ -14,22 +14,12 @@ from gw_backend.config.constants import API_PATH
 
 from .constants import PATH_SUFFIX
 
-try:
-    from gw_cli import get_dhcp_server_config, set_dhcp_server
-    cli_available = True
-except ModuleNotFoundError:
-    cli_available = False
-except ImportError:
-    cli_available = False
-
 
 dhcp_config_route = Blueprint('dhcp_config', __name__)
 
 @dhcp_config_route.route(API_PATH + PATH_SUFFIX + 'domainName', methods = ['POST'])
 @jwt_required
 def post_domain_name():
-    if not cli_available:
-        abort(501)
     request_data = request.get_json()
     config = get_dhcp_server_config()
     if not 'domainName' in request_data:
@@ -43,8 +33,6 @@ def post_domain_name():
 @dhcp_config_route.route(API_PATH + PATH_SUFFIX + 'beginIpRange', methods = ['POST'])
 @jwt_required
 def post_begin_ip_range():
-    if not cli_available:
-        abort(501)
     request_data = request.get_json()
     config = get_dhcp_server_config()
     if not 'beginIpRange' in request_data:
@@ -58,8 +46,6 @@ def post_begin_ip_range():
 @dhcp_config_route.route(API_PATH + PATH_SUFFIX + 'endIpRange', methods = ['POST'])
 @jwt_required
 def post_end_ip_range():
-    if not cli_available:
-        abort(501)
     request_data = request.get_json()
     config = get_dhcp_server_config()
     if not 'endIpRange' in request_data:
@@ -73,8 +59,6 @@ def post_end_ip_range():
 @dhcp_config_route.route(API_PATH + PATH_SUFFIX + 'leaseTime', methods = ['POST'])
 @jwt_required
 def post_lease_time():
-    if not cli_available:
-        abort(501)
     request_data = request.get_json()
     config = get_dhcp_server_config()
     if not 'leaseTime' in request_data:
