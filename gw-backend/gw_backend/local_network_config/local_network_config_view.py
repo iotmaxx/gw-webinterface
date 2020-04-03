@@ -4,13 +4,15 @@
 # @Email: alittysw@gmail.com
 # @Create At: 2020-03-21 14:26:14
 # @Last Modified By: Andre Litty
-# @Last Modified At: 2020-04-03 10:50:16
+# @Last Modified At: 2020-04-03 12:46:38
 # @Description: Logic related to local network configuration.
 
 from flask import Blueprint, request, abort, jsonify
 from flask_jwt_extended import jwt_required
 
 from gw_backend.config.constants import API_PATH
+
+from gw_cli import change_hostname, change_mtu, change_ipv4
 
 from .constants import PATH_SUFFIX
 
@@ -23,7 +25,7 @@ def post_hostname():
     request_data = request.get_json()
     if not 'hostname' in request_data:
         abort(400)
-    r = set_hostname(request_data.get('hostname'))
+    r = change_hostname(request_data.get('hostname'))
     print(r)
     resp = {'message': 'Success'}
     return jsonify(resp)
@@ -34,7 +36,7 @@ def post_mtu():
     request_data = request.get_json()
     if not 'mtu' in request_data:
         abort(400)
-    set_mtu(request_data.get('mtu'))
+    change_mtu(request_data.get('mtu'))
     resp = {'message': 'Success'}
     return jsonify(resp)
 
@@ -44,6 +46,6 @@ def post_ip():
     request_data = request.get_json()
     if not 'ipAddress' in request_data or not 'subnetMask' in request_data:
         abort(400)
-    set_ipv4(request_data.get('ipAddress', request_data.get('subnetMask')))
+    change_ipv4(request_data.get('ipAddress', request_data.get('subnetMask')))
     resp = {'message': 'Success'}
     return jsonify(resp)
