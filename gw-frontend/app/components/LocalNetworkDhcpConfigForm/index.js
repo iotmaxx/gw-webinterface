@@ -19,7 +19,13 @@ const FormWrapper = styled.form`
   display: grid;
 `;
 
-function LocalNetworkDhcpConfigForm({submit}) {
+function LocalNetworkDhcpConfigForm({
+  submit,
+  domainName,
+  beginIpRange,
+  endIpRange,
+  leaseTime
+}) {
 
   const schema = Yup.object({
     domainName: Yup.string()
@@ -27,19 +33,15 @@ function LocalNetworkDhcpConfigForm({submit}) {
     leaseTime: Yup.string()
       .required('Required'),
     beginIpRange: YUP_VALIDATORS.ipV4Field,
-    endIpRange: YUP_VALIDATORS.ipV4Field,
-    clientMacAddress: Yup.string(),
-    clientIpAddress: YUP_VALIDATORS.ipV4Field,
+    endIpRange: YUP_VALIDATORS.ipV4Field
   });
 
   const formik = useFormik({
     initialValues: {
-      domainName: '',
-      leaseTime: '',
-      beginIpRange: '',
-      endIpRange: '',
-      clientMacAddress: '',
-      clientIpAddress: ''
+      domainName: domainName,
+      leaseTime: leaseTime,
+      beginIpRange: beginIpRange,
+      endIpRange: endIpRange
     },
     onSubmit: values => {
       submit(values);
@@ -77,27 +79,17 @@ function LocalNetworkDhcpConfigForm({submit}) {
         errors={formik.errors.endIpRange}
       />
 
-      <label htmlFor="clientMacAddress">Client MAC address</label>
-      <input type="text" name="clientMacAddress" placeholder="00:00:00:00:00:00" {...formik.getFieldProps('clientMacAddress')} />
-      <FormFieldError 
-        touched={formik.touched.clientMacAddress}
-        errors={formik.errors.clientMacAddress}
-      />
-
-      <label htmlFor="clientIpAddress">Client IP address</label>
-      <input type="text" name="clientIpAddress" placeholder="127.0.0.1" {...formik.getFieldProps('clientIpAddress')} />
-      <FormFieldError 
-        touched={formik.touched.clientIpAddress}
-        errors={formik.errors.clientIpAddress}
-      />
-
       <button type="submit">Apply</button>
     </FormWrapper>
   );
 }
 
 LocalNetworkDhcpConfigForm.propTypes = {
-  submit: PropTypes.func
+  submit: PropTypes.func,
+  domainName: PropTypes.string,
+  beginIpRange: PropTypes.string,
+  endIpRange: PropTypes.string,
+  leaseTime: PropTypes.string
 };
 
 export default LocalNetworkDhcpConfigForm;

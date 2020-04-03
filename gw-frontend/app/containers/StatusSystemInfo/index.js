@@ -4,67 +4,63 @@
  *
  */
 
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 
 import StatusOverview from 'components/StatusOverview';
 
-const VALUES = [
-  {
-    caption: 'Uptime',
-    value: '65 days, 06:56',
-  },
-  {
-    caption: 'Load average',
-    value: '0.06 0.02 0.00'
-  },
-  {
-    caption: 'FlashTotal',
-    value: '31506328 KiB'
-  },
-  {
-    caption: 'FlashUsed',
-    value: '9507220 KiB 32%'
-  },
-  {
-    caption: 'MemTotal',
-    value: '500064 KiB'
-  },
-  {
-    caption: 'MemFree',
-    value: '73356 KiB'
-  },
-  {
-    caption: 'Buffers',
-    value: '137568 KiB'
-  },
-  {
-    caption: 'Cached',
-    value: '185816 KiB'
-  }
-]
+import injectReducer from 'utils/injectReducer';
+import SystemInfoReducer from './reducers';
 
-export function StatusSystemInfo() {
+import injectSaga from 'utils/injectSaga';
+import { DAEMON } from 'utils/constants';
+import saga from './saga';
+
+import {
+  getSystemInfo
+} from './actions';
+
+export function StatusSystemInfo({
+  doGetSystemInfo,
+  statusSystemInfo
+}) {
+
+  useEffect(() => {
+    doGetSystemInfo()
+  }, [])
+
   return (
-    <StatusOverview caption="System Info" values={VALUES} />
+    <StatusOverview caption="System Info" values={statusSystemInfo} />
   );
 }
 
 StatusSystemInfo.propTypes = {
-  dispatch: PropTypes.func.isRequired,
+  doGetSystemInfo: PropTypes.func,
+  statusSystemInfo: PropTypes.array
 };
 
 function mapDispatchToProps(dispatch) {
   return {
-    dispatch,
+    doGetSystemInfo: () => {
+      dispatch(getSystemInfo())
+    }
   };
 }
 
+function mapStateToProps(state) {
+  return {
+    statusSystemInfo: state.StatusSystemInfo.systemInfo
+  }
+}
+
 const withConnect = connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps,
 );
 
-export default compose(withConnect)(StatusSystemInfo);
+const withReducer = injectReducer({ key: 'StatusSystemInfo', reducer: SystemInfoReducer });
+const withSaga = injectSaga({ key: 'StatusSystemInfo', saga, mode: DAEMON })
+
+export default compose(withReducer, withSaga, withConnect)(StatusSystemInfo);

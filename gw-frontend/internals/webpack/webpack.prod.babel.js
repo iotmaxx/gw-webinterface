@@ -68,7 +68,7 @@ module.exports = require('./webpack.base.babel')({
   plugins: [
     // Minify and optimize the index.html
     new HtmlWebpackPlugin({
-      template: path.resolve('../gw-backend/templates/', 'index.html'),
+      template: path.resolve('../gw-backend/gw_backend/templates/', 'index.html'),
       minify: {
         removeComments: true,
         collapseWhitespace: true,

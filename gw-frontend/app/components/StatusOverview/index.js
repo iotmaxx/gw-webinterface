@@ -22,8 +22,7 @@ const TR = styled.tr`
   }
 `;
 
-function StatusOverview({caption, values}) {
-
+function StatusOverview({caption, values=[]}) {
   const tableContent = values.map((val, idx) => (
     <TR key={idx} >
       <th>

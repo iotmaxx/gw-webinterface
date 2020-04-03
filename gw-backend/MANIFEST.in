@@ -1,0 +1,2 @@
+recursive-include gw-backend/templates *
+recursive-include gw-backend/static *

@@ -11,7 +11,7 @@ module.exports = options => ({
   output: Object.assign(
     {
       // Compile into js/build.js
-      path: path.resolve('../gw-backend/', 'static'),
+      path: path.resolve('../gw-backend/gw_backend', 'static'),
       publicPath: '/',
     },
     options.output,

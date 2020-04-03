@@ -10,8 +10,6 @@
  */
 import * as Yup from 'yup';
 
-export const ACCESS_TOKEN = 'ACCESS_TOKEN';
-
 export const ROUTES = {
     dashboard: "/dashboard",
     login: "/login",
@@ -97,3 +95,19 @@ export const YUP_VALIDATORS = {
       .typeError('Only numeric values allowed')
       .positive('Please enter a number bigger 0')
 }
+
+export const ACCESS_TOKEN = 'USER_TOKEN';
+export const REFRESH_TOKEN = 'REFRESH_TOKEN';
+export const REFRESH_TOKEN_SUCCESS = 'REFRESH_TOKEN_SUCCESS';
+export const REFRESH_TOKEN_ERROR = 'REFRESH_TOKEN_ERROR';
+
+export const LOGIN = 'LOGIN';
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
+export const LOGIN_ERROR = 'LOGIN_ERROR';
+export const LOGOUT = 'LOGOUT';
+
+// TODO: Replace production url with actual url
+export const API_URL =
+  process.env.NODE_ENV === 'development'
+    ? 'http://127.0.0.1:5000/api/v1/'
+    : 'http://127.0.0.1:5000/api/v1/';

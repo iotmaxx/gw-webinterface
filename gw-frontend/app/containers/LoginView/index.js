@@ -14,21 +14,25 @@ import LoginForm from 'components/LoginForm';
 import { FormattedMessage } from 'react-intl';
 import messages from './messages';
 
-import { ACCESS_TOKEN, ROUTES } from 'containers/App/constants';
+import { login } from '../App/actions';
 
 import {ToastsContainer, ToastsStore, ToastsContainerPosition} from 'react-toasts';
 
 import { withRouter } from "react-router-dom";
 
-export function LoginView(props) {
+import injectSaga from 'utils/injectSaga';
+import { DAEMON } from 'utils/constants';
+import saga from './saga';
+
+export function LoginView({
+  doLogin
+}) {
 
   const submit = values => {
-    console.log(values)
-    if (values.name === "admin" && values.password === "admin") {
-      localStorage.setItem(ACCESS_TOKEN, ACCESS_TOKEN);
-      props.history.push(ROUTES.dashboard);
+    if (values.name.length !== 0 || values.password.length !== 0) {
+      doLogin(values.name, values.password);
     } else {
-      ToastsStore.error("Sorry, wrong credentials")
+      ToastsStore.error("Sorry, you profived empty credentials")
     }
   }
 
@@ -41,12 +45,14 @@ export function LoginView(props) {
 }
 
 LoginView.propTypes = {
-  dispatch: PropTypes.func.isRequired,
+  doLogin: PropTypes.func,
 };
 
 function mapDispatchToProps(dispatch) {
   return {
-    dispatch,
+    doLogin: (username, password) => {
+      dispatch(login(username, password))
+    },
   };
 }
 
@@ -55,4 +61,6 @@ const withConnect = connect(
   mapDispatchToProps,
 );
 
-export default compose(withConnect)(withRouter(LoginView));
+const withSaga = injectSaga({ key: 'LoginView', saga, mode: DAEMON });
+
+export default compose(withSaga, withConnect)(withRouter(LoginView));

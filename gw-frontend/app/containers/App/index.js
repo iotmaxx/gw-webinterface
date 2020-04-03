@@ -7,8 +7,9 @@
  *
  */
 
-import React from 'react';
+import React, {useEffect} from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 import AuthRoute from 'components/AuthRoute';
 
@@ -64,7 +65,7 @@ import WirelessNetworkStaticRoutes from 'containers/WirelessNetworkStaticRoutes/
 
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 
-import { ACCESS_TOKEN, ROUTES } from './constants';
+import { ROUTES, ACCESS_TOKEN } from './constants';
 
 import SideNav from 'components/SideNav/Loadable';
 import Header from 'components/Header';
@@ -72,6 +73,14 @@ import Header from 'components/Header';
 import GlobalStyle from '../../global-styles';
 
 import styled from 'styled-components';
+
+import injectReducer from 'utils/injectReducer';
+import LoginReducer from './reducers';
+
+import { connect } from 'react-redux';
+import { compose } from 'redux';
+
+import { logout, loginSuccess } from './actions';
 
 const MainWrapper = styled.div`
   display: flex;
@@ -92,18 +101,23 @@ const ContentWrapper = styled.div`
   justify-content: center;
 `;
 
-export default function App() {
-  const accessToken = localStorage.getItem(ACCESS_TOKEN);
+export function App({ loggedIn, doLogout, doLoginSuccess }) {
+
+  useEffect(() => {
+    const accessToken = localStorage.getItem(ACCESS_TOKEN);
+    if (accessToken !== null && accessToken !== undefined && !loggedIn)
+      doLoginSuccess();
+  })
+
   return (
     <MainWrapper>
       <Header/>
       <BodyWrapper>
-      <SideNav/>
+      <SideNav logout={doLogout} loggedIn={loggedIn} />
       <ContentWrapper>
           <Switch>
             <Route exact path="/">
-              {accessToken && <Redirect to={ROUTES.dashboard} />}
-              {!accessToken && <Redirect to={ROUTES.login} />}
+              <Redirect to={ROUTES.dashboard} />
             </Route>
             <Route exact path={ROUTES.login} component={LoginView} />
             
@@ -171,3 +185,34 @@ export default function App() {
     </MainWrapper>
   );
 }
+
+App.propTypes = {
+  doLogout: PropTypes.func,
+  loggedIn: PropTypes.bool
+};
+
+function mapDispatchToProps(dispatch) {
+  return {
+    doLogout: () => {
+      dispatch(logout())
+    },
+    doLoginSuccess: () => {
+      dispatch(loginSuccess())
+    }
+  }
+}
+
+function mapStateToProps(state) {
+  return {
+    loggedIn: state.App.loggedIn
+  }
+}
+
+const withConnect = connect(
+  mapStateToProps,
+  mapDispatchToProps
+);
+
+const withReducer = injectReducer({ key: 'App', reducer: LoginReducer });
+
+export default compose(withReducer, withConnect)(App)

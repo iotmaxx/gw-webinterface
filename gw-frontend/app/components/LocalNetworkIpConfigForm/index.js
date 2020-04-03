@@ -31,7 +31,13 @@ const IpV6Wrapper = styled.div`
 `;
 
 // TODO: Add alias address form
-function LocalNetworkIpConfigForm({submit}) {
+function LocalNetworkIpConfigForm({
+  submit,
+  mtu,
+  hostname,
+  ipAddress,
+  subnetMask
+}) {
 
   const [enableIPv6, setEnableIPv6] = useState(false);
 
@@ -50,12 +56,12 @@ function LocalNetworkIpConfigForm({submit}) {
 
   const formik = useFormik({
     initialValues: {
-      ipAddress: '',
-      subnetMask: '',
-      mtu: 1500,
+      ipAddress: ipAddress ,
+      subnetMask: subnetMask,
+      mtu: mtu,
       addressType: 'static',
       ipAddressV6: '',
-      hostname: ''
+      hostname: hostname
     },
     onSubmit: values => {
       submit(values);
@@ -70,7 +76,7 @@ function LocalNetworkIpConfigForm({submit}) {
   return (
     <FormWrapper onSubmit={formik.handleSubmit}>
       <label htmlFor="hostname">Hostname</label>
-      <input type="text" name="hostname" placeholder="localhost" {...formik.getFieldProps('hostname')} />
+      <input type="text" name="hostname" placeholder="localhost" {...formik.getFieldProps('hostname')}/>
       <FormFieldError 
         touched={formik.touched.hostname}
         errors={formik.errors.hostname}
@@ -118,7 +124,11 @@ function LocalNetworkIpConfigForm({submit}) {
 }
 
 LocalNetworkIpConfigForm.propTypes = {
-  submit: PropTypes.func
+  submit: PropTypes.func,
+  mtu: PropTypes.number,
+  hostname: PropTypes.string,
+  ipAddress: PropTypes.string,
+  subnetMask: PropTypes.string
 };
 
 export default LocalNetworkIpConfigForm;

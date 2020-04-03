@@ -13,34 +13,83 @@ import LocalNetworkIpConfigForm from 'components/LocalNetworkIpConfigForm';
 
 import {ToastsContainer, ToastsStore, ToastsContainerPosition} from 'react-toasts';
 
-export function LocalNetworkIpConfig() {
+import injectSaga from 'utils/injectSaga';
+import { DAEMON } from 'utils/constants';
+import saga from './saga';
+
+import injectReducer from 'utils/injectReducer';
+import LocalNetworkReducer from './reducers';
+import {
+  setHostname,
+  setAddress,
+  setMTU
+} from './actions';
+
+export function LocalNetworkIpConfig({
+  doSetHostname,
+  doSetAddress,
+  doSetMTU,
+  mtu,
+  hostname,
+  ipAddress,
+  subnetMask
+}) {
 
   const submit = values => {
     console.log(values);
+    doSetHostname();
+    doSetAddress();
+    doSetMTU();
     ToastsStore.success("Success, your changes have been submitted!");
   };
 
   return (
     <div>
-      <LocalNetworkIpConfigForm submit={submit} />
+      <LocalNetworkIpConfigForm submit={submit} mtu={mtu} hostname={hostname} ipAddress={ipAddress} subnetMask={subnetMask}/>
       <ToastsContainer store={ToastsStore} position={ToastsContainerPosition.BOTTOM_RIGHT} />
     </div>
   );
 }
 
 LocalNetworkIpConfig.propTypes = {
-  dispatch: PropTypes.func.isRequired,
+  doSetHostname: PropTypes.func,
+  doSetAddress: PropTypes.func,
+  doSetMTU: PropTypes.func,
+  mtu: PropTypes.number,
+  hostname: PropTypes.string,
+  ipAddress: PropTypes.string,
+  subnetMask: PropTypes.string
 };
 
 function mapDispatchToProps(dispatch) {
   return {
-    dispatch,
+    doSetHostname: (hostname) => {
+      dispatch(setHostname(hostname))
+    },
+    doSetAddress: (ipAddress, subnetMask) => {
+      dispatch(setAddress(ipAddress, subnetMask))
+    },
+    doSetMTU: (mtu) => {
+      dispatch(setMTU(mtu))
+    }
   };
 }
 
+const mapStateToProps = state => {
+  return {
+    hostname: state.LocalNetworkIpConfig.hostname,
+    mtu: state.LocalNetworkIpConfig.mtu,
+    ipAddress: state.LocalNetworkIpConfig.ipAddress,
+    subnetMask: state.LocalNetworkIpConfig.subnetMask
+  }
+}
+
 const withConnect = connect(
-  null,
-  mapDispatchToProps,
+  mapStateToProps,
+  mapDispatchToProps
 );
 
-export default compose(withConnect)(LocalNetworkIpConfig);
+const withSaga = injectSaga({ key: 'LocalNetworkIpConfig', saga, mode: DAEMON });
+const withReducer = injectReducer({ key: 'LocalNetworkIpConfig', reducer: LocalNetworkReducer });
+
+export default compose(withReducer, withSaga, withConnect)(LocalNetworkIpConfig);
