@@ -15,17 +15,17 @@ const IN_VALUES = [
   {
     caption: '#1',
     value: 'low',
-    additionalValues: ['SMS', 'eMail']
-  }
-]
+    additionalValues: ['SMS', 'eMail'],
+  },
+];
 
 const OUT_VALUES = [
   {
     caption: '#2',
     value: 'off',
-    additionalValues: ['manual']
-  }
-]
+    additionalValues: ['manual'],
+  },
+];
 
 export function StatusIoStats() {
   return (

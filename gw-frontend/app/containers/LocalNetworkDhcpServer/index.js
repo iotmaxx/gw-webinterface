@@ -11,7 +11,11 @@ import { compose } from 'redux';
 
 import LocalNetworkDhcpConfigForm from 'components/LocalNetworkDhcpConfigForm';
 
-import {ToastsContainer, ToastsStore, ToastsContainerPosition} from 'react-toasts';
+import {
+  ToastsContainer,
+  ToastsStore,
+  ToastsContainerPosition,
+} from 'react-toasts';
 
 import injectSaga from 'utils/injectSaga';
 import { DAEMON } from 'utils/constants';
@@ -24,7 +28,7 @@ import {
   setDomainName,
   setBeginIpRange,
   setEndIpRange,
-  setLeaseTime
+  setLeaseTime,
 } from './actions';
 
 export function LocalNetworkDhcpServer({
@@ -35,24 +39,30 @@ export function LocalNetworkDhcpServer({
   doSetDomainName,
   doSetBeginIpRange,
   doSetEndIpRange,
-  doSetLeaseTime
+  doSetLeaseTime,
 }) {
   const submit = values => {
-    if (values.domainName !== domainName)
-      doSetDomainName(values.domainName)
+    if (values.domainName !== domainName) doSetDomainName(values.domainName);
     if (values.beginIpRange !== beginIpRange)
-      doSetBeginIpRange(values.beginIpRange)
-    if (values.endIpRange !== endIpRange)
-      doSetEndIpRange(endIpRange)
-    if (values.leaseTime !== leaseTime)
-      doSetLeaseTime(leaseTime)
-    ToastsStore.success("Success, your changes have been submitted!");
-  }
-  
+      doSetBeginIpRange(values.beginIpRange);
+    if (values.endIpRange !== endIpRange) doSetEndIpRange(endIpRange);
+    if (values.leaseTime !== leaseTime) doSetLeaseTime(leaseTime);
+    ToastsStore.success('Success, your changes have been submitted!');
+  };
+
   return (
     <div>
-      <LocalNetworkDhcpConfigForm submit={submit} domainName={domainName} beginIpRange={beginIpRange} endIpRange={endIpRange} leaseTime={leaseTime} />
-      <ToastsContainer store={ToastsStore} position={ToastsContainerPosition.BOTTOM_RIGHT} />
+      <LocalNetworkDhcpConfigForm
+        submit={submit}
+        domainName={domainName}
+        beginIpRange={beginIpRange}
+        endIpRange={endIpRange}
+        leaseTime={leaseTime}
+      />
+      <ToastsContainer
+        store={ToastsStore}
+        position={ToastsContainerPosition.BOTTOM_RIGHT}
+      />
     </div>
   );
 }
@@ -65,23 +75,23 @@ LocalNetworkDhcpServer.propTypes = {
   doSetDomainName: PropTypes.func,
   doSetBeginIpRange: PropTypes.func,
   doSetEndIpRange: PropTypes.func,
-  doSetLeaseTime: PropTypes.func
+  doSetLeaseTime: PropTypes.func,
 };
 
 function mapDispatchToProps(dispatch) {
   return {
-    doSetDomainName: (domainName) => {
+    doSetDomainName: domainName => {
       dispatch(setDomainName(domainName));
     },
-    doSetBeginIpRange: (ipRange) => {
+    doSetBeginIpRange: ipRange => {
       dispatch(setBeginIpRange(ipRange));
     },
-    doSetEndIpRange: (ipRange) => {
+    doSetEndIpRange: ipRange => {
       dispatch(setEndIpRange(ipRange));
     },
-    doSetLeaseTime: (leaseTime) => {
+    doSetLeaseTime: leaseTime => {
       dispatch(setLeaseTime(leaseTime));
-    }
+    },
   };
 }
 
@@ -90,16 +100,27 @@ const mapStateToProps = state => {
     domainName: state.LocalNetworkDhcpServer.domainName,
     beginIpRange: state.LocalNetworkDhcpServer.beginIpRange,
     endIpRange: state.LocalNetworkDhcpServer.endIpRange,
-    leaseTime: state.LocalNetworkDhcpServer.leaseTime
-  }
-}
+    leaseTime: state.LocalNetworkDhcpServer.leaseTime,
+  };
+};
 
 const withConnect = connect(
   mapStateToProps,
   mapDispatchToProps,
 );
 
-const withSaga = injectSaga({ key: 'LocalNetworkDhcpServer', saga, mode: DAEMON });
-const withReducer = injectReducer({ key: 'LocalNetworkDhcpServer', reducer: LocalDhcpServerReducer });
+const withSaga = injectSaga({
+  key: 'LocalNetworkDhcpServer',
+  saga,
+  mode: DAEMON,
+});
+const withReducer = injectReducer({
+  key: 'LocalNetworkDhcpServer',
+  reducer: LocalDhcpServerReducer,
+});
 
-export default compose(withReducer, withSaga, withConnect)(LocalNetworkDhcpServer);
+export default compose(
+  withReducer,
+  withSaga,
+  withConnect,
+)(LocalNetworkDhcpServer);

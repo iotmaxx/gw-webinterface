@@ -8,7 +8,7 @@ import React from 'react';
 import PropTypes, { element } from 'prop-types';
 import styled from 'styled-components';
 
-import {MAIN_COLORS} from 'containers/App/constants';
+import { MAIN_COLORS } from 'containers/App/constants';
 
 const TD = styled.td`
   text-align: center;
@@ -22,33 +22,28 @@ const TR = styled.tr`
   }
 `;
 
-function StatusTable({caption="", values}) {
-
+function StatusTable({ caption = '', values = [] }) {
   const tableHeader = (
     <TR>
       {values.map((value, idx) => (
-        <th key={idx} >
-          {value.caption}
-        </th>
+        <th key={idx}>{value.caption}</th>
       ))}
     </TR>
   );
-  
+
   let range = 0;
   values.forEach(element => {
-    if (element.values.length > range)
-      range = element.values.length;
+    if (element.values.length > range) range = element.values.length;
   });
 
-
   const rows = [];
-  for(let i=0; i < range; i++) {
+  for (let i = 0; i < range; i++) {
     const cellValues = [];
     values.map((element, idx) => {
       const cellValue = element.values.length > i ? element.values[i] : '';
       cellValues.push(<TD key={`${i}-${idx}`}>{cellValue}</TD>);
-    })
-    rows.push(<TR key={i}>{cellValues}</TR>)
+    });
+    rows.push(<TR key={i}>{cellValues}</TR>);
   }
 
   return (
@@ -64,7 +59,7 @@ function StatusTable({caption="", values}) {
 
 StatusTable.propTypes = {
   caption: PropTypes.string,
-  values: PropTypes.array
+  values: PropTypes.array,
 };
 
 export default StatusTable;

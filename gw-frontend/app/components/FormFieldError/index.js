@@ -14,8 +14,7 @@ const StyledP = styled.p`
   margin-top: 5px;
 `;
 
-function FormFieldError({touched, errors}) {
-
+function FormFieldError({ touched, errors }) {
   const Wrapper = styled.div`
     display: ${touched && errors ? 'block' : 'none'};
   `;
@@ -29,7 +28,7 @@ function FormFieldError({touched, errors}) {
 
 FormFieldError.propTypes = {
   touched: PropTypes.bool,
-  errors: PropTypes.string
+  errors: PropTypes.string,
 };
 
 export default FormFieldError;

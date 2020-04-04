@@ -13,8 +13,7 @@ import { MAIN_COLORS } from 'containers/App/constants';
 import DownChevron from '../../assets/icons/DownChevron.svg';
 import RightChevron from '../../assets/icons/RightChevron.svg';
 
-function MenuDropdownGroup({caption, children, subcategory=false}) {
-
+function MenuDropdownGroup({ caption, children, subcategory = false }) {
   const [isOpen, setIsOpen] = useState(false);
 
   const Wrapper = styled.div`
@@ -41,21 +40,17 @@ function MenuDropdownGroup({caption, children, subcategory=false}) {
   return (
     <Wrapper>
       <StyledDT onClick={() => setIsOpen(!isOpen)}>
-        {
-          isOpen ? <Arrow src={DownChevron} /> : <Arrow src={RightChevron}/>
-        }
+        {isOpen ? <Arrow src={DownChevron} /> : <Arrow src={RightChevron} />}
         {caption}
       </StyledDT>
-      <StyledDL>
-        {children}
-      </StyledDL>
+      <StyledDL>{children}</StyledDL>
     </Wrapper>
   );
 }
 
 MenuDropdownGroup.propTypes = {
   caption: PropTypes.string,
-  children: PropTypes.node
+  children: PropTypes.node,
 };
 
 export default MenuDropdownGroup;
