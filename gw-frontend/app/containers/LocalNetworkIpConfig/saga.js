@@ -8,7 +8,7 @@ import {
 import {
   successSetHostname,
   successSetMTU,
-  successsetAddress,
+  successSetAddress,
 } from './actions';
 
 import { API_URL } from '../App/constants';
@@ -54,7 +54,7 @@ function* setAddress({ ipAddress, subnetMask }) {
       },
     };
     const response = yield call(request, requestURL, options);
-    yield put(successsetAddress(response.ipAddress, response.subnetMask));
+    yield put(successSetAddress(response.ipAddress, response.subnetMask));
   } catch (error) {
     console.log(error);
     yield put({ type: LOGIN_ERROR, error });

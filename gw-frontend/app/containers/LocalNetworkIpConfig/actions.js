@@ -36,7 +36,7 @@ export function successSetHostname(hostname) {
   };
 }
 
-export function successsetAddress(ipAddress, subnetMask) {
+export function successSetAddress(ipAddress, subnetMask) {
   return {
     type: SUCCESS_SET_ADDRESS,
     ipAddress,

@@ -10,8 +10,6 @@ const initialState = {
   beginIpRange: '127.0.0.1',
   endIpRange: '127.0.0.254',
   leaseTime: '1d',
-  clientMacAddress: '00:00:00:00:00:00',
-  clientIpAddress: '127.0.0.1',
 };
 
 function LocalDhcpServerReducer(state = initialState, action) {
