@@ -9,6 +9,7 @@
 import React from 'react';
 import { render } from 'react-testing-library';
 import { IntlProvider } from 'react-intl';
+import { BrowserRouter } from 'react-router-dom';
 // import 'jest-dom/extend-expect'; // add some helpful assertions
 
 import SideNav from '../index';
@@ -19,14 +20,12 @@ describe('<SideNav />', () => {
     const spy = jest.spyOn(global.console, 'error');
     render(
       <IntlProvider locale={DEFAULT_LOCALE}>
-        <SideNav />
+        <BrowserRouter>
+          <SideNav />
+        </BrowserRouter>
       </IntlProvider>,
     );
     expect(spy).not.toHaveBeenCalled();
-  });
-
-  it('Expect to have additional unit tests specified', () => {
-    expect(true).toEqual(false);
   });
 
   /**

@@ -18,16 +18,13 @@ describe('<StatusSystemInfo />', () => {
   it('Expect to not log errors in console', () => {
     const spy = jest.spyOn(global.console, 'error');
     const dispatch = jest.fn();
+    const doGetSystemInfo = jest.fn();
     render(
       <IntlProvider locale={DEFAULT_LOCALE}>
-        <StatusSystemInfo dispatch={dispatch} />
+        <StatusSystemInfo dispatch={dispatch} doGetSystemInfo={doGetSystemInfo}/>
       </IntlProvider>,
     );
     expect(spy).not.toHaveBeenCalled();
-  });
-
-  it('Expect to have additional unit tests specified', () => {
-    expect(true).toEqual(false);
   });
 
   /**

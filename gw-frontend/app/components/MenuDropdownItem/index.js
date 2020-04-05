@@ -13,8 +13,7 @@ import styled from 'styled-components';
 
 import { MAIN_COLORS } from 'containers/App/constants';
 
-function MenuDropdownItem({to, caption, depth=1}) {
-  
+function MenuDropdownItem({ to, caption, depth = 1 }) {
   const StyledLink = styled(Link)`
     color: ${MAIN_COLORS.orange};
     text-decoration: none;
@@ -33,7 +32,7 @@ function MenuDropdownItem({to, caption, depth=1}) {
 
 MenuDropdownItem.propTypes = {
   to: PropTypes.string,
-  caption: PropTypes.string
+  caption: PropTypes.string,
 };
 
 export default MenuDropdownItem;

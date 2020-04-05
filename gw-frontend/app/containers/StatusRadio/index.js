@@ -18,35 +18,32 @@ const VALUES = [
   },
   {
     caption: 'Network Status',
-    value: 'busy'
+    value: 'busy',
   },
   {
     caption: 'Signal Level',
-    value: '-83 dBm'
+    value: '-83 dBm',
   },
   {
     caption: 'Packet Data',
-    value: 'offline'
+    value: 'offline',
   },
   {
     caption: 'SIM #1 IMSI',
-    value: '123456789012345'
+    value: '123456789012345',
   },
   {
     caption: 'Local area code',
-    value: '579'
+    value: '579',
   },
   {
     caption: 'Cell ID',
-    value: '2606587'
-  }
-]
+    value: '2606587',
+  },
+];
 
 export function StatusRadio() {
-
-  return (
-      <StatusOverview caption="Radio Status" values={VALUES}/>
-  );
+  return <StatusOverview caption="Radio Status" values={VALUES} />;
 }
 
 StatusRadio.propTypes = {

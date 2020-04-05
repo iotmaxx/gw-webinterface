@@ -18,29 +18,29 @@ const WIFI_VALUES = [
   },
   {
     caption: 'IP Address',
-    value: '209.168.145.154'
+    value: '209.168.145.154',
   },
   {
     caption: 'Netmask',
-    value: '255.255.255.255'
+    value: '255.255.255.255',
   },
   {
     caption: 'DNS Server',
-    value: '139.7.30.126'
+    value: '139.7.30.126',
   },
   {
     caption: 'Sec. DNS Server',
-    value: '139.7.30.125'
+    value: '139.7.30.125',
   },
   {
     caption: 'RX Bytes',
-    value: 'unknown'
+    value: 'unknown',
   },
   {
     caption: 'TX Bytes',
-    value: 'unknown'
-  }
-]
+    value: 'unknown',
+  },
+];
 
 const LAN_VALUES = [
   {
@@ -49,25 +49,25 @@ const LAN_VALUES = [
   },
   {
     caption: 'Link #2',
-    value: 'connected'
+    value: 'connected',
   },
   {
     caption: 'IP Address',
-    value: '192.168.0.1'
+    value: '192.168.0.1',
   },
   {
     caption: 'Netmask',
-    value: '255.255.255.255'
+    value: '255.255.255.255',
   },
   {
     caption: 'IP Address',
-    value: 'fe80::5054:ff:fea6:a808/64'
+    value: 'fe80::5054:ff:fea6:a808/64',
   },
   {
     caption: 'IP Address',
-    value: '2a01:4f8:201:860f:5054:ff:fea6:a808/64'
+    value: '2a01:4f8:201:860f:5054:ff:fea6:a808/64',
   },
-]
+];
 
 export function StatusNetworkConnections() {
   return (

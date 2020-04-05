@@ -4,7 +4,7 @@
 # @Email: alittysw@gmail.com
 # @Create At: 2020-03-21 14:26:14
 # @Last Modified By: Andre Litty
-# @Last Modified At: 2020-04-03 12:46:38
+# @Last Modified At: 2020-04-05 13:30:32
 # @Description: Logic related to local network configuration.
 
 from flask import Blueprint, request, abort, jsonify
@@ -26,7 +26,6 @@ def post_hostname():
     if not 'hostname' in request_data:
         abort(400)
     r = change_hostname(request_data.get('hostname'))
-    print(r)
     resp = {'message': 'Success'}
     return jsonify(resp)
 

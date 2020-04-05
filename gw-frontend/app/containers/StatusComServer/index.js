@@ -14,14 +14,12 @@ import StatusOverview from 'components/StatusOverview';
 const VALUES = [
   {
     caption: 'Link',
-    value: 'Disabled'
-  }
-]
+    value: 'Disabled',
+  },
+];
 
 export function StatusComServer() {
-  return (
-    <StatusOverview caption="ComSERVER Status" values={VALUES}/>
-  );
+  return <StatusOverview caption="ComSERVER Status" values={VALUES} />;
 }
 
 StatusComServer.propTypes = {

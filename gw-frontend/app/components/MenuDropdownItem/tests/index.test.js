@@ -11,6 +11,7 @@ import { render } from 'react-testing-library';
 import { IntlProvider } from 'react-intl';
 // import 'jest-dom/extend-expect'; // add some helpful assertions
 
+import { BrowserRouter } from 'react-router-dom';
 import MenuDropdownItem from '../index';
 import { DEFAULT_LOCALE } from '../../../i18n';
 
@@ -19,15 +20,14 @@ describe('<MenuDropdownItem />', () => {
     const spy = jest.spyOn(global.console, 'error');
     render(
       <IntlProvider locale={DEFAULT_LOCALE}>
-        <MenuDropdownItem />
+        <BrowserRouter>
+          <MenuDropdownItem to={"test"} caption={"test"}/>
+        </BrowserRouter>
       </IntlProvider>,
     );
     expect(spy).not.toHaveBeenCalled();
   });
 
-  it('Expect to have additional unit tests specified', () => {
-    expect(true).toEqual(false);
-  });
 
   /**
    * Unskip this test to use it

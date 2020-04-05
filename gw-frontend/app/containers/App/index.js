@@ -101,19 +101,18 @@ const ContentWrapper = styled.div`
   justify-content: center;
 `;
 
-export function App({ loggedIn, doLogout, doLoginSuccess }) {
-
+function App(props) {
   useEffect(() => {
     const accessToken = localStorage.getItem(ACCESS_TOKEN);
-    if (accessToken !== null && accessToken !== undefined && !loggedIn)
-      doLoginSuccess();
+    if (accessToken !== null && accessToken !== undefined && !props.loggedIn)
+      props.doLoginSuccess();
   })
 
   return (
     <MainWrapper>
       <Header/>
       <BodyWrapper>
-      <SideNav logout={doLogout} loggedIn={loggedIn} />
+      <SideNav logout={props.doLogout} loggedIn={props.loggedIn} />
       <ContentWrapper>
           <Switch>
             <Route exact path="/">

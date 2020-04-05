@@ -4,7 +4,7 @@
  *
  */
 
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
@@ -18,41 +18,33 @@ import injectSaga from 'utils/injectSaga';
 import { DAEMON } from 'utils/constants';
 import saga from './saga';
 
-import {
-  getSystemInfo
-} from './actions';
+import { getSystemInfo } from './actions';
 
-export function StatusSystemInfo({
-  doGetSystemInfo,
-  statusSystemInfo
-}) {
-
+export function StatusSystemInfo({ doGetSystemInfo, statusSystemInfo }) {
   useEffect(() => {
-    doGetSystemInfo()
-  }, [])
+    doGetSystemInfo();
+  }, []);
 
-  return (
-    <StatusOverview caption="System Info" values={statusSystemInfo} />
-  );
+  return <StatusOverview caption="System Info" values={statusSystemInfo} />;
 }
 
 StatusSystemInfo.propTypes = {
   doGetSystemInfo: PropTypes.func,
-  statusSystemInfo: PropTypes.array
+  statusSystemInfo: PropTypes.array,
 };
 
 function mapDispatchToProps(dispatch) {
   return {
     doGetSystemInfo: () => {
-      dispatch(getSystemInfo())
-    }
+      dispatch(getSystemInfo());
+    },
   };
 }
 
 function mapStateToProps(state) {
   return {
-    statusSystemInfo: state.StatusSystemInfo.systemInfo
-  }
+    statusSystemInfo: state.StatusSystemInfo.systemInfo,
+  };
 }
 
 const withConnect = connect(
@@ -60,7 +52,14 @@ const withConnect = connect(
   mapDispatchToProps,
 );
 
-const withReducer = injectReducer({ key: 'StatusSystemInfo', reducer: SystemInfoReducer });
-const withSaga = injectSaga({ key: 'StatusSystemInfo', saga, mode: DAEMON })
+const withReducer = injectReducer({
+  key: 'StatusSystemInfo',
+  reducer: SystemInfoReducer,
+});
+const withSaga = injectSaga({ key: 'StatusSystemInfo', saga, mode: DAEMON });
 
-export default compose(withReducer, withSaga, withConnect)(StatusSystemInfo);
+export default compose(
+  withReducer,
+  withSaga,
+  withConnect,
+)(StatusSystemInfo);
