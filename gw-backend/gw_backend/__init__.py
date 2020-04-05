@@ -4,8 +4,10 @@
 # @Email: alittysw@gmail.com
 # @Create At: 2020-03-21 13:48:57
 # @Last Modified By: Andre Litty
-# @Last Modified At: 2020-04-05 13:22:44
+# @Last Modified At: 2020-04-05 20:50:34
 # @Description: Main application and entry point to run program.
+import os
+import logging
 
 from flask import Flask, send_from_directory
 from flask_jwt_extended import JWTManager
@@ -15,10 +17,13 @@ from flask_jwt_extended import jwt_required
 from gw_backend.config.constants import *
 from gw_backend.config.settings import DevelopmentSettings, ProductionSettings
 
-import os
-
 
 def create_app():
+    logging.basicConfig(
+        filename='/tmp/gw.log',
+        format='%(asctime)s [%(levelname)s] %(name)s: %(message)s',
+        level=logging.DEBUG
+    )
 
     app = Flask(__name__)
     env = os.environ.get('FLASK_ENV')
@@ -47,5 +52,5 @@ def create_app():
             return send_from_directory(app.static_folder, path)
         else:
             return send_from_directory(app.static_folder, 'index.html')
-
+    app.logger.info(f'Started server with {env} settings')
     return app
