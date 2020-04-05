@@ -4,7 +4,7 @@
 # @Email: alittysw@gmail.com
 # @Create At: 2020-03-21 14:26:14
 # @Last Modified By: Andre Litty
-# @Last Modified At: 2020-04-05 13:30:32
+# @Last Modified At: 2020-04-05 20:58:46
 # @Description: Logic related to local network configuration.
 
 from flask import Blueprint, request, abort, jsonify
@@ -19,7 +19,8 @@ from .constants import PATH_SUFFIX
 
 local_network_route = Blueprint('local_network', __name__)
 
-@local_network_route.route(API_PATH + PATH_SUFFIX + 'hostname', methods = ['POST'])
+
+@local_network_route.route(API_PATH + PATH_SUFFIX + 'hostname', methods=['POST'])
 @jwt_required
 def post_hostname():
     request_data = request.get_json()
@@ -29,7 +30,8 @@ def post_hostname():
     resp = {'message': 'Success'}
     return jsonify(resp)
 
-@local_network_route.route(API_PATH + PATH_SUFFIX + 'mtu', methods = ['POST'])
+
+@local_network_route.route(API_PATH + PATH_SUFFIX + 'mtu', methods=['POST'])
 @jwt_required
 def post_mtu():
     request_data = request.get_json()
@@ -39,7 +41,8 @@ def post_mtu():
     resp = {'message': 'Success'}
     return jsonify(resp)
 
-@local_network_route.route(API_PATH + PATH_SUFFIX + 'address', methods = ['POST'])
+
+@local_network_route.route(API_PATH + PATH_SUFFIX + 'address', methods=['POST'])
 @jwt_required
 def post_ip():
     request_data = request.get_json()

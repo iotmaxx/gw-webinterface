@@ -4,7 +4,7 @@
 # @Email: alittysw@gmail.com
 # @Create At: 2020-03-21 13:48:57
 # @Last Modified By: Andre Litty
-# @Last Modified At: 2020-04-05 20:50:34
+# @Last Modified At: 2020-04-05 20:58:37
 # @Description: Main application and entry point to run program.
 import os
 import logging

@@ -4,7 +4,7 @@
 # @Email: alittysw@gmail.com
 # @Create At: 2020-03-21 13:48:40
 # @Last Modified By: Andre Litty
-# @Last Modified At: 2020-03-24 02:03:58
+# @Last Modified At: 2020-04-05 20:58:29
 # @Description: Blueprint for system information logic.
 
 from flask import Blueprint, request, abort, jsonify
@@ -21,16 +21,20 @@ import os
 
 system_info_route = Blueprint('system_info', __name__)
 
+
 def get_disk_usage():
     return psutil.disk_usage('/')
+
 
 def get_uptime():
     boot_time = datetime.datetime.fromtimestamp(psutil.boot_time())
     now = datetime.datetime.now()
     return abs(now - boot_time)
 
+
 def get_memory():
     return psutil.virtual_memory()
+
 
 def read_config(config_path=''):
     settings = {}
@@ -44,14 +48,16 @@ def read_config(config_path=''):
         settings[setting[0]] = setting[-1]
     return settings
 
-@system_info_route.route(API_PATH + PATH_SUFFIX + 'config', methods = ['GET'])
+
+@system_info_route.route(API_PATH + PATH_SUFFIX + 'config', methods=['GET'])
 @jwt_required
 def get_configs():
     config_file = request.args.get('config', default='/etc/udhcp.conf')
     config = read_config(config_path=config_file)
     return jsonify(config)
 
-@system_info_route.route(API_PATH + PATH_SUFFIX + 'info', methods = ['GET'])
+
+@system_info_route.route(API_PATH + PATH_SUFFIX + 'info', methods=['GET'])
 @jwt_required
 def get_system_information():
     disk_info = get_disk_usage()

@@ -4,7 +4,7 @@
 # @Email: alittysw@gmail.com
 # @Create At: 2020-03-21 13:44:40
 # @Last Modified By: Andre Litty
-# @Last Modified At: 2020-03-29 16:49:57
+# @Last Modified At: 2020-04-05 20:59:01
 # @Description: Application wide configurations / constants.
 
 API_PATH = '/api/v1/'
