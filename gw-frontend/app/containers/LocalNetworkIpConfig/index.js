@@ -35,10 +35,10 @@ export function LocalNetworkIpConfig({
   subnetMask,
 }) {
   const submit = values => {
-    console.log(values);
-    doSetHostname();
-    doSetAddress();
-    doSetMTU();
+    if (values.hostname !== hostname) doSetHostname(values.hostname);
+    if (values.ipAddress !== ipAddress || values.subnetMask !== subnetMask)
+      doSetAddress(values.ipAddress, values.subnetMask);
+    if (values.mtu !== mtu) doSetMTU(mtu);
     ToastsStore.success('Success, your changes have been submitted!');
   };
 

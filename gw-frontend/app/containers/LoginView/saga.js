@@ -15,7 +15,7 @@ import { takeLatest, call, put } from 'redux-saga/effects';
 import request from 'utils/request';
 import history from 'utils/history';
 
-function* login({ username, password }) {
+export function* login({ username, password }) {
   try {
     const data = { username, password };
     const requestURL = `${API_URL}auth/login`;

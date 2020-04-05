@@ -11,13 +11,13 @@ import {
   successSetAddress,
 } from './actions';
 
-import { API_URL } from '../App/constants';
+import { API_URL, LOGIN_ERROR, ACCESS_TOKEN } from '../App/constants';
 
 import { takeLatest, call, put } from 'redux-saga/effects';
 
 import request from 'utils/request';
 
-function* setHostname({ hostname }) {
+export function* setHostname({ hostname }) {
   try {
     const data = { hostname };
     const requestURL = `${API_URL}${LOCAL_NETWORK_PATH_SUFFIX}hostname`;
@@ -39,7 +39,7 @@ function* setHostname({ hostname }) {
   }
 }
 
-function* setAddress({ ipAddress, subnetMask }) {
+export function* setAddress({ ipAddress, subnetMask }) {
   try {
     const data = { ipAddress, subnetMask };
     const requestURL = `${API_URL}${LOCAL_NETWORK_PATH_SUFFIX}address`;
@@ -61,7 +61,7 @@ function* setAddress({ ipAddress, subnetMask }) {
   }
 }
 
-function* setMTU({ mtu }) {
+export function* setMTU({ mtu }) {
   try {
     const data = { mtu };
     const requestURL = `${API_URL}${LOCAL_NETWORK_PATH_SUFFIX}mtu`;
@@ -76,7 +76,7 @@ function* setMTU({ mtu }) {
       },
     };
     const response = yield call(request, requestURL, options);
-    yield put(successSetMTU(response.mut));
+    yield put(successSetMTU(response.mtu));
   } catch (error) {
     console.log(error);
     yield put({ type: LOGIN_ERROR, error });

@@ -13,13 +13,13 @@ import {
   successSetLeaseTime,
 } from './actions';
 
-import { API_URL, ACCESS_TOKEN } from '../App/constants';
+import { API_URL, ACCESS_TOKEN, LOGIN_ERROR } from '../App/constants';
 
 import { takeLatest, call, put } from 'redux-saga/effects';
 
 import request from 'utils/request';
 
-function* setDomainName({ domainName }) {
+export function* setDomainName({ domainName }) {
   try {
     const data = { domainName };
     const requestURL = `${API_URL}${DHCP_PATH_SUFFIX}domainName`;
@@ -41,7 +41,7 @@ function* setDomainName({ domainName }) {
   }
 }
 
-function* setBeginIpRange({ beginIpRange }) {
+export function* setBeginIpRange({ beginIpRange }) {
   try {
     const data = { beginIpRange };
     const requestURL = `${API_URL}${DHCP_PATH_SUFFIX}beginIpRange`;
@@ -63,7 +63,7 @@ function* setBeginIpRange({ beginIpRange }) {
   }
 }
 
-function* setEndIpRange({ endIpRange }) {
+export function* setEndIpRange({ endIpRange }) {
   try {
     const data = { endIpRange };
     const requestURL = `${API_URL}${DHCP_PATH_SUFFIX}endIpRange`;
@@ -85,7 +85,7 @@ function* setEndIpRange({ endIpRange }) {
   }
 }
 
-function* setLeaseTime({ leaseTime }) {
+export function* setLeaseTime({ leaseTime }) {
   try {
     const data = { leaseTime };
     const requestURL = `${API_URL}${DHCP_PATH_SUFFIX}leaseTime`;
