@@ -8,6 +8,7 @@ build_frontend()
     echo "Building production version for gw-webinterface frontend..."
     FRONTEND_PATH=$HOME_PATH"/gw-frontend"
     cd $FRONTEND_PATH
+    npm install
     npm run build
 }
 
