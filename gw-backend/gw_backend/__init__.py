@@ -4,7 +4,7 @@
 # @Email: alittysw@gmail.com
 # @Create At: 2020-03-21 13:48:57
 # @Last Modified By: Andre Litty
-# @Last Modified At: 2020-04-05 20:58:37
+# @Last Modified At: 2020-04-08 14:12:59
 # @Description: Main application and entry point to run program.
 import os
 import logging
@@ -26,13 +26,12 @@ def create_app():
     )
 
     app = Flask(__name__)
-    env = os.environ.get('FLASK_ENV')
+    env = os.environ.get('FLASK_ENV', 'development')
 
-    if env is 'development':
+    if env == 'development':
         app.config.from_object(DevelopmentSettings())
     else:
         app.config.from_object(ProductionSettings())
-
     jwt = JWTManager(app)
 
     from gw_backend.auth.login import auth_route

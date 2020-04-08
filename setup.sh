@@ -20,13 +20,15 @@ install_backend()
     pip install -e .
 }
 
-set_environment_variable()
+set_environment_variables()
 {
-    if [ -z "${FLASK_APP}" ]; then
-        export FLASK_APP=gw_backend
-    fi
+    echo "Setting flask environment variables"
+    export FLASK_APP=gw_backend
+    export FLASK_RUN_HOST=0.0.0.0
+    export FLASK_RUN_PORT=3000
 }
 
-set_environment_variable
+echo "Configuring and installing gw-application..."
+set_environment_variables
 build_frontend
 install_backend

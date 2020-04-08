@@ -4,7 +4,7 @@
 # @Email: alittysw@gmail.com
 # @Create At: 2020-03-21 13:45:12
 # @Last Modified By: Andre Litty
-# @Last Modified At: 2020-04-05 20:58:59
+# @Last Modified At: 2020-04-08 14:23:05
 # @Description: Class based flask settings.
 
 
@@ -13,7 +13,6 @@ class Settings(object):
     TESTING = False
     SECRET_KEY = 'SECRET_KEY'
     JWT_ALGORITHM = 'HS512'
-
 
 class ProductionSettings(Settings):
     pass
