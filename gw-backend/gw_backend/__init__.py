@@ -4,15 +4,17 @@
 # @Email: alittysw@gmail.com
 # @Create At: 2020-03-21 13:48:57
 # @Last Modified By: Andre Litty
-# @Last Modified At: 2020-04-08 14:12:59
+# @Last Modified At: 2020-04-08 17:53:20
 # @Description: Main application and entry point to run program.
 import os
 import logging
 
 from flask import Flask, send_from_directory
-from flask_jwt_extended import JWTManager
 
+from flask_jwt_extended import JWTManager
 from flask_jwt_extended import jwt_required
+
+from flask_cors import CORS
 
 from gw_backend.config.constants import *
 from gw_backend.config.settings import DevelopmentSettings, ProductionSettings
@@ -26,6 +28,7 @@ def create_app():
     )
 
     app = Flask(__name__)
+    CORS(app)
     env = os.environ.get('FLASK_ENV', 'development')
 
     if env == 'development':

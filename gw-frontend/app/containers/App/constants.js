@@ -108,8 +108,5 @@ export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_ERROR = 'LOGIN_ERROR';
 export const LOGOUT = 'LOGOUT';
 
-// TODO: Replace production url with actual url
-export const API_URL =
-  process.env.NODE_ENV === 'development'
-    ? 'http://127.0.0.1:5000/api/v1/'
-    : 'http://127.0.0.1:5000/api/v1/';
+const port = process.env.FLASK_RUN_PORT ? process.env.FLASK_RUN_PORT : 3000
+export const API_URL = `http://127.0.0.1:${port}/api/v1/`
