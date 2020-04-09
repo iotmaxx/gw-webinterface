@@ -40,7 +40,7 @@ describe('LocalNetworkIpConfig saga', () => {
   });
   it('tests setAddress saga', () => {
     const requestURL = `${API_URL}${LOCAL_NETWORK_PATH_SUFFIX}address`;
-    const address = { ipAddress: '127.0.0.1', subnetMask: '255.255.255.0' };
+    const address = { ipAddress: '127.0.0.1', subnetMask: '255.255.255.0', oldAddress: '127.0.0.2' };
     const options = makeBody(address);
     const setAddressSaga = setAddress(address);
     const response = {

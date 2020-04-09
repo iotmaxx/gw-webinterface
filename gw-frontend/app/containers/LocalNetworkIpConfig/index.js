@@ -11,17 +11,16 @@ import { compose } from 'redux';
 
 import LocalNetworkIpConfigForm from 'components/LocalNetworkIpConfigForm';
 
-import {
-  ToastsContainer,
-  ToastsStore,
-  ToastsContainerPosition,
-} from 'react-toasts';
-
 import injectSaga from 'utils/injectSaga';
-import { DAEMON } from 'utils/constants';
-import saga from './saga';
-
 import injectReducer from 'utils/injectReducer';
+import { DAEMON } from 'utils/constants';
+
+import Feedback from 'components/Feedback';
+
+import { ROUTES, port } from '../App/constants';
+import { dismiss } from '../App/actions';
+
+import saga from './saga';
 import LocalNetworkReducer from './reducers';
 import { setHostname, setAddress, setMTU } from './actions';
 
@@ -29,17 +28,27 @@ export function LocalNetworkIpConfig({
   doSetHostname,
   doSetAddress,
   doSetMTU,
+  doDismiss,
   mtu,
   hostname,
   ipAddress,
   subnetMask,
+  error,
+  success,
 }) {
   const submit = values => {
     if (values.hostname !== hostname) doSetHostname(values.hostname);
     if (values.ipAddress !== ipAddress || values.subnetMask !== subnetMask)
-      doSetAddress(values.ipAddress, values.subnetMask);
+      doSetAddress(values.ipAddress, values.subnetMask, ipAddress);
     if (values.mtu !== mtu) doSetMTU(mtu);
-    ToastsStore.success('Success, your changes have been submitted!');
+  };
+
+  const reload = () => {
+    setTimeout(() => {
+      window.location.replace(
+        `http://${ipAddress}:${port}/${ROUTES.localNetwork.ipConfig}`,
+      );
+    }, 1500);
   };
 
   return (
@@ -51,22 +60,27 @@ export function LocalNetworkIpConfig({
         ipAddress={ipAddress}
         subnetMask={subnetMask}
       />
-      <ToastsContainer
-        store={ToastsStore}
-        position={ToastsContainerPosition.BOTTOM_RIGHT}
+      <Feedback
+        success={success}
+        error={error}
+        callDismiss={doDismiss}
+        show={success || error}
       />
     </div>
   );
 }
-
+//{success && reload()}
 LocalNetworkIpConfig.propTypes = {
   doSetHostname: PropTypes.func,
   doSetAddress: PropTypes.func,
   doSetMTU: PropTypes.func,
+  dismiss: PropTypes.func,
   mtu: PropTypes.number,
   hostname: PropTypes.string,
   ipAddress: PropTypes.string,
   subnetMask: PropTypes.string,
+  error: PropTypes.bool,
+  success: PropTypes.bool,
 };
 
 function mapDispatchToProps(dispatch) {
@@ -74,11 +88,14 @@ function mapDispatchToProps(dispatch) {
     doSetHostname: hostname => {
       dispatch(setHostname(hostname));
     },
-    doSetAddress: (ipAddress, subnetMask) => {
-      dispatch(setAddress(ipAddress, subnetMask));
+    doSetAddress: (ipAddress, subnetMask, oldAddress) => {
+      dispatch(setAddress(ipAddress, subnetMask, oldAddress));
     },
     doSetMTU: mtu => {
       dispatch(setMTU(mtu));
+    },
+    doDismiss: () => {
+      dispatch(dismiss());
     },
   };
 }
@@ -89,6 +106,8 @@ const mapStateToProps = state => {
     mtu: state.LocalNetworkIpConfig.mtu,
     ipAddress: state.LocalNetworkIpConfig.ipAddress,
     subnetMask: state.LocalNetworkIpConfig.subnetMask,
+    error: state.App.error,
+    success: state.App.success,
   };
 };
 

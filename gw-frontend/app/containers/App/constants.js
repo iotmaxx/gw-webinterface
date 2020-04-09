@@ -105,8 +105,11 @@ export const REFRESH_TOKEN_ERROR = 'REFRESH_TOKEN_ERROR';
 
 export const LOGIN = 'LOGIN';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
-export const LOGIN_ERROR = 'LOGIN_ERROR';
 export const LOGOUT = 'LOGOUT';
 
-const port = process.env.FLASK_RUN_PORT ? process.env.FLASK_RUN_PORT : 3000
-export const API_URL = `http://127.0.0.1:${port}/api/v1/`
+export const SET_SUCCESS = 'SET_SUCCESS';
+export const SET_ERROR = 'SET_ERROR';
+export const DISMISS = 'DISMISS';
+
+export const port = process.env.FLASK_RUN_PORT ? process.env.FLASK_RUN_PORT : 3000
+export const API_URL = `http://127.0.0.2:${port}/api/v1/`

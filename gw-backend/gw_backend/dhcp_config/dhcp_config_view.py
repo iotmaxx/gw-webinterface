@@ -4,7 +4,7 @@
 # @Email: alittysw@gmail.com
 # @Create At: 2020-03-21 14:30:29
 # @Last Modified By: Andre Litty
-# @Last Modified At: 2020-04-05 20:58:53
+# @Last Modified At: 2020-04-08 20:19:59
 # @Description: Logic related to dhcp configuration.
 
 from flask import Blueprint, request, abort, jsonify
@@ -12,7 +12,7 @@ from flask_jwt_extended import jwt_required
 
 from gw_backend.config.constants import API_PATH
 
-from gw_cli import change_dhcp_server
+from gw_cli import change_dhcp_server, get_dhcp_server_config
 
 from .constants import PATH_SUFFIX
 
@@ -29,8 +29,12 @@ def post_domain_name():
         abort(400)
     if not config:
         abort(400)
-    change_dhcp_server(request_data.get('domainName'),
-                       config[0], config[1], config[2])
+    change_dhcp_server(
+        request_data.get('domainName'),
+        config[0],
+        config[1],
+        config[2]
+        )
     resp = {'domainName': request_data.get('domainName')}
     return jsonify(resp)
 
@@ -44,8 +48,12 @@ def post_begin_ip_range():
         abort(400)
     if not config:
         abort(400)
-    change_dhcp_server(config[3], request_data.get(
-        'beginIpRange'), config[1], config[2])
+    change_dhcp_server(
+        config[3],
+        request_data.get('beginIpRange'),
+        config[1],
+        config[2]
+        )
     resp = {'beginIpRange': request_data.get('beginIpRange')}
     return jsonify(resp)
 
@@ -59,8 +67,12 @@ def post_end_ip_range():
         abort(400)
     if not config:
         abort(400)
-    change_dhcp_server(config[3], config[0],
-                       request_data.get('endIpRange'), config[2])
+    change_dhcp_server(
+        config[3],
+        config[0],
+        request_data.get('endIpRange'),
+        config[2]
+        )
     resp = {'endIpRange': request_data.get('endIpRange')}
     return jsonify(resp)
 
@@ -74,7 +86,11 @@ def post_lease_time():
         abort(400)
     if not config:
         abort(400)
-    change_dhcp_server(config[3], config[0], config[1],
-                       request_data.get('leaseTime'))
+    change_dhcp_server(
+        config[3],
+        config[0],
+        config[1],
+        request_data.get('leaseTime')
+        )
     resp = {'leaseTime': request_data.get('leaseTime')}
     return jsonify(resp)

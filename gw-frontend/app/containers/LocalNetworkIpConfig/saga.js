@@ -11,7 +11,8 @@ import {
   successSetAddress,
 } from './actions';
 
-import { API_URL, LOGIN_ERROR, ACCESS_TOKEN } from '../App/constants';
+import { API_URL, ACCESS_TOKEN } from '../App/constants';
+import { setError, setSuccess } from '../App/actions';
 
 import { takeLatest, call, put } from 'redux-saga/effects';
 
@@ -33,15 +34,16 @@ export function* setHostname({ hostname }) {
     };
     const response = yield call(request, requestURL, options);
     yield put(successSetHostname(response.hostname));
+    yield put(setSuccess());
   } catch (error) {
     console.log(error);
-    yield put({ type: LOGIN_ERROR, error });
+    yield put(setError());
   }
 }
 
-export function* setAddress({ ipAddress, subnetMask }) {
+export function* setAddress({ipAddress, subnetMask, oldAddress}) {
   try {
-    const data = { ipAddress, subnetMask };
+    const data = { ipAddress, subnetMask, oldAddress };
     const requestURL = `${API_URL}${LOCAL_NETWORK_PATH_SUFFIX}address`;
     const accessToken = localStorage.getItem(ACCESS_TOKEN);
     const options = {
@@ -55,9 +57,10 @@ export function* setAddress({ ipAddress, subnetMask }) {
     };
     const response = yield call(request, requestURL, options);
     yield put(successSetAddress(response.ipAddress, response.subnetMask));
+    yield put(setSuccess());
   } catch (error) {
     console.log(error);
-    yield put({ type: LOGIN_ERROR, error });
+    yield put(setError());
   }
 }
 
@@ -77,9 +80,10 @@ export function* setMTU({ mtu }) {
     };
     const response = yield call(request, requestURL, options);
     yield put(successSetMTU(response.mtu));
+    yield put(setSuccess());
   } catch (error) {
     console.log(error);
-    yield put({ type: LOGIN_ERROR, error });
+    yield put(setError());
   }
 }
 
