@@ -4,7 +4,7 @@
  *
  */
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
@@ -24,6 +24,7 @@ import {
   setBeginIpRange,
   setEndIpRange,
   setLeaseTime,
+  getDhcpConfig,
 } from './actions';
 import { dismiss } from '../App/actions';
 
@@ -39,7 +40,12 @@ export function LocalNetworkDhcpServer({
   doSetEndIpRange,
   doSetLeaseTime,
   doDismiss,
+  doGetDhcoConfig,
 }) {
+  useEffect(() => {
+    doGetDhcoConfig();
+  }, []);
+
   const submit = values => {
     if (values.domainName !== domainName) doSetDomainName(values.domainName);
     if (values.beginIpRange !== beginIpRange)
@@ -79,6 +85,7 @@ LocalNetworkDhcpServer.propTypes = {
   doSetEndIpRange: PropTypes.func,
   doSetLeaseTime: PropTypes.func,
   doDismiss: PropTypes.func,
+  doGetDhcoConfig: PropTypes.func,
 };
 
 function mapDispatchToProps(dispatch) {
@@ -97,6 +104,9 @@ function mapDispatchToProps(dispatch) {
     },
     doDismiss: () => {
       dispatch(dismiss());
+    },
+    doGetDhcoConfig: () => {
+      dispatch(getDhcpConfig());
     },
   };
 }
