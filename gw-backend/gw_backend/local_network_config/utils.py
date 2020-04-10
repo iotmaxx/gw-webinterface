@@ -4,7 +4,7 @@
 # @Email: alittysw@gmail.com
 # @Create At: 2020-04-10 03:21:53
 # @Last Modified By: Andre Litty
-# @Last Modified At: 2020-04-10 12:43:32
+# @Last Modified At: 2020-04-10 16:19:34
 # @Description: Utils to search and replace file content and get ip address information.
 
 import glob
@@ -71,3 +71,9 @@ def get_net_information():
         }
     except Exception:
         return None
+
+
+def update_env_file(ip, port=3000):
+    content = f'HOST_ADDRESS={ip}\nHOST_PORT={port}'
+    with open('../../.env', 'w') as env:
+        env.write(content)
