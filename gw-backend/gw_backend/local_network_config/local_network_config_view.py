@@ -4,7 +4,7 @@
 # @Email: alittysw@gmail.com
 # @Create At: 2020-03-21 14:26:14
 # @Last Modified By: Andre Litty
-# @Last Modified At: 2020-04-10 04:50:22
+# @Last Modified At: 2020-04-10 09:50:10
 # @Description: Logic related to local network configuration.
 
 from flask import Blueprint, request, abort, jsonify
@@ -15,7 +15,7 @@ from gw_backend.config.constants import API_PATH
 from gw_cli import change_hostname, change_mtu, change_ipv4
 
 from .constants import PATH_SUFFIX
-from .utils import find_file_content, in_file_replace
+from .utils import find_file_content, replace_in_file
 
 local_network_route = Blueprint('local_network', __name__)
 
@@ -64,7 +64,8 @@ def post_ip():
         search_address = f'http://{old_address}'
         replace_address = f'http://{ip_address}'
         file = find_file_content(search_address)
-        in_file_replace(file, search_string, replace_address)
+        if file is not None:
+            replace_in_file(file, search_string, replace_address)
         return jsonify(
             ipAddress=ip_address,
             subnetMask=subnet_mask

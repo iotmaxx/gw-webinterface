@@ -4,7 +4,7 @@
 # @Email: alittysw@gmail.com
 # @Create At: 2020-04-03 12:56:13
 # @Last Modified By: Andre Litty
-# @Last Modified At: 2020-04-05 20:59:18
+# @Last Modified At: 2020-04-10 04:09:21
 # @Description: All tests related to gw-backend.
 
 import pytest
@@ -214,7 +214,8 @@ def test_set_ipAddress_success(client):
     auth_header = make_auth_header(client)
     data = {
         'ipAddress': '127.0.0.1',
-        'subnetMask': '255.255.255.0'
+        'subnetMask': '255.255.255.0',
+        'oldAddress': '127.0.0.2',
     }
     response = client.post('api/v1/local_network/address',
                            headers=auth_header, json=data)
@@ -226,7 +227,8 @@ def test_set_ipAddress_fail(client):
     auth_header = make_auth_header(client)
     data = {
         'invalidData': '127.0.0.1',
-        'subnetMask': '255.255.255.0'
+        'subnetMask': '255.255.255.0',
+        'oldAddress': '127.0.0.2',
     }
     response = client.post('api/v1/local_network/address',
                            headers=auth_header, json=data)

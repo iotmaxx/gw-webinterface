@@ -4,7 +4,7 @@
 # @Email: alittysw@gmail.com
 # @Create At: 2020-04-10 03:21:53
 # @Last Modified By: Andre Litty
-# @Last Modified At: 2020-04-10 03:35:15
+# @Last Modified At: 2020-04-10 09:50:20
 # @Description: Utils to search and replace file content.
 
 import glob
@@ -24,7 +24,7 @@ def find_file_content(search_string):
         return None
 
 
-def in_file_replace(filename, to_replace, replace_with):
+def replace_in_file(filename, to_replace, replace_with):
     try:
         with open(filename, 'r') as file:
             contend = file.read()
