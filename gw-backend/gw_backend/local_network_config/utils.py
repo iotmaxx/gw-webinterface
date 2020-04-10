@@ -4,7 +4,7 @@
 # @Email: alittysw@gmail.com
 # @Create At: 2020-04-10 03:21:53
 # @Last Modified By: Andre Litty
-# @Last Modified At: 2020-04-10 11:40:37
+# @Last Modified At: 2020-04-10 12:43:32
 # @Description: Utils to search and replace file content and get ip address information.
 
 import glob
@@ -54,9 +54,9 @@ def get_net_information():
         if addr.returncode != 0:
             return None
         addr = addr.stdout.decode()
-        mtu = re.search(mtu_regex, add).group()
+        mtu = re.search(MTU_REX, add).group()
         mtu = mtu.split(' ')[-1]
-        ipv4 = re.search(ip_regex, add).group()
+        ipv4 = re.search(IP_REX, add).group()
         ipv4 = ipv4.split(' ')[-1]
         nic = ipaddress.IPv4Interface(ipv4)
         netmask = nic.netmask.compressed
