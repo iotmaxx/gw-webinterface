@@ -10,12 +10,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 
 import LocalNetworkDhcpConfigForm from 'components/LocalNetworkDhcpConfigForm';
-
-import {
-  ToastsContainer,
-  ToastsStore,
-  ToastsContainerPosition,
-} from 'react-toasts';
+import Feedback from 'components/Feedback';
 
 import injectSaga from 'utils/injectSaga';
 import { DAEMON } from 'utils/constants';
@@ -30,16 +25,20 @@ import {
   setEndIpRange,
   setLeaseTime,
 } from './actions';
+import { dismiss } from '../App/actions';
 
 export function LocalNetworkDhcpServer({
   domainName,
   beginIpRange,
   endIpRange,
   leaseTime,
+  success,
+  error,
   doSetDomainName,
   doSetBeginIpRange,
   doSetEndIpRange,
   doSetLeaseTime,
+  doDismiss,
 }) {
   const submit = values => {
     if (values.domainName !== domainName) doSetDomainName(values.domainName);
@@ -47,7 +46,6 @@ export function LocalNetworkDhcpServer({
       doSetBeginIpRange(values.beginIpRange);
     if (values.endIpRange !== endIpRange) doSetEndIpRange(endIpRange);
     if (values.leaseTime !== leaseTime) doSetLeaseTime(leaseTime);
-    ToastsStore.success('Success, your changes have been submitted!');
   };
 
   return (
@@ -59,9 +57,11 @@ export function LocalNetworkDhcpServer({
         endIpRange={endIpRange}
         leaseTime={leaseTime}
       />
-      <ToastsContainer
-        store={ToastsStore}
-        position={ToastsContainerPosition.BOTTOM_RIGHT}
+      <Feedback
+        success={success}
+        error={error}
+        show={success || error}
+        callDismiss={doDismiss}
       />
     </div>
   );
@@ -72,10 +72,13 @@ LocalNetworkDhcpServer.propTypes = {
   beginIpRange: PropTypes.string,
   endIpRange: PropTypes.string,
   leaseTime: PropTypes.string,
+  success: PropTypes.bool,
+  error: PropTypes.bool,
   doSetDomainName: PropTypes.func,
   doSetBeginIpRange: PropTypes.func,
   doSetEndIpRange: PropTypes.func,
   doSetLeaseTime: PropTypes.func,
+  doDismiss: PropTypes.func,
 };
 
 function mapDispatchToProps(dispatch) {
@@ -92,6 +95,9 @@ function mapDispatchToProps(dispatch) {
     doSetLeaseTime: leaseTime => {
       dispatch(setLeaseTime(leaseTime));
     },
+    doDismiss: () => {
+      dispatch(dismiss());
+    },
   };
 }
 
@@ -101,6 +107,8 @@ const mapStateToProps = state => {
     beginIpRange: state.LocalNetworkDhcpServer.beginIpRange,
     endIpRange: state.LocalNetworkDhcpServer.endIpRange,
     leaseTime: state.LocalNetworkDhcpServer.leaseTime,
+    success: state.App.success,
+    error: state.App.error,
   };
 };
 

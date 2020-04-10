@@ -16,9 +16,16 @@ function LocalNetworkReducer(state = initialState, action) {
     case SUCCESS_SET_MTU:
       return { ...state, mtu: action.mtu };
     case SUCCESS_SET_ADDRESS:
-      return { ...state, ipAddress: action.ipAddress, subnetMask: action.subnetMask };
+      return {
+        ...state,
+        ipAddress: action.ipAddress,
+        subnetMask: action.subnetMask,
+      };
     case SUCCESS_SET_HOSTNAME:
-      return { ...state, hostname: action.hostname };
+      return {
+        ...state,
+        hostname: action.hostname,
+      };
     default:
       return state;
   }

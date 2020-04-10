@@ -1,6 +1,5 @@
 import {
   LOGIN,
-  LOGIN_ERROR,
   LOGOUT,
   API_URL,
   ACCESS_TOKEN,
@@ -8,7 +7,7 @@ import {
   ROUTES,
 } from '../App/constants';
 
-import { loginSuccess } from '../App/actions';
+import { loginSuccess, setSuccess, setError } from '../App/actions';
 
 import { takeLatest, call, put } from 'redux-saga/effects';
 
@@ -32,9 +31,10 @@ export function* login({ username, password }) {
     localStorage.setItem(REFRESH_TOKEN, token_pair.refresh);
     history.push(ROUTES.dashboard);
     yield put(loginSuccess());
+    yield put(setSuccess());
   } catch (error) {
     console.log(error);
-    yield put({ type: LOGIN_ERROR, error });
+    yield put(setError());
   }
 }
 

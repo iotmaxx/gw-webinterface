@@ -13,7 +13,8 @@ import {
   successSetLeaseTime,
 } from './actions';
 
-import { API_URL, ACCESS_TOKEN, LOGIN_ERROR } from '../App/constants';
+import { API_URL, ACCESS_TOKEN } from '../App/constants';
+import { setSuccess, setError } from '../App/actions';
 
 import { takeLatest, call, put } from 'redux-saga/effects';
 
@@ -35,9 +36,10 @@ export function* setDomainName({ domainName }) {
     };
     const response = yield call(request, requestURL, options);
     yield put(successSetDomainName(response.domainName));
+    yield put(setSuccess());
   } catch (error) {
     console.log(error);
-    yield put({ type: LOGIN_ERROR, error });
+    yield put(setError());
   }
 }
 
@@ -57,9 +59,10 @@ export function* setBeginIpRange({ beginIpRange }) {
     };
     const response = yield call(request, requestURL, options);
     yield put(successSetBeginIpRange(response.beginIpRange));
+    yield put(setSuccess());
   } catch (error) {
     console.log(error);
-    yield put({ type: LOGIN_ERROR, error });
+    yield put(setError());
   }
 }
 
@@ -79,9 +82,10 @@ export function* setEndIpRange({ endIpRange }) {
     };
     const response = yield call(request, requestURL, options);
     yield put(successSetEndIpRange(response.endIpRange));
+    yield put(setSuccess());
   } catch (error) {
     console.log(error);
-    yield put({ type: LOGIN_ERROR, error });
+    yield put(setError());
   }
 }
 
@@ -101,9 +105,10 @@ export function* setLeaseTime({ leaseTime }) {
     };
     const response = yield call(request, requestURL, options);
     yield put(successSetLeaseTime(response.leaseTime));
+    yield put(setSuccess());
   } catch (error) {
     console.log(error);
-    yield put({ type: LOGIN_ERROR, error });
+    yield put(setError());
   }
 }
 

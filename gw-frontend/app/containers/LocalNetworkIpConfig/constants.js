@@ -1,3 +1,13 @@
+/*
+ * @Script: constants.js
+ * @Author: Andre Litty
+ * @Email: alittysw@gmail.com
+ * @Create At: 2020-04-08 20:48:15
+ * @Last Modified By: Andre Litty
+ * @Last Modified At: 2020-04-09 09:35:56
+ * @Description: Constants for LocalNetworkIpConfig.
+ */
+
 export const SET_HOSTNAME = 'SET_HOSTNAME';
 export const SET_ADDRESS = 'SET_ADDRESS';
 export const SET_MTU = 'SET_MTU';

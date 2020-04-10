@@ -5,7 +5,9 @@ import {
   SUCCESS_SET_ADDRESS,
   SUCCESS_SET_HOSTNAME,
   SUCCESS_SET_MTU,
+  FAILURE_SET_DATA,
 } from './constants';
+import { func } from 'prop-types';
 
 export function setHostname(hostname) {
   return {
@@ -14,11 +16,12 @@ export function setHostname(hostname) {
   };
 }
 
-export function setAddress(ipAddress, subnetMask) {
+export function setAddress(ipAddress, subnetMask, oldAddress) {
   return {
     type: SET_ADDRESS,
     ipAddress,
     subnetMask,
+    oldAddress
   };
 }
 
