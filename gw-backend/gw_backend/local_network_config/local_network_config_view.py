@@ -4,7 +4,7 @@
 # @Email: alittysw@gmail.com
 # @Create At: 2020-03-21 14:26:14
 # @Last Modified By: Andre Litty
-# @Last Modified At: 2020-04-10 09:50:10
+# @Last Modified At: 2020-04-10 11:45:09
 # @Description: Logic related to local network configuration.
 
 from flask import Blueprint, request, abort, jsonify
@@ -15,7 +15,7 @@ from gw_backend.config.constants import API_PATH
 from gw_cli import change_hostname, change_mtu, change_ipv4
 
 from .constants import PATH_SUFFIX
-from .utils import find_file_content, replace_in_file
+from .utils import find_file_content, replace_in_file, get_net_information
 
 local_network_route = Blueprint('local_network', __name__)
 
@@ -48,27 +48,34 @@ def post_mtu():
         abort(503)
 
 
-@local_network_route.route(API_PATH + PATH_SUFFIX + 'address', methods=['POST'])
+@local_network_route.route(API_PATH + PATH_SUFFIX + 'address', methods=['POST', 'GET'])
 @jwt_required
 def post_ip():
-    request_data = request.get_json()
-    if not 'ipAddress' in request_data\
-            or not 'subnetMask' in request_data\
-            or not 'oldAddress' in request_data:
-        abort(400)
-    ip_address = request_data.get('ipAddress')
-    old_address = request_data.get('oldAddress')
-    subnet_mask = request_data.get('subnetMask')
-    address_response = change_ipv4(ip_address, subnet_mask)
-    if address_response.returncode == 0:
-        search_address = f'http://{old_address}'
-        replace_address = f'http://{ip_address}'
-        file = find_file_content(search_address)
-        if file is not None:
-            replace_in_file(file, search_string, replace_address)
-        return jsonify(
-            ipAddress=ip_address,
-            subnetMask=subnet_mask
-        )
+    if request.method == 'GET':
+        net_info = get_net_information()
+        if net_info is not None:
+            return jsonify(net_info)
+        else:
+            return abort(503)
     else:
-        abort(503)
+        request_data = request.get_json()
+        if not 'ipAddress' in request_data
+                or not 'subnetMask' in request_data
+                or not 'oldAddress' in request_data:
+            abort(400)
+        ip_address = request_data.get('ipAddress')
+        old_address = request_data.get('oldAddress')
+        subnet_mask = request_data.get('subnetMask')
+        address_response = change_ipv4(ip_address, subnet_mask)
+        if address_response.returncode == 0:
+            search_address = f'http://{old_address}'
+            replace_address = f'http://{ip_address}'
+            file = find_file_content(search_address)
+            if file is not None:
+                replace_in_file(file, search_string, replace_address)
+            return jsonify(
+                ipAddress = ip_address,
+                subnetMask = subnet_mask
+            )
+        else:
+            abort(503)

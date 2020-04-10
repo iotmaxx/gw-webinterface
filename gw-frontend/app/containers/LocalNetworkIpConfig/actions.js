@@ -1,13 +1,13 @@
 import {
   SET_ADDRESS,
+  GET_ADDRESS,
   SET_HOSTNAME,
   SET_MTU,
   SUCCESS_SET_ADDRESS,
   SUCCESS_SET_HOSTNAME,
   SUCCESS_SET_MTU,
-  FAILURE_SET_DATA,
+  SUCCESS_GET_ADDRESS,
 } from './constants';
-import { func } from 'prop-types';
 
 export function setHostname(hostname) {
   return {
@@ -21,7 +21,13 @@ export function setAddress(ipAddress, subnetMask, oldAddress) {
     type: SET_ADDRESS,
     ipAddress,
     subnetMask,
-    oldAddress
+    oldAddress,
+  };
+}
+
+export function getAddress() {
+  return {
+    type: GET_ADDRESS,
   };
 }
 
@@ -44,6 +50,16 @@ export function successSetAddress(ipAddress, subnetMask) {
     type: SUCCESS_SET_ADDRESS,
     ipAddress,
     subnetMask,
+  };
+}
+
+export function successGetAddress(ipAddress, subnetMask, mtu, hostname) {
+  return {
+    type: SUCCESS_SET_ADDRESS,
+    ipAddress,
+    subnetMask,
+    mtu,
+    hostname,
   };
 }
 
