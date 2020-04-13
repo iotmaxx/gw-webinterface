@@ -3,6 +3,7 @@ import {
   SUCCESS_SET_BEGIN_IP_RANGE,
   SUCCESS_SET_END_IP_RANGE,
   SUCCESS_SET_LEASE_TIME,
+  SUCCESS_GET_DHCP_CONFIG,
 } from './constants';
 
 const initialState = {
@@ -22,6 +23,14 @@ function LocalDhcpServerReducer(state = initialState, action) {
       return { ...state, endIpRange: action.endIpRange };
     case SUCCESS_SET_LEASE_TIME:
       return { ...state, leaseTime: action.leaseTime };
+    case SUCCESS_GET_DHCP_CONFIG:
+      return {
+        ...state,
+        domainName: action.domainName,
+        beginIpRange: action.beginIpRange,
+        endIpRange: action.endIpRange,
+        leaseTime: action.leaseTime,
+      };
     default:
       return state;
   }

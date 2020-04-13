@@ -4,7 +4,7 @@
  *
  */
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
@@ -22,13 +22,14 @@ import { dismiss } from '../App/actions';
 
 import saga from './saga';
 import LocalNetworkReducer from './reducers';
-import { setHostname, setAddress, setMTU } from './actions';
+import { setHostname, setAddress, setMTU, getAddress } from './actions';
 
 export function LocalNetworkIpConfig({
   doSetHostname,
   doSetAddress,
   doSetMTU,
   doDismiss,
+  doGetAddress,
   mtu,
   hostname,
   ipAddress,
@@ -36,6 +37,10 @@ export function LocalNetworkIpConfig({
   error,
   success,
 }) {
+  useEffect(() => {
+    doGetAddress();
+  }, []);
+
   const submit = values => {
     if (values.hostname !== hostname) doSetHostname(values.hostname);
     if (values.ipAddress !== ipAddress || values.subnetMask !== subnetMask)
@@ -43,6 +48,7 @@ export function LocalNetworkIpConfig({
     if (values.mtu !== mtu) doSetMTU(mtu);
   };
 
+  // TODO: incluce
   const reload = () => {
     setTimeout(() => {
       window.location.replace(
@@ -74,6 +80,7 @@ LocalNetworkIpConfig.propTypes = {
   doSetHostname: PropTypes.func,
   doSetAddress: PropTypes.func,
   doSetMTU: PropTypes.func,
+  doGetAddress: PropTypes.func,
   dismiss: PropTypes.func,
   mtu: PropTypes.number,
   hostname: PropTypes.string,
@@ -93,6 +100,9 @@ function mapDispatchToProps(dispatch) {
     },
     doSetMTU: mtu => {
       dispatch(setMTU(mtu));
+    },
+    doGetAddress: () => {
+      dispatch(getAddress());
     },
     doDismiss: () => {
       dispatch(dismiss());

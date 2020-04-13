@@ -3,6 +3,7 @@ import {
   SET_BEGIN_IP_RANGE,
   SET_END_IP_RANGE,
   SET_LEASE_TIME,
+  GET_DHCP_CONFIG,
   DHCP_PATH_SUFFIX,
 } from './constants';
 
@@ -11,6 +12,7 @@ import {
   successSetBeginIpRange,
   successSetEndIpRange,
   successSetLeaseTime,
+  successGetDhcpConfig,
 } from './actions';
 
 import { API_URL, ACCESS_TOKEN } from '../App/constants';
@@ -112,6 +114,32 @@ export function* setLeaseTime({ leaseTime }) {
   }
 }
 
+export function* getDhcpConfig() {
+  try {
+    const requestURL = `${API_URL}${DHCP_PATH_SUFFIX}config`;
+    const accessToken = localStorage.getItem(ACCESS_TOKEN);
+    const options = {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${accessToken}`,
+      },
+    };
+    const response = yield call(request, requestURL, options);
+    yield put(
+      successGetDhcpConfig(
+        response.domainName,
+        response.beginIpRange,
+        response.endIpRange,
+        response.leaseTime,
+      ),
+    );
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 // Root saga
 export default function* rootSaga() {
   yield [
@@ -119,5 +147,6 @@ export default function* rootSaga() {
     yield takeLatest(SET_BEGIN_IP_RANGE, setBeginIpRange),
     yield takeLatest(SET_END_IP_RANGE, setEndIpRange),
     yield takeLatest(SET_LEASE_TIME, setLeaseTime),
+    yield takeLatest(GET_DHCP_CONFIG, getDhcpConfig),
   ];
 }

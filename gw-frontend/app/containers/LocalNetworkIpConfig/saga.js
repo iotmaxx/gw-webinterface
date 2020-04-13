@@ -2,6 +2,7 @@ import {
   SET_HOSTNAME,
   SET_ADDRESS,
   SET_MTU,
+  GET_ADDRESS,
   LOCAL_NETWORK_PATH_SUFFIX,
 } from './constants';
 
@@ -9,6 +10,7 @@ import {
   successSetHostname,
   successSetMTU,
   successSetAddress,
+  successGetAddress,
 } from './actions';
 
 import { API_URL, ACCESS_TOKEN } from '../App/constants';
@@ -41,7 +43,7 @@ export function* setHostname({ hostname }) {
   }
 }
 
-export function* setAddress({ipAddress, subnetMask, oldAddress}) {
+export function* setAddress({ ipAddress, subnetMask, oldAddress }) {
   try {
     const data = { ipAddress, subnetMask, oldAddress };
     const requestURL = `${API_URL}${LOCAL_NETWORK_PATH_SUFFIX}address`;
@@ -87,11 +89,38 @@ export function* setMTU({ mtu }) {
   }
 }
 
+export function* getAddress() {
+  try {
+    const requestURL = `${API_URL}${LOCAL_NETWORK_PATH_SUFFIX}address`;
+    const accessToken = localStorage.getItem(ACCESS_TOKEN);
+    const options = {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${accessToken}`,
+      },
+    };
+    const response = yield call(request, requestURL, options);
+    yield put(
+      successGetAddress(
+        response.ipAddress,
+        response.subnetMask,
+        response.mtu,
+        response.hostname,
+      ),
+    );
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 // Root saga
 export default function* rootSaga() {
   yield [
     yield takeLatest(SET_HOSTNAME, setHostname),
     yield takeLatest(SET_ADDRESS, setAddress),
     yield takeLatest(SET_MTU, setMTU),
+    yield takeLatest(GET_ADDRESS, getAddress),
   ];
 }

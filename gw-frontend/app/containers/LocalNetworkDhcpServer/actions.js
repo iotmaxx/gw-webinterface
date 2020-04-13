@@ -3,10 +3,12 @@ import {
   SET_BEGIN_IP_RANGE,
   SET_END_IP_RANGE,
   SET_LEASE_TIME,
+  GET_DHCP_CONFIG,
   SUCCESS_SET_DOMAIN_NAME,
   SUCCESS_SET_BEGIN_IP_RANGE,
   SUCCESS_SET_END_IP_RANGE,
   SUCCESS_SET_LEASE_TIME,
+  SUCCESS_GET_DHCP_CONFIG,
 } from './constants';
 
 export function setDomainName(domainName) {
@@ -61,6 +63,27 @@ export function successSetEndIpRange(endIpRange) {
 export function successSetLeaseTime(leaseTime) {
   return {
     type: SUCCESS_SET_LEASE_TIME,
+    leaseTime,
+  };
+}
+
+export function getDhcpConfig() {
+  return {
+    type: GET_DHCP_CONFIG,
+  };
+}
+
+export function successGetDhcpConfig(
+  domainName,
+  beginIpRange,
+  endIpRange,
+  leaseTime,
+) {
+  return {
+    type: SUCCESS_GET_DHCP_CONFIG,
+    domainName,
+    beginIpRange,
+    endIpRange,
     leaseTime,
   };
 }

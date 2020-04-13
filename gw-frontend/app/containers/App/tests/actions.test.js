@@ -1,5 +1,5 @@
-import { logout, loginSuccess, login } from '../actions';
-import { LOGIN, LOGIN_SUCCESS, LOGOUT } from '../constants';
+import { logout, loginSuccess, login, setSuccess, setError, dismiss } from '../actions';
+import { LOGIN, LOGIN_SUCCESS, LOGOUT, SET_SUCCESS, SET_ERROR, DISMISS } from '../constants';
 
 describe('LoginReducer', () => {
   it('returns the login constant', () => {
@@ -15,6 +15,21 @@ describe('LoginReducer', () => {
   it('toggels the logout', () => {
     expect(logout()).toEqual({
       type: LOGOUT,
+    });
+  });
+  it('toggels the set success', () => {
+    expect(setSuccess()).toEqual({
+      type: SET_SUCCESS,
+    });
+  });
+  it('toggels the logout', () => {
+    expect(setError()).toEqual({
+      type: SET_ERROR,
+    });
+  });
+  it('toggels the logout', () => {
+    expect(dismiss()).toEqual({
+      type: DISMISS,
     });
   });
 });
