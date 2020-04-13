@@ -54,7 +54,7 @@ export function LocalNetworkIpConfig({
       window.location.replace(
         `http://${ipAddress}:${port}/${ROUTES.localNetwork.ipConfig}`,
       );
-    }, 1500);
+    }, 1000);
   };
 
   return (
@@ -71,11 +71,12 @@ export function LocalNetworkIpConfig({
         error={error}
         callDismiss={doDismiss}
         show={success || error}
+        callback={reload}
       />
     </div>
   );
 }
-//{success && reload()}
+
 LocalNetworkIpConfig.propTypes = {
   doSetHostname: PropTypes.func,
   doSetAddress: PropTypes.func,

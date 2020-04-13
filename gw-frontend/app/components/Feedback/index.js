@@ -15,7 +15,7 @@ import {
 import { FormattedMessage } from 'react-intl';
 import messages from './messages';
 
-function Feedback({ show, success, error, callDismiss, msg=null }) {
+function Feedback({ show, success, error, callDismiss, msg=null, callback=null }) {
   const showToast = () => {
     if (success) {
       const message = msg == null ? 'Success, your changes have been submitted!' : msg;
@@ -27,6 +27,8 @@ function Feedback({ show, success, error, callDismiss, msg=null }) {
     }
     setTimeout(() => {
       callDismiss();
+      if (callback)
+        callback();
     }, 3000);
   };
 
