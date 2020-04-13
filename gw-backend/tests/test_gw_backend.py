@@ -4,7 +4,7 @@
 # @Email: alittysw@gmail.com
 # @Create At: 2020-04-03 12:56:13
 # @Last Modified By: Andre Litty
-# @Last Modified At: 2020-04-10 04:09:21
+# @Last Modified At: 2020-04-13 12:24:32
 # @Description: All tests related to gw-backend.
 
 import pytest
@@ -168,6 +168,13 @@ def test_set_lease_time_fail(client):
     assert response.status_code == 400
 
 
+def test_get_dhcp_config(client):
+    auth_header = make_auth_header(client)
+    response = client.get('api/v1/dhcp_config/config', headers=auth_header)
+    json_response = json.loads(response.data.decode())
+    assert response.status_code == 200
+
+
 def test_set_hostname_success(client):
     auth_header = make_auth_header(client)
     data = {
@@ -223,6 +230,13 @@ def test_set_ipAddress_success(client):
     assert response.status_code == 200
 
 
+def test_get_network_info(client):
+    auth_header = make_auth_header(client)
+    response = client.get('api/v1/local_network/address', headers=auth_header)
+    json_response = json.loads(response.data.decode())
+    assert response.status_code == 200
+
+
 def test_set_ipAddress_fail(client):
     auth_header = make_auth_header(client)
     data = {
@@ -244,7 +258,7 @@ def test_get_system_info(client):
     assert response.status_code == 200
 
 
-def test_get_system_info(client):
+def test_get_system_info_config(client):
     auth_header = make_auth_header(client)
     response = client.get('api/v1/system/config', headers=auth_header)
     json_response = json.loads(response.data.decode())
