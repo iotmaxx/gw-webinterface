@@ -68,6 +68,7 @@ function WirelessNetworkSimConfigForm({ submit }) {
       submit(values);
     },
     validationSchema: schema,
+    enableReinitialize: true,
   });
 
   const toggleCheckbox = event => {

@@ -52,7 +52,7 @@ export function LocalNetworkIpConfig({
   const reload = () => {
     setTimeout(() => {
       window.location.replace(
-        `http://${ipAddress}:${port}/${ROUTES.localNetwork.ipConfig}`,
+        `http://${ipAddress}:${port}${ROUTES.localNetwork.ipConfig}`,
       );
     }, 1000);
   };

@@ -8,7 +8,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
-import { useFormik } from 'formik';
+import { useFormik, useFormikContext } from 'formik';
 import * as Yup from 'yup';
 
 import FormFieldError from 'components/FormFieldError';
@@ -69,8 +69,8 @@ function LocalNetworkIpConfigForm({
       submit(values);
     },
     validationSchema: schema,
+    enableReinitialize: true,
   });
-
   const toggleCheckbox = event => {
     setEnableIPv6(event.target.checked);
   };
@@ -82,6 +82,7 @@ function LocalNetworkIpConfigForm({
         type="text"
         name="hostname"
         placeholder="localhost"
+        value={formik.values.hostname}
         {...formik.getFieldProps('hostname')}
       />
       <FormFieldError
@@ -94,6 +95,7 @@ function LocalNetworkIpConfigForm({
         type="text"
         name="ipAddress"
         placeholder="127.0.0.1"
+        value={formik.values.ipAddress}
         {...formik.getFieldProps('ipAddress')}
       />
       <FormFieldError
@@ -106,6 +108,7 @@ function LocalNetworkIpConfigForm({
         type="text"
         name="subnetMask"
         placeholder="255.255.255.0"
+        value={formik.values.subnetMask}
         {...formik.getFieldProps('subnetMask')}
       />
       <FormFieldError
@@ -118,6 +121,7 @@ function LocalNetworkIpConfigForm({
         type="number"
         name="mtu"
         placeholder="1500"
+        value={formik.values.mtu}
         {...formik.getFieldProps('mtu')}
       />
       <FormFieldError touched={formik.touched.mtu} errors={formik.errors.mtu} />
@@ -139,6 +143,7 @@ function LocalNetworkIpConfigForm({
             type="text"
             name="ipAddressV6"
             placeholder="00:00:00:00:00:00"
+            value={formik.values.ipAddressV6}
             {...formik.getFieldProps('ipAddressV6')}
           />
           <FormFieldError
