@@ -4,7 +4,7 @@
 # @Email: alittysw@gmail.com
 # @Create At: 2020-03-21 14:26:14
 # @Last Modified By: Andre Litty
-# @Last Modified At: 2020-04-10 16:19:23
+# @Last Modified At: 2020-04-14 15:14:42
 # @Description: Logic related to local network configuration.
 
 from flask import Blueprint, request, abort, jsonify

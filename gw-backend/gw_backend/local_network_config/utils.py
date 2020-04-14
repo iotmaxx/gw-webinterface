@@ -4,7 +4,7 @@
 # @Email: alittysw@gmail.com
 # @Create At: 2020-04-10 03:21:53
 # @Last Modified By: Andre Litty
-# @Last Modified At: 2020-04-10 16:19:34
+# @Last Modified At: 2020-04-14 15:14:52
 # @Description: Utils to search and replace file content and get ip address information.
 
 import glob
@@ -47,16 +47,16 @@ def replace_in_file(filename, to_replace, replace_with):
 def get_net_information():
     try:
         addr = subprocess.run(
-            ['ip', 'addr', 'show' 'eth0'],
+            ['ip', 'addr', 'show', 'dev', 'eht0'],
             check=True,
             capture_output=True
         )
         if addr.returncode != 0:
             return None
         addr = addr.stdout.decode()
-        mtu = re.search(MTU_REX, add).group()
+        mtu = re.search(MTU_REX, addr).group()
         mtu = mtu.split(' ')[-1]
-        ipv4 = re.search(IP_REX, add).group()
+        ipv4 = re.search(IP_REX, addr).group()
         ipv4 = ipv4.split(' ')[-1]
         nic = ipaddress.IPv4Interface(ipv4)
         netmask = nic.netmask.compressed
@@ -65,7 +65,7 @@ def get_net_information():
         hostname = os.uname()[1]
         return {
             'hostname': hostname,
-            'ipAdress': ip,
+            'ipAddress': ip,
             'subnetMask': netmask,
             'subnetMaskPrefix': netmask_prefix
         }

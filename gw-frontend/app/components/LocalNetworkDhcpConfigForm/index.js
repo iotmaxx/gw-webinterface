@@ -44,6 +44,7 @@ function LocalNetworkDhcpConfigForm({
       submit(values);
     },
     validationSchema: schema,
+    enableReinitialize: true,
   });
 
   return (
