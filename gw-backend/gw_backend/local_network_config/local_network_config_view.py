@@ -3,8 +3,8 @@
 # @Author: Andre Litty
 # @Email: alittysw@gmail.com
 # @Create At: 2020-03-21 14:26:14
-# @Last Modified By: Andre Litty
-# @Last Modified At: 2020-04-14 15:14:42
+# @Last Modified By: Your Name
+# @Last Modified At: 2020-04-23 13:51:53
 # @Description: Logic related to local network configuration.
 
 from flask import Blueprint, request, abort, jsonify
@@ -42,7 +42,7 @@ def post_mtu():
         abort(400)
     mtu = request_data.get('mtu')
     mtu_response = change_mtu(mtu)
-    if clu_response.returncode == 0:
+    if mtu_response.returncode == 0:
         return jsonify(mtu=mtu)
     else:
         abort(503)
@@ -74,7 +74,7 @@ def post_ip():
             replace_address = f'http://{ip_address}'
             file = find_file_content(search_address)
             if file is not None:
-                replace_in_file(file, search_string, replace_address)
+                replace_in_file(file, search_address, replace_address)
             update_env_file(ip_address)
         return jsonify(
             ipAddress = ip_address,
