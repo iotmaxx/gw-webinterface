@@ -79,7 +79,10 @@ export const ROUTES = {
 
 export const MAIN_COLORS = {
   dark: '#003a40',
+  white: '#fff',
   cyan: '#00bab3',
+  headerBorderColor: 'rgb(0, 186, 179)',
+  contentHeaderBackground: '#f2f5f5',
   orange: '#e16720',
   transparentlyDark: '#d6d6d636',
   transparentlyBeige: '#f5f5dc24',
@@ -111,10 +114,6 @@ export const SET_SUCCESS = 'SET_SUCCESS';
 export const SET_ERROR = 'SET_ERROR';
 export const DISMISS = 'DISMISS';
 
-export const port = process.env.HOST_PORT
-  ? process.env.HOST_PORT
-  : 3000;
-const host = process.env.HOST_ADDRESS
-  ? process.env.HOST_ADDRESS
-  : '127.0.0.1';
+export const port = process.env.HOST_PORT ? process.env.HOST_PORT : 3000;
+const host = process.env.HOST_ADDRESS ? process.env.HOST_ADDRESS : '127.0.0.1';
 export const API_URL = `http://${host}:${port}/api/v1/`;

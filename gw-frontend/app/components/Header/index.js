@@ -7,27 +7,30 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import Logo from '../../assets/icons/Logo.svg';
-
 import { MAIN_COLORS } from 'containers/App/constants';
+import IotMaxx from '../../assets/icons/iotmaxx.png';
 
 const StyledHeader = styled.div`
-  background-color: ${MAIN_COLORS.orange};
+  background-color: ${MAIN_COLORS.white};
   width: 100%;
-  height: 10vh;
+  height: 150px;
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
+  align-items: center;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-bottom-color: ${MAIN_COLORS.headerBorderColor};
 `;
 
 const StyledImage = styled.img`
-  width: 20%;
-  height: 100%;
+  width: max-content;
+  height: max-content;
 `;
 
 function Header() {
   return (
     <StyledHeader>
-      <StyledImage src={Logo} />
+      <StyledImage src={IotMaxx} />
     </StyledHeader>
   );
 }

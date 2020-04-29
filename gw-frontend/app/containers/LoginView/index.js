@@ -12,15 +12,11 @@ import { compose } from 'redux';
 import LoginForm from 'components/LoginForm';
 import Feedback from 'components/Feedback';
 
-import { FormattedMessage } from 'react-intl';
-import messages from './messages';
-
-import { login, dismiss } from '../App/actions';
-
 import { withRouter } from 'react-router-dom';
 
 import injectSaga from 'utils/injectSaga';
 import { DAEMON } from 'utils/constants';
+import { login, dismiss } from '../App/actions';
 import saga from './saga';
 
 export function LoginView({ doLogin, success, error, doDismiss }) {
@@ -46,7 +42,7 @@ export function LoginView({ doLogin, success, error, doDismiss }) {
 
 LoginView.propTypes = {
   doLogin: PropTypes.func,
-  dismiss: PropTypes.func,
+  doDismiss: PropTypes.func,
   error: PropTypes.bool,
   success: PropTypes.bool,
 };
@@ -62,12 +58,10 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-const mapStateToProps = state => {
-  return {
-    error: state.App.error,
-    success: state.App.success,
-  };
-};
+const mapStateToProps = state => ({
+  error: state.App.error,
+  success: state.App.success,
+});
 
 const withConnect = connect(
   mapStateToProps,

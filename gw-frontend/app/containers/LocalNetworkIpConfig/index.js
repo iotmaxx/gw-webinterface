@@ -48,7 +48,6 @@ export function LocalNetworkIpConfig({
     if (values.mtu !== mtu) doSetMTU(mtu);
   };
 
-  // TODO: incluce
   const reload = () => {
     setTimeout(() => {
       window.location.replace(
@@ -82,7 +81,7 @@ LocalNetworkIpConfig.propTypes = {
   doSetAddress: PropTypes.func,
   doSetMTU: PropTypes.func,
   doGetAddress: PropTypes.func,
-  dismiss: PropTypes.func,
+  doDismiss: PropTypes.func,
   mtu: PropTypes.number,
   hostname: PropTypes.string,
   ipAddress: PropTypes.string,
@@ -111,16 +110,14 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-const mapStateToProps = state => {
-  return {
-    hostname: state.LocalNetworkIpConfig.hostname,
-    mtu: state.LocalNetworkIpConfig.mtu,
-    ipAddress: state.LocalNetworkIpConfig.ipAddress,
-    subnetMask: state.LocalNetworkIpConfig.subnetMask,
-    error: state.App.error,
-    success: state.App.success,
-  };
-};
+const mapStateToProps = state => ({
+  hostname: state.LocalNetworkIpConfig.hostname,
+  mtu: state.LocalNetworkIpConfig.mtu,
+  ipAddress: state.LocalNetworkIpConfig.ipAddress,
+  subnetMask: state.LocalNetworkIpConfig.subnetMask,
+  error: state.App.error,
+  success: state.App.success,
+});
 
 const withConnect = connect(
   mapStateToProps,

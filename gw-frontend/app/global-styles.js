@@ -55,7 +55,7 @@ const GlobalStyle = createGlobalStyle`
     margin-top: 20px;
     padding: 50px;
     box-sizing: content-box;
-    border-color: ${MAIN_COLORS.orange};
+    border-color: ${MAIN_COLORS.dark};
     border-width: 2px;
     border-style: outset;
     border-radius: 15px;
