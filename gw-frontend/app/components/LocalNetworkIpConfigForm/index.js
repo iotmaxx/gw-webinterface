@@ -8,7 +8,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
-import { useFormik, useFormikContext } from 'formik';
+import { useFormik } from 'formik';
 import * as Yup from 'yup';
 
 import FormFieldError from 'components/FormFieldError';
@@ -16,18 +16,18 @@ import FormFieldError from 'components/FormFieldError';
 import { YUP_VALIDATORS } from 'containers/App/constants';
 
 const FormWrapper = styled.form`
-  display: grid;
+  display: flex;
+  flex-direction: column;
+  padding-left: 2em;
+  padding-right: 2em;
 `;
 
-const CheckboxWrapper = styled.input`
-  margin-left: 10px;
-  height: 20px;
-  width: 20px;
-  vertical-align: text-bottom;
-`;
-
-const IpV6Wrapper = styled.div`
-  display: contents;
+const FormGroup = styled.div`
+  display: inherit;
+  justify-content: space-between;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  align-items: center;
 `;
 
 // TODO: Add alias address form
@@ -38,7 +38,7 @@ function LocalNetworkIpConfigForm({
   ipAddress,
   subnetMask,
 }) {
-  const [enableIPv6, setEnableIPv6] = useState(false);
+  const [enableIPv6, setEnableIPv6] = useState(true);
 
   const schema = Yup.object({
     ipAddress: YUP_VALIDATORS.ipV4Field.required('Required'),
@@ -58,12 +58,12 @@ function LocalNetworkIpConfigForm({
 
   const formik = useFormik({
     initialValues: {
-      ipAddress: ipAddress,
-      subnetMask: subnetMask,
-      mtu: mtu,
+      ipAddress,
+      subnetMask,
+      mtu,
       addressType: 'static',
       ipAddressV6: '',
-      hostname: hostname,
+      hostname,
     },
     onSubmit: values => {
       submit(values);
@@ -71,73 +71,79 @@ function LocalNetworkIpConfigForm({
     validationSchema: schema,
     enableReinitialize: true,
   });
-  const toggleCheckbox = event => {
-    setEnableIPv6(event.target.checked);
+  const toggleSelect = event => {
+    const { value } = event.target[event.target.selectedIndex];
+    if (value === 'y') setEnableIPv6(true);
+    if (value === 'n') setEnableIPv6(false);
   };
 
   return (
     <FormWrapper onSubmit={formik.handleSubmit}>
-      <label htmlFor="hostname">Hostname</label>
-      <input
-        type="text"
-        name="hostname"
-        placeholder="localhost"
-        value={formik.values.hostname}
-        {...formik.getFieldProps('hostname')}
-      />
-      <FormFieldError
-        touched={formik.touched.hostname}
-        errors={formik.errors.hostname}
-      />
-
-      <label htmlFor="ipAddress">IP Address</label>
-      <input
-        type="text"
-        name="ipAddress"
-        placeholder="127.0.0.1"
-        value={formik.values.ipAddress}
-        {...formik.getFieldProps('ipAddress')}
-      />
-      <FormFieldError
-        touched={formik.touched.ipAddress}
-        errors={formik.errors.ipAddress}
-      />
-
-      <label htmlFor="subnetMask">Subnet Mask</label>
-      <input
-        type="text"
-        name="subnetMask"
-        placeholder="255.255.255.0"
-        value={formik.values.subnetMask}
-        {...formik.getFieldProps('subnetMask')}
-      />
-      <FormFieldError
-        touched={formik.touched.subnetMask}
-        errors={formik.errors.subnetMask}
-      />
-
-      <label htmlFor="mtu">MTU</label>
-      <input
-        type="number"
-        name="mtu"
-        placeholder="1500"
-        value={formik.values.mtu}
-        {...formik.getFieldProps('mtu')}
-      />
-      <FormFieldError touched={formik.touched.mtu} errors={formik.errors.mtu} />
-
-      <label htmlFor="enableIPv6">
-        Enable IPv6
-        <CheckboxWrapper
-          name="enableIPv6"
-          checked={enableIPv6}
-          onChange={event => toggleCheckbox(event)}
-          type="checkbox"
+      <FormGroup>
+        <label htmlFor="hostname">Hostname</label>
+        <input
+          type="text"
+          name="hostname"
+          placeholder="localhost"
+          value={formik.values.hostname}
+          {...formik.getFieldProps('hostname')}
         />
-      </label>
-
+        <FormFieldError
+          touched={formik.touched.hostname}
+          errors={formik.errors.hostname}
+        />
+      </FormGroup>
+      <FormGroup>
+        <label htmlFor="ipAddress">IP Address</label>
+        <input
+          type="text"
+          name="ipAddress"
+          placeholder="127.0.0.1"
+          value={formik.values.ipAddress}
+          {...formik.getFieldProps('ipAddress')}
+        />
+        <FormFieldError
+          touched={formik.touched.ipAddress}
+          errors={formik.errors.ipAddress}
+        />
+      </FormGroup>
+      <FormGroup>
+        <label htmlFor="subnetMask">Subnet Mask</label>
+        <input
+          type="text"
+          name="subnetMask"
+          placeholder="255.255.255.0"
+          value={formik.values.subnetMask}
+          {...formik.getFieldProps('subnetMask')}
+        />
+        <FormFieldError
+          touched={formik.touched.subnetMask}
+          errors={formik.errors.subnetMask}
+        />
+      </FormGroup>
+      <FormGroup>
+        <label htmlFor="mtu">MTU</label>
+        <input
+          type="number"
+          name="mtu"
+          placeholder="1500"
+          value={formik.values.mtu}
+          {...formik.getFieldProps('mtu')}
+        />
+        <FormFieldError
+          touched={formik.touched.mtu}
+          errors={formik.errors.mtu}
+        />
+      </FormGroup>
+      <FormGroup>
+        <label htmlFor="enableIPv6">Enable IPv6</label>
+        <select name="enableIPv6" id="enableIPv6" onChange={toggleSelect}>
+          <option value="y">Yes</option>
+          <option value="n">No</option>
+        </select>
+      </FormGroup>
       {enableIPv6 ? (
-        <IpV6Wrapper>
+        <FormGroup>
           <label htmlFor="ipAddressV6">IPv6 static address</label>
           <input
             type="text"
@@ -150,9 +156,8 @@ function LocalNetworkIpConfigForm({
             touched={formik.touched.ipAddressV6}
             errors={formik.errors.ipAddressV6}
           />
-        </IpV6Wrapper>
+        </FormGroup>
       ) : null}
-
       <button type="submit">Apply</button>
     </FormWrapper>
   );

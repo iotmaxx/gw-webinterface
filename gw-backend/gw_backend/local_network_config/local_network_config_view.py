@@ -3,8 +3,8 @@
 # @Author: Andre Litty
 # @Email: alittysw@gmail.com
 # @Create At: 2020-03-21 14:26:14
-# @Last Modified By: Your Name
-# @Last Modified At: 2020-04-23 13:51:53
+# @Last Modified By: DerAndre
+# @Last Modified At: 2020-04-30 16:10:59
 # @Description: Logic related to local network configuration.
 
 from flask import Blueprint, request, abort, jsonify
@@ -80,3 +80,12 @@ def post_ip():
             ipAddress = ip_address,
             subnetMask = subnet_mask
         )
+
+@local_network_route.route(API_PATH + PATH_SUFFIX + 'ipv6Address', methods=['POST'])
+@jwt_required
+def post_ipv6():
+    request_data = request.get_json()
+    if not 'ipv6Address' in request_data:
+        abort(400)
+    ipv6Address = request_data.get('ipv6Address')
+    return jsonify(ipv6Address=ipv6Address)

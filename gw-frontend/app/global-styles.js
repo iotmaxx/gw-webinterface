@@ -45,10 +45,6 @@ const GlobalStyle = createGlobalStyle`
     font-size: large;
   }
 
-  label {
-    margin-top: 16px;
-  }
-
   form {
     justify-content: center;
     width: 400px;

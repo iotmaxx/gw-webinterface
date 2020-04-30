@@ -22,18 +22,26 @@ import { dismiss } from '../App/actions';
 
 import saga from './saga';
 import LocalNetworkReducer from './reducers';
-import { setHostname, setAddress, setMTU, getAddress } from './actions';
+import {
+  setHostname,
+  setAddress,
+  setMTU,
+  getAddress,
+  setIpv6Address,
+} from './actions';
 
 export function LocalNetworkIpConfig({
   doSetHostname,
   doSetAddress,
   doSetMTU,
+  doSetIpv6Address,
   doDismiss,
   doGetAddress,
   mtu,
   hostname,
   ipAddress,
   subnetMask,
+  ipv6Address,
   error,
   success,
 }) {
@@ -46,6 +54,8 @@ export function LocalNetworkIpConfig({
     if (values.ipAddress !== ipAddress || values.subnetMask !== subnetMask)
       doSetAddress(values.ipAddress, values.subnetMask, ipAddress);
     if (values.mtu !== mtu) doSetMTU(mtu);
+    if (values.ipv6Address !== ipv6Address)
+      doSetIpv6Address(values.ipv6Address);
   };
 
   const reload = () => {
@@ -81,11 +91,13 @@ LocalNetworkIpConfig.propTypes = {
   doSetAddress: PropTypes.func,
   doSetMTU: PropTypes.func,
   doGetAddress: PropTypes.func,
+  doSetIpv6Address: PropTypes.func,
   doDismiss: PropTypes.func,
   mtu: PropTypes.number,
   hostname: PropTypes.string,
   ipAddress: PropTypes.string,
   subnetMask: PropTypes.string,
+  ipv6Address: PropTypes.string,
   error: PropTypes.bool,
   success: PropTypes.bool,
 };
@@ -107,6 +119,9 @@ function mapDispatchToProps(dispatch) {
     doDismiss: () => {
       dispatch(dismiss());
     },
+    doSetIpv6Address: () => {
+      dispatch(setIpv6Address());
+    },
   };
 }
 
@@ -115,6 +130,7 @@ const mapStateToProps = state => ({
   mtu: state.LocalNetworkIpConfig.mtu,
   ipAddress: state.LocalNetworkIpConfig.ipAddress,
   subnetMask: state.LocalNetworkIpConfig.subnetMask,
+  ipv6Address: state.LocalNetworkIpConfig.ipv6Address,
   error: state.App.error,
   success: state.App.success,
 });

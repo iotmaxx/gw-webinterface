@@ -3,10 +3,11 @@ import {
   GET_ADDRESS,
   SET_HOSTNAME,
   SET_MTU,
+  SET_IPV6_ADDRESS,
   SUCCESS_SET_ADDRESS,
   SUCCESS_SET_HOSTNAME,
   SUCCESS_SET_MTU,
-  SUCCESS_GET_ADDRESS,
+  SUCCESS_SET_IPV6_ADDRESS,
 } from './constants';
 
 export function setHostname(hostname) {
@@ -35,6 +36,13 @@ export function setMTU(mtu) {
   return {
     type: SET_MTU,
     mtu,
+  };
+}
+
+export function setIpv6Address(ipv6Address) {
+  return {
+    type: SET_IPV6_ADDRESS,
+    ipv6Address,
   };
 }
 
@@ -67,5 +75,12 @@ export function successSetMTU(mtu) {
   return {
     type: SUCCESS_SET_MTU,
     mtu,
+  };
+}
+
+export function successSetIpv6Address(ipv6Address) {
+  return {
+    type: SUCCESS_SET_IPV6_ADDRESS,
+    ipv6Address,
   };
 }
