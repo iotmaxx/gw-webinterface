@@ -55,7 +55,7 @@ const GlobalStyle = createGlobalStyle`
     border-width: 2px;
     border-style: outset;
     border-radius: 15px;
-    background-color: ${MAIN_COLORS.transparentlyBeige};
+    background-color: ${MAIN_COLORS.darkTabkeRow};
   }
 
   input[type=text], input[type=number], input[type=password] {

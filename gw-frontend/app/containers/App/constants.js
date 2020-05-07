@@ -9,6 +9,7 @@
  * export const YOUR_ACTION_CONSTANT = 'yourproject/YourContainer/YOUR_ACTION_CONSTANT';
  */
 import * as Yup from 'yup';
+import styled from 'styled-components';
 
 export const ROUTES = {
   dashboard: '/dashboard',
@@ -85,11 +86,63 @@ export const MAIN_COLORS = {
   contentHeaderBackground: '#f2f5f5',
   orange: '#e16720',
   transparentlyDark: '#d6d6d636',
-  transparentlyBeige: '#f5f5dc24',
   tableEvenRowBackground: '#dddddd45',
   tableBorder: '#dddddd',
   customWebkitScrollbar: '#c3c4c4',
+  darkTabkeRow: '#ddd',
+  lightTableRow: '#eee',
 };
+
+export const LightTableRow = styled.tr`
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: white;
+  background-color: ${MAIN_COLORS.lightTableRow};
+`;
+
+export const DarkTableRow = styled.tr`
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: white;
+  background-color: ${MAIN_COLORS.darkTabkeRow};
+`;
+
+export const InputCell = styled.td`
+  text-align: left;
+  padding-left: 3em;
+  width: 50%;
+`;
+
+export const LabelCell = styled.td`
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: white;
+  width: 50%;
+`;
+
+export const Select = styled.select`
+  width: inherit;
+`;
+
+export const CenterButton = styled.button`
+  align-self: center;
+  padding-left: 1em;
+  padding-right: 1em;
+`;
+
+export const FormWrapper = styled.form`
+  display: flex;
+  width: max-content;
+  flex-direction: column;
+  padding-bottom: 1em;
+  padding-top: 10px;
+  padding-left: 0px;
+  padding-right: 0px;
+`;
+
+export const TableHead = styled.td`
+  text-align: center;
+`;
 
 export const YUP_VALIDATORS = {
   ipV4Field: Yup.string().matches(

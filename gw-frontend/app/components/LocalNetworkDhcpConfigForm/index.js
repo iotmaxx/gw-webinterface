@@ -5,7 +5,6 @@
  */
 
 import React from 'react';
-import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
 import { useFormik } from 'formik';
@@ -13,11 +12,19 @@ import * as Yup from 'yup';
 
 import FormFieldError from 'components/FormFieldError';
 
-import { YUP_VALIDATORS } from 'containers/App/constants';
+import {
+  YUP_VALIDATORS,
+  LightTableRow,
+  DarkTableRow,
+  InputCell,
+  LabelCell,
+  CenterButton,
+  FormWrapper,
+  TableHead,
+} from 'containers/App/constants';
 
-const FormWrapper = styled.form`
-  display: grid;
-`;
+import Label from '../Label';
+import Input from '../FormikInput';
 
 function LocalNetworkDhcpConfigForm({
   submit,
@@ -35,10 +42,10 @@ function LocalNetworkDhcpConfigForm({
 
   const formik = useFormik({
     initialValues: {
-      domainName: domainName,
-      leaseTime: leaseTime,
-      beginIpRange: beginIpRange,
-      endIpRange: endIpRange,
+      domainName,
+      leaseTime,
+      beginIpRange,
+      endIpRange,
     },
     onSubmit: values => {
       submit(values);
@@ -49,55 +56,84 @@ function LocalNetworkDhcpConfigForm({
 
   return (
     <FormWrapper onSubmit={formik.handleSubmit}>
-      <label htmlFor="domainName">Domain Name</label>
-      <input
-        type="text"
-        name="domainName"
-        placeholder="your-domain.org"
-        {...formik.getFieldProps('domainName')}
-      />
-      <FormFieldError
-        touched={formik.touched.domainName}
-        errors={formik.errors.domainName}
-      />
-
-      <label htmlFor="leaseTime">Lease Time</label>
-      <input
-        type="text"
-        name="leaseTime"
-        placeholder="1d 5h 30m"
-        {...formik.getFieldProps('leaseTime')}
-      />
-      <FormFieldError
-        touched={formik.touched.leaseTime}
-        errors={formik.errors.leaseTime}
-      />
-
-      <label htmlFor="beginIpRange">Begin IP Range</label>
-      <input
-        type="text"
-        name="beginIpRange"
-        placeholder="192.168.1.1"
-        {...formik.getFieldProps('beginIpRange')}
-      />
-      <FormFieldError
-        touched={formik.touched.beginIpRange}
-        errors={formik.errors.beginIpRange}
-      />
-
-      <label htmlFor="endIpRange">End IP Range</label>
-      <input
-        type="text"
-        name="endIpRange"
-        placeholder="192.168.1.255"
-        {...formik.getFieldProps('endIpRange')}
-      />
-      <FormFieldError
-        touched={formik.touched.endIpRange}
-        errors={formik.errors.endIpRange}
-      />
-
-      <button type="submit">Apply</button>
+      <table>
+        <tbody>
+          <DarkTableRow>
+            <TableHead colSpan={2}>
+              <p>DHCP server</p>
+            </TableHead>
+          </DarkTableRow>
+          <LightTableRow>
+            <LabelCell>
+              <Label text="Domain Name" labelFor="domainName" />
+            </LabelCell>
+            <InputCell>
+              <Input
+                type="text"
+                name="domainName"
+                placeholder="your-domain.org"
+                formik={formik}
+              />
+              <FormFieldError
+                touched={formik.touched.domainName}
+                errors={formik.errors.domainName}
+              />
+            </InputCell>
+          </LightTableRow>
+          <DarkTableRow>
+            <LabelCell>
+              <Label text="Lease Time" labelFor="leaseTime" />
+            </LabelCell>
+            <InputCell>
+              <Input
+                type="text"
+                name="leaseTime"
+                placeholder="1d 5h 30m"
+                formik={formik}
+              />
+              <FormFieldError
+                touched={formik.touched.leaseTime}
+                errors={formik.errors.leaseTime}
+              />
+            </InputCell>
+          </DarkTableRow>
+          <LightTableRow>
+            <LabelCell>
+              <Label text="Begin IP Range" labelFor="beginIpRange" />
+            </LabelCell>
+            <InputCell>
+              <Input
+                type="text"
+                name="beginIpRange"
+                placeholder="192.168.1.1"
+                formik={formik}
+              />
+              <FormFieldError
+                touched={formik.touched.beginIpRange}
+                errors={formik.errors.beginIpRange}
+              />
+            </InputCell>
+          </LightTableRow>
+          <DarkTableRow>
+            <LabelCell>
+              <Label text="End IP Range" labelFor="endIpRange" />
+            </LabelCell>
+            <InputCell>
+              <Input
+                type="text"
+                name="endIpRange"
+                placeholder="192.168.1.255"
+                formik={formik}
+              />
+              <FormFieldError
+                touched={formik.touched.endIpRange}
+                errors={formik.errors.endIpRange}
+              />
+            </InputCell>
+          </DarkTableRow>
+        </tbody>
+      </table>
+      <CenterButton type="submit">Apply</CenterButton>
     </FormWrapper>
   );
 }
