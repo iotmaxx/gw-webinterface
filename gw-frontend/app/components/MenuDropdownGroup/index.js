@@ -17,13 +17,12 @@ function MenuDropdownGroup({ caption, children, subcategory = false }) {
   const [isOpen, setIsOpen] = useState(false);
 
   const Wrapper = styled.div`
-    margin-left: ${subcategory ? 1 : 0}rem;
+    margin-left: ${subcategory ? 2 : 1}rem;
   `;
 
   const StyledDT = styled.dt`
-    font-weight: 600;
     margin-top: 10px;
-    color: ${MAIN_COLORS.cyan};
+    color: ${MAIN_COLORS.white};
   `;
 
   const Arrow = styled.img`
@@ -51,6 +50,7 @@ function MenuDropdownGroup({ caption, children, subcategory = false }) {
 MenuDropdownGroup.propTypes = {
   caption: PropTypes.string,
   children: PropTypes.node,
+  subcategory: PropTypes.bool,
 };
 
 export default MenuDropdownGroup;

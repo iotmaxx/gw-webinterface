@@ -13,9 +13,11 @@ import styled from 'styled-components';
 
 import { MAIN_COLORS } from 'containers/App/constants';
 
+import Minus from '../../assets/icons/Minus.svg';
+
 function MenuDropdownItem({ to, caption, depth = 1 }) {
   const StyledLink = styled(Link)`
-    color: ${MAIN_COLORS.orange};
+    color: ${MAIN_COLORS.white};
     text-decoration: none;
   `;
 
@@ -23,8 +25,14 @@ function MenuDropdownItem({ to, caption, depth = 1 }) {
     margin-left: ${depth * 2}rem;
   `;
 
+  const Indicator = styled.img`
+    height: 1rem;
+    margin-right: 1rem;
+  `;
+
   return (
     <StyledDD>
+      <Indicator src={Minus} />
       <StyledLink to={to}>{caption}</StyledLink>
     </StyledDD>
   );
@@ -33,6 +41,7 @@ function MenuDropdownItem({ to, caption, depth = 1 }) {
 MenuDropdownItem.propTypes = {
   to: PropTypes.string,
   caption: PropTypes.string,
+  depth: PropTypes.number,
 };
 
 export default MenuDropdownItem;

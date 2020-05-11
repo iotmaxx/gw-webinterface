@@ -5,7 +5,6 @@
  */
 
 import React from 'react';
-import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
 import { useFormik } from 'formik';
@@ -13,9 +12,18 @@ import * as Yup from 'yup';
 
 import FormFieldError from 'components/FormFieldError';
 
-const FormWrapper = styled.form`
-  display: grid;
-`;
+import {
+  LightTableRow,
+  DarkTableRow,
+  InputCell,
+  LabelCell,
+  CenterButton,
+  FormWrapper,
+  TableHead,
+} from 'containers/App/constants';
+
+import Label from '../Label';
+import Input from '../FormikInput';
 
 function LoginForm({ submit }) {
   const schema = Yup.object({
@@ -36,30 +44,50 @@ function LoginForm({ submit }) {
 
   return (
     <FormWrapper onSubmit={formik.handleSubmit}>
-      <label htmlFor="name">Name</label>
-      <input
-        type="text"
-        name="name"
-        placeholder="Usernanme"
-        {...formik.getFieldProps('name')}
-      />
-      <FormFieldError
-        touched={formik.touched.name}
-        errors={formik.errors.name}
-      />
-
-      <label htmlFor="password">Password</label>
-      <input
-        type="password"
-        name="password"
-        placeholder="Password"
-        {...formik.getFieldProps('password')}
-      />
-      <FormFieldError
-        touched={formik.touched.password}
-        errors={formik.errors.password}
-      />
-      <button type="submit">Login</button>
+      <table>
+        <tbody>
+          <DarkTableRow>
+            <TableHead colSpan={2}>
+              <p>Login</p>
+            </TableHead>
+          </DarkTableRow>
+          <LightTableRow>
+            <LabelCell>
+              <Label text="Name" labelFor="name" />
+            </LabelCell>
+            <InputCell>
+              <Input
+                type="text"
+                name="name"
+                placeholder="Usernanme"
+                formik={formik}
+              />
+              <FormFieldError
+                touched={formik.touched.name}
+                errors={formik.errors.name}
+              />
+            </InputCell>
+          </LightTableRow>
+          <DarkTableRow>
+            <LabelCell>
+              <Label text="Password" labelFor="password" />
+            </LabelCell>
+            <InputCell>
+              <Input
+                type="password"
+                name="password"
+                placeholder="Password"
+                formik={formik}
+              />
+              <FormFieldError
+                touched={formik.touched.password}
+                errors={formik.errors.password}
+              />
+            </InputCell>
+          </DarkTableRow>
+        </tbody>
+      </table>
+      <CenterButton type="submit">Login</CenterButton>
     </FormWrapper>
   );
 }

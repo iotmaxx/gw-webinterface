@@ -45,21 +45,17 @@ const GlobalStyle = createGlobalStyle`
     font-size: large;
   }
 
-  label {
-    margin-top: 16px;
-  }
-
   form {
     justify-content: center;
     width: 400px;
     margin-top: 20px;
     padding: 50px;
     box-sizing: content-box;
-    border-color: ${MAIN_COLORS.orange};
+    border-color: ${MAIN_COLORS.dark};
     border-width: 2px;
     border-style: outset;
     border-radius: 15px;
-    background-color: ${MAIN_COLORS.transparentlyBeige};
+    background-color: ${MAIN_COLORS.darkTabkeRow};
   }
 
   input[type=text], input[type=number], input[type=password] {

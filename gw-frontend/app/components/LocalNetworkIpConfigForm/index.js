@@ -5,30 +5,27 @@
  */
 
 import React, { useState } from 'react';
-import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
-import { useFormik, useFormikContext } from 'formik';
+import { useFormik } from 'formik';
 import * as Yup from 'yup';
 
 import FormFieldError from 'components/FormFieldError';
 
-import { YUP_VALIDATORS } from 'containers/App/constants';
+import {
+  YUP_VALIDATORS,
+  LightTableRow,
+  DarkTableRow,
+  InputCell,
+  LabelCell,
+  Select,
+  CenterButton,
+  FormWrapper,
+  TableHead,
+} from 'containers/App/constants';
 
-const FormWrapper = styled.form`
-  display: grid;
-`;
-
-const CheckboxWrapper = styled.input`
-  margin-left: 10px;
-  height: 20px;
-  width: 20px;
-  vertical-align: text-bottom;
-`;
-
-const IpV6Wrapper = styled.div`
-  display: contents;
-`;
+import Label from '../Label';
+import Input from '../FormikInput';
 
 // TODO: Add alias address form
 function LocalNetworkIpConfigForm({
@@ -38,7 +35,7 @@ function LocalNetworkIpConfigForm({
   ipAddress,
   subnetMask,
 }) {
-  const [enableIPv6, setEnableIPv6] = useState(false);
+  const [enableIPv6, setEnableIPv6] = useState(true);
 
   const schema = Yup.object({
     ipAddress: YUP_VALIDATORS.ipV4Field.required('Required'),
@@ -58,12 +55,12 @@ function LocalNetworkIpConfigForm({
 
   const formik = useFormik({
     initialValues: {
-      ipAddress: ipAddress,
-      subnetMask: subnetMask,
-      mtu: mtu,
+      ipAddress,
+      subnetMask,
+      mtu,
       addressType: 'static',
       ipAddressV6: '',
-      hostname: hostname,
+      hostname,
     },
     onSubmit: values => {
       submit(values);
@@ -71,89 +68,127 @@ function LocalNetworkIpConfigForm({
     validationSchema: schema,
     enableReinitialize: true,
   });
-  const toggleCheckbox = event => {
-    setEnableIPv6(event.target.checked);
+  const toggleSelect = event => {
+    const { value } = event.target[event.target.selectedIndex];
+    if (value === 'y') setEnableIPv6(true);
+    if (value === 'n') setEnableIPv6(false);
   };
 
   return (
     <FormWrapper onSubmit={formik.handleSubmit}>
-      <label htmlFor="hostname">Hostname</label>
-      <input
-        type="text"
-        name="hostname"
-        placeholder="localhost"
-        value={formik.values.hostname}
-        {...formik.getFieldProps('hostname')}
-      />
-      <FormFieldError
-        touched={formik.touched.hostname}
-        errors={formik.errors.hostname}
-      />
-
-      <label htmlFor="ipAddress">IP Address</label>
-      <input
-        type="text"
-        name="ipAddress"
-        placeholder="127.0.0.1"
-        value={formik.values.ipAddress}
-        {...formik.getFieldProps('ipAddress')}
-      />
-      <FormFieldError
-        touched={formik.touched.ipAddress}
-        errors={formik.errors.ipAddress}
-      />
-
-      <label htmlFor="subnetMask">Subnet Mask</label>
-      <input
-        type="text"
-        name="subnetMask"
-        placeholder="255.255.255.0"
-        value={formik.values.subnetMask}
-        {...formik.getFieldProps('subnetMask')}
-      />
-      <FormFieldError
-        touched={formik.touched.subnetMask}
-        errors={formik.errors.subnetMask}
-      />
-
-      <label htmlFor="mtu">MTU</label>
-      <input
-        type="number"
-        name="mtu"
-        placeholder="1500"
-        value={formik.values.mtu}
-        {...formik.getFieldProps('mtu')}
-      />
-      <FormFieldError touched={formik.touched.mtu} errors={formik.errors.mtu} />
-
-      <label htmlFor="enableIPv6">
-        Enable IPv6
-        <CheckboxWrapper
-          name="enableIPv6"
-          checked={enableIPv6}
-          onChange={event => toggleCheckbox(event)}
-          type="checkbox"
-        />
-      </label>
-
-      {enableIPv6 ? (
-        <IpV6Wrapper>
-          <label htmlFor="ipAddressV6">IPv6 static address</label>
-          <input
-            type="text"
-            name="ipAddressV6"
-            placeholder="00:00:00:00:00:00"
-            value={formik.values.ipAddressV6}
-            {...formik.getFieldProps('ipAddressV6')}
-          />
-          <FormFieldError
-            touched={formik.touched.ipAddressV6}
-            errors={formik.errors.ipAddressV6}
-          />
-        </IpV6Wrapper>
-      ) : null}
-
-      <button type="submit">Apply</button>
+      <table>
+        <tbody>
+          <DarkTableRow>
+            <TableHead colSpan={2}>
+              <p>Current address</p>
+            </TableHead>
+          </DarkTableRow>
+          <LightTableRow>
+            <LabelCell>
+              <Label text="Hostname" labelFor="hostname" />
+            </LabelCell>
+            <InputCell>
+              <Input
+                type="text"
+                name="hostname"
+                placeholder="localhost"
+                value={formik.values.hostname}
+                formik={formik}
+              />
+              <FormFieldError
+                touched={formik.touched.hostname}
+                errors={formik.errors.hostname}
+              />
+            </InputCell>
+          </LightTableRow>
+          <DarkTableRow>
+            <LabelCell>
+              <Label text="IP Address" labelFor="ipAddress" />
+            </LabelCell>
+            <InputCell>
+              <Input
+                type="text"
+                name="ipAddress"
+                placeholder="127.0.0.1"
+                value={formik.values.ipAddress}
+                formik={formik}
+              />
+              <FormFieldError
+                touched={formik.touched.ipAddress}
+                errors={formik.errors.ipAddress}
+              />
+            </InputCell>
+          </DarkTableRow>
+          <LightTableRow>
+            <LabelCell>
+              <Label text="Subnet Mask" labelFor="subnetMask" />
+            </LabelCell>
+            <InputCell>
+              <Input
+                type="text"
+                name="subnetMask"
+                placeholder="255.255.255.0"
+                value={formik.values.subnetMask}
+                formik={formik}
+              />
+              <FormFieldError
+                touched={formik.touched.subnetMask}
+                errors={formik.errors.subnetMask}
+              />
+            </InputCell>
+          </LightTableRow>
+          <DarkTableRow>
+            <LabelCell>
+              <Label text="MTU" labelFor="mtu" />
+            </LabelCell>
+            <InputCell>
+              <Input
+                type="number"
+                name="mtu"
+                placeholder="1500"
+                value={formik.values.mtu}
+                formik={formik}
+              />
+              <FormFieldError
+                touched={formik.touched.mtu}
+                errors={formik.errors.mtu}
+              />
+            </InputCell>
+          </DarkTableRow>
+          <LightTableRow>
+            <LabelCell>
+              <Label text="Enable IPv6" labelFor="enableIPv6" />
+            </LabelCell>
+            <InputCell>
+              <Select name="enableIPv6" id="enableIPv6" onChange={toggleSelect}>
+                <option value="y">Yes</option>
+                <option value="n">No</option>
+              </Select>
+            </InputCell>
+          </LightTableRow>
+          {enableIPv6 ? (
+            <DarkTableRow>
+              <LabelCell>
+                <Label text="IPv6 static address" labelFor="ipAddressV6" />
+              </LabelCell>
+              <InputCell>
+                <Input
+                  type="text"
+                  name="ipAddressV6"
+                  placeholder="00:00:00:00:00:00"
+                  value={formik.values.ipAddressV6}
+                  formik={formik}
+                />
+                <FormFieldError
+                  touched={formik.touched.ipAddressV6}
+                  errors={formik.errors.ipAddressV6}
+                />
+              </InputCell>
+            </DarkTableRow>
+          ) : null}
+        </tbody>
+      </table>
+      <CenterButton type="submit">Apply</CenterButton>
     </FormWrapper>
   );
 }

@@ -3,6 +3,7 @@ import {
   SUCCESS_SET_HOSTNAME,
   SUCCESS_SET_MTU,
   SUCCESS_GET_ADDRESS,
+  SUCCESS_SET_IPV6_ADDRESS,
 } from './constants';
 
 const initialState = {
@@ -10,6 +11,7 @@ const initialState = {
   hostname: 'localhost',
   ipAddress: '127.0.0.1',
   subnetMask: '255.255.255.0',
+  ipv6Address: '',
 };
 
 function LocalNetworkReducer(state = initialState, action) {
@@ -34,6 +36,11 @@ function LocalNetworkReducer(state = initialState, action) {
         mtu: action.mtu,
         ipAddress: action.ipAddress,
         subnetMask: action.subnetMask,
+      };
+    case SUCCESS_SET_IPV6_ADDRESS:
+      return {
+        ...state,
+        ipv6Address: action.ipv6Address,
       };
     default:
       return state;

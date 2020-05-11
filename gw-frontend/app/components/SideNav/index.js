@@ -10,9 +10,12 @@ import PropTypes from 'prop-types';
 
 import { withRouter } from 'react-router-dom';
 
+// eslint-disable-next-line import/no-duplicates
 import MenuDropDownGroup from 'components/MenuDropdownGroup';
-import MenuDropDownItem from 'components/MenuDropdownItem';
+// eslint-disable-next-line import/no-duplicates
 import MenuDropdownGroup from 'components/MenuDropdownGroup';
+
+import MenuDropDownItem from 'components/MenuDropdownItem';
 
 import { ROUTES, MAIN_COLORS } from 'containers/App/constants';
 
@@ -22,7 +25,8 @@ const Wrapper = styled.div`
   left: 0px;
   padding-left: 10px;
   padding-right: 10px;
-  width: 20vw;
+  max-width: 20em;
+  min-width: 18em;
   height: 100%;
   background-color: ${MAIN_COLORS.dark};
   overflow-y: scroll;
@@ -32,11 +36,13 @@ const Wrapper = styled.div`
 const LogoutContainer = styled.div`
   display: flex;
   align-items: center;
+  margin-left: 1rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
 `;
 
 const StyledP = styled.p`
-  font-weight: 600;
-  color: ${MAIN_COLORS.cyan};
+  color: ${MAIN_COLORS.white};
 `;
 
 const StyledLogout = styled.img`
@@ -45,13 +51,10 @@ const StyledLogout = styled.img`
 `;
 
 export class SideNav extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
+  // eslint-disable-next-line no-unused-vars
   shouldComponentUpdate(nextProps, nextState, nextContext) {
     if (this.props.loggedIn !== nextProps.loggedIn) return true;
-    else return false;
+    return false;
   }
 
   render() {
@@ -147,7 +150,7 @@ export class SideNav extends React.Component {
               />
             </MenuDropDownGroup>
             <MenuDropDownGroup caption="VPN">
-              <MenuDropdownGroup caption="IPSec" subcategory={true}>
+              <MenuDropdownGroup caption="IPSec" subcategory>
                 <MenuDropDownItem
                   to={ROUTES.ipSec.connection}
                   caption="Connections"
@@ -164,7 +167,7 @@ export class SideNav extends React.Component {
                   depth={1}
                 />
               </MenuDropdownGroup>
-              <MenuDropdownGroup caption="OpenVPN" subcategory={true}>
+              <MenuDropdownGroup caption="OpenVPN" subcategory>
                 <MenuDropDownItem
                   to={ROUTES.openVpn.connections}
                   caption="Connections"
@@ -252,6 +255,7 @@ export class SideNav extends React.Component {
 
 SideNav.propTypes = {
   loggedIn: PropTypes.bool,
+  logout: PropTypes.func,
 };
 
 export default withRouter(SideNav);

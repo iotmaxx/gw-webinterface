@@ -7,7 +7,7 @@
  *
  */
 
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
@@ -56,7 +56,7 @@ import VpnOpenVpnStaticKeys from 'containers/VpnOpenVpnStaticKeys/Loadable';
 import VpnOpenVpnStatus from 'containers/VpnOpenVpnStatus/Loadable';
 import WirelessNetworkBackupSim from 'containers/WirelessNetworkBackupSim/Loadable';
 import WirelessNetworkConnectionCheck from 'containers/WirelessNetworkConnectionCheck/Loadable';
-import WirelessNetworkDynDns from 'containers/WirelessNetworkDynDns/Loadable';  
+import WirelessNetworkDynDns from 'containers/WirelessNetworkDynDns/Loadable';
 import WirelessNetworkPacketDataSetup from 'containers/WirelessNetworkPacketDataSetup/Loadable';
 import WirelessNetworkRadioSetup from 'containers/WirelessNetworkRadioSetup/Loadable';
 import WirelessNetworkSim from 'containers/WirelessNetworkSim/Loadable';
@@ -65,22 +65,21 @@ import WirelessNetworkStaticRoutes from 'containers/WirelessNetworkStaticRoutes/
 
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 
-import { ROUTES, ACCESS_TOKEN } from './constants';
-
 import SideNav from 'components/SideNav/Loadable';
 import Header from 'components/Header';
-
-import GlobalStyle from '../../global-styles';
 
 import styled from 'styled-components';
 
 import injectReducer from 'utils/injectReducer';
-import LoginReducer from './reducers';
 
 import { connect } from 'react-redux';
 import { compose } from 'redux';
+import LoginReducer from './reducers';
+import GlobalStyle from '../../global-styles';
+import { ROUTES, ACCESS_TOKEN } from './constants';
 
 import { logout, loginSuccess } from './actions';
+import ContentHeader from '../../components/ContentHeader';
 
 const MainWrapper = styled.div`
   display: flex;
@@ -98,7 +97,8 @@ const BodyWrapper = styled.div`
 const ContentWrapper = styled.div`
   width: 100%;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
 `;
 
 function App(props) {
@@ -106,75 +106,242 @@ function App(props) {
     const accessToken = localStorage.getItem(ACCESS_TOKEN);
     if (accessToken !== null && accessToken !== undefined && !props.loggedIn)
       props.doLoginSuccess();
-  })
+  });
 
   return (
     <MainWrapper>
-      <Header/>
+      <Header />
       <BodyWrapper>
-      <SideNav logout={props.doLogout} loggedIn={props.loggedIn} />
-      <ContentWrapper>
+        <SideNav logout={props.doLogout} loggedIn={props.loggedIn} />
+        <ContentWrapper>
+          {props.loggedIn && <ContentHeader />}
           <Switch>
             <Route exact path="/">
               <Redirect to={ROUTES.dashboard} />
             </Route>
             <Route exact path={ROUTES.login} component={LoginView} />
-            
             <AuthRoute exact path={ROUTES.dashboard} component={Dashboard} />
-            
-            <AuthRoute exact path={ROUTES.status.radio} component={StatusRadio} />
-            <AuthRoute exact path={ROUTES.status.networkConnection} component={StatusNetworkConnections} />
-            <AuthRoute exact path={ROUTES.status.ioStatus} component={StatusIoStats} />
-            <AuthRoute exact path={ROUTES.status.comServer} component={StatusComServer} />
-            <AuthRoute exact path={ROUTES.status.routingTable} component={StatusRoutingTable} />
-            <AuthRoute exact path={ROUTES.status.dhcpLease} component={StatusDhcpLeases} />
-            <AuthRoute exact path={ROUTES.status.systemInfo} component={StatusSystemInfo} />
+            <AuthRoute
+              exact
+              path={ROUTES.status.radio}
+              component={StatusRadio}
+            />
+            <AuthRoute
+              exact
+              path={ROUTES.status.networkConnection}
+              component={StatusNetworkConnections}
+            />
+            <AuthRoute
+              exact
+              path={ROUTES.status.ioStatus}
+              component={StatusIoStats}
+            />
+            <AuthRoute
+              exact
+              path={ROUTES.status.comServer}
+              component={StatusComServer}
+            />
+            <AuthRoute
+              exact
+              path={ROUTES.status.routingTable}
+              component={StatusRoutingTable}
+            />
+            <AuthRoute
+              exact
+              path={ROUTES.status.dhcpLease}
+              component={StatusDhcpLeases}
+            />
+            <AuthRoute
+              exact
+              path={ROUTES.status.systemInfo}
+              component={StatusSystemInfo}
+            />
 
-            <AuthRoute exact path={ROUTES.localNetwork.ipConfig} component={LocalNetworkIpConfig} />
-            <AuthRoute exact path={ROUTES.localNetwork.dhcpServer} component={LocalNetworkDhcpServer} />
-            <AuthRoute exact path={ROUTES.localNetwork.staticRoutes} component={LocalNetworkStaticRoutes} />
+            <AuthRoute
+              exact
+              path={ROUTES.localNetwork.ipConfig}
+              component={LocalNetworkIpConfig}
+            />
+            <AuthRoute
+              exact
+              path={ROUTES.localNetwork.dhcpServer}
+              component={LocalNetworkDhcpServer}
+            />
+            <AuthRoute
+              exact
+              path={ROUTES.localNetwork.staticRoutes}
+              component={LocalNetworkStaticRoutes}
+            />
 
-            <AuthRoute exact path={ROUTES.wifi.radioSetup} component={WirelessNetworkRadioSetup} />
-            <AuthRoute exact path={ROUTES.wifi.sim} component={WirelessNetworkSim} />
-            <AuthRoute exact path={ROUTES.wifi.backupSim} component={WirelessNetworkBackupSim} />
-            <AuthRoute exact path={ROUTES.wifi.smsConfig} component={WirelessNetworkSmsConfig} />
-            <AuthRoute exact path={ROUTES.wifi.packetDataSetup} component={WirelessNetworkPacketDataSetup} />
-            <AuthRoute exact path={ROUTES.wifi.staticRoutes} component={WirelessNetworkStaticRoutes} />
-            <AuthRoute exact path={ROUTES.wifi.dynDns} component={WirelessNetworkDynDns} />
-            <AuthRoute exact path={ROUTES.wifi.connectionCheck} component={WirelessNetworkConnectionCheck} />
+            <AuthRoute
+              exact
+              path={ROUTES.wifi.radioSetup}
+              component={WirelessNetworkRadioSetup}
+            />
+            <AuthRoute
+              exact
+              path={ROUTES.wifi.sim}
+              component={WirelessNetworkSim}
+            />
+            <AuthRoute
+              exact
+              path={ROUTES.wifi.backupSim}
+              component={WirelessNetworkBackupSim}
+            />
+            <AuthRoute
+              exact
+              path={ROUTES.wifi.smsConfig}
+              component={WirelessNetworkSmsConfig}
+            />
+            <AuthRoute
+              exact
+              path={ROUTES.wifi.packetDataSetup}
+              component={WirelessNetworkPacketDataSetup}
+            />
+            <AuthRoute
+              exact
+              path={ROUTES.wifi.staticRoutes}
+              component={WirelessNetworkStaticRoutes}
+            />
+            <AuthRoute
+              exact
+              path={ROUTES.wifi.dynDns}
+              component={WirelessNetworkDynDns}
+            />
+            <AuthRoute
+              exact
+              path={ROUTES.wifi.connectionCheck}
+              component={WirelessNetworkConnectionCheck}
+            />
 
-            <AuthRoute exact path={ROUTES.networkSecurity.general} component={NetworkSecurityGeneralSetup} />
-            <AuthRoute exact path={ROUTES.networkSecurity.firewall} component={NetworkSecurityFirewall} />
-            <AuthRoute exact path={ROUTES.networkSecurity.ipPortForwarding} component={NetworkSecurityIpAndPortForwarding} />
+            <AuthRoute
+              exact
+              path={ROUTES.networkSecurity.general}
+              component={NetworkSecurityGeneralSetup}
+            />
+            <AuthRoute
+              exact
+              path={ROUTES.networkSecurity.firewall}
+              component={NetworkSecurityFirewall}
+            />
+            <AuthRoute
+              exact
+              path={ROUTES.networkSecurity.ipPortForwarding}
+              component={NetworkSecurityIpAndPortForwarding}
+            />
 
-            <AuthRoute exact path={ROUTES.ipSec.connection} component={VpnIPsecConnections} />
-            <AuthRoute exact path={ROUTES.ipSec.certificates} component={VpnIPsecCertificates} />
-            <AuthRoute exact path={ROUTES.ipSec.status} component={VpnIPsecStatus} />
+            <AuthRoute
+              exact
+              path={ROUTES.ipSec.connection}
+              component={VpnIPsecConnections}
+            />
+            <AuthRoute
+              exact
+              path={ROUTES.ipSec.certificates}
+              component={VpnIPsecCertificates}
+            />
+            <AuthRoute
+              exact
+              path={ROUTES.ipSec.status}
+              component={VpnIPsecStatus}
+            />
 
-            <AuthRoute exact path={ROUTES.openVpn.connections} component={VpnOpenVpnConnections} />
-            <AuthRoute exact path={ROUTES.openVpn.portForwarding} component={VpnOpenVpnPortForwarding} />
-            <AuthRoute exact path={ROUTES.openVpn.certificates} component={VpnOpenVpnCertificates} />
-            <AuthRoute exact path={ROUTES.openVpn.staticKeys} component={VpnOpenVpnStaticKeys} />
-            <AuthRoute exact path={ROUTES.openVpn.status} component={VpnOpenVpnStatus} />
+            <AuthRoute
+              exact
+              path={ROUTES.openVpn.connections}
+              component={VpnOpenVpnConnections}
+            />
+            <AuthRoute
+              exact
+              path={ROUTES.openVpn.portForwarding}
+              component={VpnOpenVpnPortForwarding}
+            />
+            <AuthRoute
+              exact
+              path={ROUTES.openVpn.certificates}
+              component={VpnOpenVpnCertificates}
+            />
+            <AuthRoute
+              exact
+              path={ROUTES.openVpn.staticKeys}
+              component={VpnOpenVpnStaticKeys}
+            />
+            <AuthRoute
+              exact
+              path={ROUTES.openVpn.status}
+              component={VpnOpenVpnStatus}
+            />
 
             <AuthRoute exact path={ROUTES.io.inputs} component={IoInputs} />
             <AuthRoute exact path={ROUTES.io.outputs} component={IoOutputs} />
-            <AuthRoute exact path={ROUTES.io.phonebook} component={IoPhonebook} />
-            <AuthRoute exact path={ROUTES.io.socketServer} component={IoSocketServer} />
-            <AuthRoute exact path={ROUTES.io.comServer} component={IoComServer} />
+            <AuthRoute
+              exact
+              path={ROUTES.io.phonebook}
+              component={IoPhonebook}
+            />
+            <AuthRoute
+              exact
+              path={ROUTES.io.socketServer}
+              component={IoSocketServer}
+            />
+            <AuthRoute
+              exact
+              path={ROUTES.io.comServer}
+              component={IoComServer}
+            />
 
-            <AuthRoute exact path={ROUTES.system.hardware} component={SystemHardware} />
-            <AuthRoute exact path={ROUTES.system.software} component={SystemSoftware} />
-            <AuthRoute exact path={ROUTES.system.systemConfiguration} component={SystemSystemConfiguration} />
+            <AuthRoute
+              exact
+              path={ROUTES.system.hardware}
+              component={SystemHardware}
+            />
+            <AuthRoute
+              exact
+              path={ROUTES.system.software}
+              component={SystemSoftware}
+            />
+            <AuthRoute
+              exact
+              path={ROUTES.system.systemConfiguration}
+              component={SystemSystemConfiguration}
+            />
             <AuthRoute exact path={ROUTES.system.user} component={SystemUser} />
-            <AuthRoute exact path={ROUTES.system.logFiles} component={SystemLogFile} />
-            <AuthRoute exact path={ROUTES.system.snmpConfig} component={SystemSnmpConfiguration} />
-            <AuthRoute exact path={ROUTES.system.smtpConfig} component={SystemSmtpConfiguration} />
-            <AuthRoute exact path={ROUTES.system.config} component={SystemConfiguration} />
-            <AuthRoute exact path={ROUTES.system.upDownload} component={SystemUpAndDownload} />
+            <AuthRoute
+              exact
+              path={ROUTES.system.logFiles}
+              component={SystemLogFile}
+            />
+            <AuthRoute
+              exact
+              path={ROUTES.system.snmpConfig}
+              component={SystemSnmpConfiguration}
+            />
+            <AuthRoute
+              exact
+              path={ROUTES.system.smtpConfig}
+              component={SystemSmtpConfiguration}
+            />
+            <AuthRoute
+              exact
+              path={ROUTES.system.config}
+              component={SystemConfiguration}
+            />
+            <AuthRoute
+              exact
+              path={ROUTES.system.upDownload}
+              component={SystemUpAndDownload}
+            />
             <AuthRoute exact path={ROUTES.system.rtc} component={SystemRtc} />
-            <AuthRoute exact path={ROUTES.system.reboot} component={SystemReboot} />
-            <AuthRoute exact path={ROUTES.system.firmwareUpdate} component={SystemFirmwareUpdate} />
+            <AuthRoute
+              exact
+              path={ROUTES.system.reboot}
+              component={SystemReboot}
+            />
+            <AuthRoute
+              exact
+              path={ROUTES.system.firmwareUpdate}
+              component={SystemFirmwareUpdate}
+            />
 
             <Route component={NotFoundPage} />
           </Switch>
@@ -187,31 +354,35 @@ function App(props) {
 
 App.propTypes = {
   doLogout: PropTypes.func,
-  loggedIn: PropTypes.bool
+  doLoginSuccess: PropTypes.func,
+  loggedIn: PropTypes.bool,
 };
 
 function mapDispatchToProps(dispatch) {
   return {
     doLogout: () => {
-      dispatch(logout())
+      dispatch(logout());
     },
     doLoginSuccess: () => {
-      dispatch(loginSuccess())
-    }
-  }
+      dispatch(loginSuccess());
+    },
+  };
 }
 
 function mapStateToProps(state) {
   return {
-    loggedIn: state.App.loggedIn
-  }
+    loggedIn: state.App.loggedIn,
+  };
 }
 
 const withConnect = connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 );
 
 const withReducer = injectReducer({ key: 'App', reducer: LoginReducer });
 
-export default compose(withReducer, withConnect)(App)
+export default compose(
+  withReducer,
+  withConnect,
+)(App);
