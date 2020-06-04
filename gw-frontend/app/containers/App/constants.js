@@ -80,17 +80,15 @@ export const ROUTES = {
 
 export const MAIN_COLORS = {
   dark: '#003a40',
-  white: '#fff',
   cyan: '#00bab3',
   headerBorderColor: 'rgb(0, 186, 179)',
   contentHeaderBackground: '#f2f5f5',
   orange: '#e16720',
   transparentlyDark: '#d6d6d636',
-  tableEvenRowBackground: '#dddddd45',
-  tableBorder: '#dddddd',
   customWebkitScrollbar: '#c3c4c4',
-  darkTabkeRow: '#ddd',
+  darkTableRow: '#ddd',
   lightTableRow: '#eee',
+  tableCaptionGreen: 'rgb(0, 58, 64)',
 };
 
 export const LightTableRow = styled.tr`
@@ -104,12 +102,12 @@ export const DarkTableRow = styled.tr`
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: white;
-  background-color: ${MAIN_COLORS.darkTabkeRow};
+  background-color: ${MAIN_COLORS.darkTableRow};
 `;
 
 export const InputCell = styled.td`
   text-align: left;
-  padding-left: 3em;
+  padding-left: 1em;
   width: 50%;
 `;
 
@@ -128,20 +126,56 @@ export const CenterButton = styled.button`
   align-self: center;
   padding-left: 1em;
   padding-right: 1em;
+  color: white;
+  font-weight: bold;
 `;
 
 export const FormWrapper = styled.form`
   display: flex;
-  width: max-content;
+  min-width: max-content;
   flex-direction: column;
-  padding-bottom: 1em;
-  padding-top: 10px;
-  padding-left: 0px;
-  padding-right: 0px;
+  padding: 0px 0px 1em 0px;
+  margin-left: 1em;
 `;
 
 export const TableHead = styled.td`
   text-align: center;
+  font-weight: bold;
+`;
+
+export const TableTitle = styled.p`
+  border-top-left-radius: 13px;
+  border-top-right-radius: 13px;
+  text-align: center;
+  background-color: ${MAIN_COLORS.tableCaptionGreen};
+  margin: 0;
+  color: white;
+  font-weight: bold;
+  padding: 1em 0 1em 0;
+`;
+
+export const Table = styled.table`
+  margin-left: 1em;
+  margin-top: 2em;
+`;
+
+export const TD = styled.td`
+  padding: 0.5em 1em 0.5em 1em;
+  border-left-color: white;
+  border-left-style: solid;
+  border-left-width: 2px;
+`;
+
+export const TR = styled.tr`
+  :nth-child(odd) {
+    background-color: ${MAIN_COLORS.darkTableRow};
+  }
+  :nth-child(even) {
+    background-color: ${MAIN_COLORS.lightTableRow};
+  }
+  border-bottom-color: white;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
 `;
 
 export const YUP_VALIDATORS = {

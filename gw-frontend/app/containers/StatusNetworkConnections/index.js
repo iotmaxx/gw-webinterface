@@ -69,6 +69,7 @@ const LAN_VALUES = [
   },
 ];
 
+// TODO: Adjust table title to meet menu point
 export function StatusNetworkConnections() {
   return (
     <div>

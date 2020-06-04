@@ -48,14 +48,10 @@ const GlobalStyle = createGlobalStyle`
   form {
     justify-content: center;
     width: 400px;
-    margin-top: 20px;
+    margin-top: 2em;
     padding: 50px;
     box-sizing: content-box;
-    border-color: ${MAIN_COLORS.dark};
-    border-width: 2px;
-    border-style: outset;
-    border-radius: 15px;
-    background-color: ${MAIN_COLORS.darkTabkeRow};
+    background-color: ${MAIN_COLORS.darkTableRow};
   }
 
   input[type=text], input[type=number], input[type=password] {
@@ -78,33 +74,38 @@ const GlobalStyle = createGlobalStyle`
   caption {
     font-weight: bold;
     font-size: larger;
-    margin-top: 20px;
-    margin-bottom: 10px;
+    margin: 0px;
+    padding: 1em 0 1em 0;
     text-align: left;
+    background-color: ${MAIN_COLORS.tableCaptionGreen};
+    color: white;
+    text-align: center;
+    border-top-right-radius: 15px;
+    border-top-left-radius: 15px;
   }
 
   th {
     text-align: left;
-    border: 1px solid ${MAIN_COLORS.tableBorder};
-    padding: 8px;
+    padding: 0.5em 1em 0.5em 1em;
     font-size: medium;
   }
 
   table {
-    width: max-content;
-    min-width: 50vw;
+    width: 30vw;
+    max-width: 50vw;
+    min-width: max-content;
   }
 
   ::-webkit-scrollbar {
     width: 10px;
   }
-  
+
   /* Track */
   ::-webkit-scrollbar-track {
     box-shadow: inset 0 0 5px ${MAIN_COLORS.customWebkitScrollbar};
     border-radius: 10px;
   }
-  
+
   /* Handle */
   ::-webkit-scrollbar-thumb {
     background: ${MAIN_COLORS.customWebkitScrollbar};

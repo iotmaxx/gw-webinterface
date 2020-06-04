@@ -11,7 +11,7 @@ import { MAIN_COLORS } from 'containers/App/constants';
 import IotMaxx from '../../assets/icons/iotmaxx.png';
 
 const StyledHeader = styled.div`
-  background-color: ${MAIN_COLORS.white};
+  background-color: white;
   width: 100%;
   height: 150px;
   display: flex;

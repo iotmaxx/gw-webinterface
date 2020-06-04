@@ -85,11 +85,12 @@ const HOP_VALUES = [
   },
 ];
 
+// TODO: Adjust table title to meet menu point
 export function StatusRoutingTable() {
   return (
     <div>
-      <StatusTable caption="Kernel IP routing table" values={ROUTE_VALUES} />
-      <StatusTable values={HOP_VALUES} />
+      <StatusTable caption="Routing Table" values={ROUTE_VALUES} />
+      <StatusTable caption="Routing Table Metrics" values={HOP_VALUES} />
     </div>
   );
 }

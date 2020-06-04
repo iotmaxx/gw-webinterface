@@ -8,8 +8,6 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import { MAIN_COLORS } from 'containers/App/constants';
-
 import DownChevron from '../../assets/icons/DownChevron.svg';
 import RightChevron from '../../assets/icons/RightChevron.svg';
 
@@ -22,7 +20,7 @@ function MenuDropdownGroup({ caption, children, subcategory = false }) {
 
   const StyledDT = styled.dt`
     margin-top: 10px;
-    color: ${MAIN_COLORS.white};
+    color: white;
   `;
 
   const Arrow = styled.img`

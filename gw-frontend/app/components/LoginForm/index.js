@@ -19,7 +19,7 @@ import {
   LabelCell,
   CenterButton,
   FormWrapper,
-  TableHead,
+  TableTitle,
 } from 'containers/App/constants';
 
 import Label from '../Label';
@@ -44,13 +44,9 @@ function LoginForm({ submit }) {
 
   return (
     <FormWrapper onSubmit={formik.handleSubmit}>
+      <TableTitle>Login</TableTitle>
       <table>
         <tbody>
-          <DarkTableRow>
-            <TableHead colSpan={2}>
-              <p>Login</p>
-            </TableHead>
-          </DarkTableRow>
           <LightTableRow>
             <LabelCell>
               <Label text="Name" labelFor="name" />
@@ -59,7 +55,7 @@ function LoginForm({ submit }) {
               <Input
                 type="text"
                 name="name"
-                placeholder="Usernanme"
+                placeholder="Username"
                 formik={formik}
               />
               <FormFieldError

@@ -5,22 +5,9 @@
  */
 
 import React from 'react';
-import PropTypes, { element } from 'prop-types';
-import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
-import { MAIN_COLORS } from 'containers/App/constants';
-
-const TD = styled.td`
-  text-align: center;
-  border: 1px solid ${MAIN_COLORS.tableBorder};
-  padding: 8px;
-`;
-
-const TR = styled.tr`
-  :nth-child(odd) {
-    background-color: ${MAIN_COLORS.tableEvenRowBackground};
-  }
-`;
+import { Table, TD, TR } from 'containers/App/constants';
 
 function StatusTable({ caption = '', values = [] }) {
   const tableHeader = (
@@ -47,13 +34,13 @@ function StatusTable({ caption = '', values = [] }) {
   }
 
   return (
-    <table>
+    <Table>
       <caption>{caption}</caption>
       <tbody>
         {tableHeader}
         {rows}
       </tbody>
-    </table>
+    </Table>
   );
 }
 

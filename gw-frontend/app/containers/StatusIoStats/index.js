@@ -27,6 +27,7 @@ const OUT_VALUES = [
   },
 ];
 
+// TODO: Adjust table title to meet menu point
 export function StatusIoStats() {
   return (
     <div>

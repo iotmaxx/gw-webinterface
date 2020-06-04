@@ -42,7 +42,7 @@ const LogoutContainer = styled.div`
 `;
 
 const StyledP = styled.p`
-  color: ${MAIN_COLORS.white};
+  color: white;
 `;
 
 const StyledLogout = styled.img`

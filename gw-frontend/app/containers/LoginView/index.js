@@ -16,8 +16,13 @@ import { withRouter } from 'react-router-dom';
 
 import injectSaga from 'utils/injectSaga';
 import { DAEMON } from 'utils/constants';
+import styled from 'styled-components';
 import { login, dismiss } from '../App/actions';
 import saga from './saga';
+
+const Centered = styled.div`
+  align-self: center;
+`;
 
 export function LoginView({ doLogin, success, error, doDismiss }) {
   const submit = values => {
@@ -27,7 +32,7 @@ export function LoginView({ doLogin, success, error, doDismiss }) {
   };
 
   return (
-    <div>
+    <Centered>
       <LoginForm submit={submit} />
       <Feedback
         success={success}
@@ -36,7 +41,7 @@ export function LoginView({ doLogin, success, error, doDismiss }) {
         show={success || error}
         msg={error ? 'Sorry, you profived empty credentials' : null}
       />
-    </div>
+    </Centered>
   );
 }
 
