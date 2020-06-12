@@ -10,6 +10,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 
 import StatusTable from 'components/StatusTable';
+import RoutingTable from 'components/RoutingTable';
 
 const ROUTE_VALUES = [
   {
@@ -85,11 +86,14 @@ const HOP_VALUES = [
   },
 ];
 
+// TODO: Adjust table title to meet menu point
 export function StatusRoutingTable() {
+  const routingData = [ROUTE_VALUES, HOP_VALUES];
+  // <StatusTable caption="Routing Table" values={ROUTE_VALUES} />
+  // <StatusTable caption="Routing Table Metrics" values={HOP_VALUES} />
   return (
     <div>
-      <StatusTable caption="Kernel IP routing table" values={ROUTE_VALUES} />
-      <StatusTable values={HOP_VALUES} />
+      <RoutingTable caption="Routing Table" values={routingData} />
     </div>
   );
 }

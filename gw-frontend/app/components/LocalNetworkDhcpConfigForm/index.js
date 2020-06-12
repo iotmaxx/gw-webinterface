@@ -20,7 +20,7 @@ import {
   LabelCell,
   CenterButton,
   FormWrapper,
-  TableHead,
+  TableTitle,
 } from 'containers/App/constants';
 
 import Label from '../Label';
@@ -56,13 +56,9 @@ function LocalNetworkDhcpConfigForm({
 
   return (
     <FormWrapper onSubmit={formik.handleSubmit}>
+      <TableTitle>DHCP Server</TableTitle>
       <table>
         <tbody>
-          <DarkTableRow>
-            <TableHead colSpan={2}>
-              <p>DHCP server</p>
-            </TableHead>
-          </DarkTableRow>
           <LightTableRow>
             <LabelCell>
               <Label text="Domain Name" labelFor="domainName" />

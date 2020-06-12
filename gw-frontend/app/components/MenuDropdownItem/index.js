@@ -11,13 +11,11 @@ import PropTypes from 'prop-types';
 
 import styled from 'styled-components';
 
-import { MAIN_COLORS } from 'containers/App/constants';
-
 import Minus from '../../assets/icons/Minus.svg';
 
 function MenuDropdownItem({ to, caption, depth = 1 }) {
   const StyledLink = styled(Link)`
-    color: ${MAIN_COLORS.white};
+    color: white;
     text-decoration: none;
   `;
 

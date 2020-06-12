@@ -22,6 +22,7 @@ import {
   CenterButton,
   FormWrapper,
   TableHead,
+  TableTitle,
 } from 'containers/App/constants';
 
 import Label from '../Label';
@@ -76,6 +77,7 @@ function LocalNetworkIpConfigForm({
 
   return (
     <FormWrapper onSubmit={formik.handleSubmit}>
+      <TableTitle>IP Configuration</TableTitle>
       <table>
         <tbody>
           <DarkTableRow>

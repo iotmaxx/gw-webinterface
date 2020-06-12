@@ -21,7 +21,7 @@ import {
   DarkTableRow,
   InputCell,
   LabelCell,
-  TableHead,
+  TableTitle,
 } from 'containers/App/constants';
 
 import Label from '../Label';
@@ -47,7 +47,7 @@ const AUTHENTICATION = ['None', 'PAP only', 'CHAP only', 'PAP/CHAP'];
 
 // TODO: Remove Mockup Auth and Providers
 // TODO: Add Country
-function WirelessNetworkSimConfigForm({ submit }) {
+function WirelessNetworkSimConfigForm({ submit, formTitle }) {
   const [roamingEnabled, setRoamingEnabled] = useState(true);
   const [provider, setProvider] = useState(PROVIDERS[0]);
   const [auth, setAuth] = useState(AUTHENTICATION[0]);
@@ -89,13 +89,9 @@ function WirelessNetworkSimConfigForm({ submit }) {
 
   return (
     <FormWrapper onSubmit={formik.handleSubmit}>
+      <TableTitle>{formTitle}</TableTitle>
       <table>
         <tbody>
-          <DarkTableRow>
-            <TableHead colSpan={2}>
-              <p>SIM</p>
-            </TableHead>
-          </DarkTableRow>
           <LightTableRow>
             <LabelCell>
               <Label text="PIN" labelFor="pin" />
@@ -220,6 +216,7 @@ function WirelessNetworkSimConfigForm({ submit }) {
 
 WirelessNetworkSimConfigForm.propTypes = {
   submit: PropTypes.func,
+  formTitle: PropTypes.string,
 };
 
 export default WirelessNetworkSimConfigForm;

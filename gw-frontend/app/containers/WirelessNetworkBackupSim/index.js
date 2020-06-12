@@ -37,7 +37,7 @@ export function WirelessNetworkBackupSim() {
   return (
     <div>
       {simEnabled ? (
-        <WirelessNetworkSimConfigForm submit={submit} />
+        <WirelessNetworkSimConfigForm submit={submit} formTitle="Backup SIM" />
       ) : (
         <PukForm clickHandler={clickHandler} />
       )}
@@ -58,7 +58,7 @@ export function WirelessNetworkBackupSim() {
 }
 
 WirelessNetworkBackupSim.propTypes = {
-  dispatch: PropTypes.func.isRequired,
+  // dispatch: PropTypes.func.isRequired,
 };
 
 function mapDispatchToProps(dispatch) {

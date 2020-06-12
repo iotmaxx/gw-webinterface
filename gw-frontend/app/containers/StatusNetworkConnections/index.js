@@ -69,11 +69,25 @@ const LAN_VALUES = [
   },
 ];
 
+// TODO: Adjust table title to meet menu point
 export function StatusNetworkConnections() {
+  const networkData = {
+    wifi: {
+      caption: 'Wireless Network',
+      values: WIFI_VALUES,
+    },
+    lan: {
+      caption: 'Local Network',
+      values: LAN_VALUES,
+    },
+  };
   return (
     <div>
-      <StatusOverview caption="Wireless Network" values={WIFI_VALUES} />
-      <StatusOverview caption="Local Network" values={LAN_VALUES} />
+      <StatusOverview
+        caption="Network Connection"
+        asList={false}
+        values={networkData}
+      />
     </div>
   );
 }

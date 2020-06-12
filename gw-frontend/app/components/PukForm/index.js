@@ -13,7 +13,7 @@ import * as Yup from 'yup';
 
 import FormFieldError from 'components/FormFieldError';
 
-import { YUP_VALIDATORS } from 'containers/App/constants';
+import { YUP_VALIDATORS, FormTitle } from 'containers/App/constants';
 
 const FormWrapper = styled.form`
   display: grid;
@@ -38,6 +38,7 @@ function PukForm({ clickHandler }) {
 
   return (
     <FormWrapper onSubmit={formik.handleSubmit}>
+      <FormTitle>PUK</FormTitle>
       <label htmlFor="puk">Please provide PUK</label>
       <input
         type="text"
