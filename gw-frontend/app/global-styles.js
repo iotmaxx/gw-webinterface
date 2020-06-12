@@ -52,6 +52,8 @@ const GlobalStyle = createGlobalStyle`
     padding: 50px;
     box-sizing: content-box;
     background-color: ${MAIN_COLORS.darkTableRow};
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
   }
 
   input[type=text], input[type=number], input[type=password] {

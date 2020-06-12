@@ -29,10 +29,20 @@ const OUT_VALUES = [
 
 // TODO: Adjust table title to meet menu point
 export function StatusIoStats() {
+  const ioData = {
+    input: {
+      caption: 'Input',
+      values: IN_VALUES,
+    },
+    output: {
+      caption: 'Output',
+      values: OUT_VALUES,
+    },
+  };
+
   return (
     <div>
-      <StatusOverview caption="Input" values={IN_VALUES} />
-      <StatusOverview caption="Output" values={OUT_VALUES} />
+      <StatusOverview caption="I/O status" values={ioData} asList={false} />
     </div>
   );
 }
