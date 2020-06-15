@@ -30,7 +30,7 @@ const UpdateTime = styled.p`
 function ContentHeader() {
   return (
     <Wrapper>
-      <ContentHeaderTitle>LTE Router: RT2200</ContentHeaderTitle>
+      <ContentHeaderTitle>Gateway: GW4100</ContentHeaderTitle>
       <UpdateTime>Last update:13:43:48</UpdateTime>
     </Wrapper>
   );
