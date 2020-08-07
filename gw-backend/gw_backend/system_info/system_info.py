@@ -4,19 +4,19 @@
 # @Email: alittysw@gmail.com
 # @Create At: 2020-03-21 13:48:40
 # @Last Modified By: Andre Litty
-# @Last Modified At: 2020-04-05 20:58:29
+# @Last Modified At: 2020-08-07 11:10:07
 # @Description: Blueprint for system information logic.
 
-from flask import Blueprint, request, abort, jsonify
+import psutil
+import datetime
+import os
+
+from flask import Blueprint, request, jsonify
 from flask_jwt_extended import jwt_required
 
 from gw_backend.config.constants import API_PATH
 
 from .constants import PATH_SUFFIX
-
-import psutil
-import datetime
-import os
 
 
 system_info_route = Blueprint('system_info', __name__)
