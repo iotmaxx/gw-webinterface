@@ -4,7 +4,7 @@
 # @Email: alittysw@gmail.com
 # @Create At: 2020-03-21 13:48:57
 # @Last Modified By: Andre Litty
-# @Last Modified At: 2020-04-08 17:53:20
+# @Last Modified At: 2020-08-07 11:13:11
 # @Description: Main application and entry point to run program.
 import os
 import logging
@@ -41,11 +41,13 @@ def create_app():
     from gw_backend.system_info.system_info import system_info_route
     from gw_backend.local_network_config.local_network_config_view import local_network_route
     from gw_backend.dhcp_config.dhcp_config_view import dhcp_config_route
+    from gw_backend.gsm_modem.gsm import gsm_modem_route
 
     app.register_blueprint(auth_route)
     app.register_blueprint(local_network_route)
     app.register_blueprint(system_info_route)
     app.register_blueprint(dhcp_config_route)
+    app.register_blueprint(gsm_modem_route)
 
     @app.route('/', defaults={'path': ''})
     @app.route('/<path:path>')
