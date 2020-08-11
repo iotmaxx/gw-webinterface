@@ -4,7 +4,7 @@
 # @Email: alittysw@gmail.com
 # @Create At: 2020-03-21 13:48:40
 # @Last Modified By: Andre Litty
-# @Last Modified At: 2020-08-07 11:10:07
+# @Last Modified At: 2020-08-11 19:18:24
 # @Description: Blueprint for system information logic.
 
 import psutil
@@ -52,7 +52,7 @@ def read_config(config_path=''):
 @system_info_route.route(API_PATH + PATH_SUFFIX + 'config', methods=['GET'])
 @jwt_required
 def get_configs():
-    config_file = request.args.get('config', default='/etc/udhcp.conf')
+    config_file = request.args.get('config', default='/etc/udhcpd.conf')
     config = read_config(config_path=config_file)
     return jsonify(config)
 

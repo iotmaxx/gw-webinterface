@@ -4,7 +4,7 @@
 # @Email: alittysw@gmail.com
 # @Create At: 2020-03-21 14:30:29
 # @Last Modified By: Andre Litty
-# @Last Modified At: 2020-04-10 11:59:36
+# @Last Modified At: 2020-08-11 19:30:31
 # @Description: Logic related to dhcp configuration.
 
 from flask import Blueprint, request, abort, jsonify
@@ -103,9 +103,9 @@ def get_dhcp_config():
     if not config:
         abort(503)
     resp = {
-        'domainName': config[0],
-        'beginIpRange': config[1],
-        'endIpRange': config[2],
-        'leaseTime': config[3]
+        'beginIpRange': config[0],
+        'endIpRange': config[1],
+        'leaseTime': config[2],
+        'domainName': config[3],
     }
     return jsonify(resp)
