@@ -4,7 +4,7 @@
 # @Email: alittysw@gmail.com
 # @Create At: 2020-08-07 11:02:53
 # @Last Modified By: Andre Litty
-# @Last Modified At: 2020-08-12 13:35:16
+# @Last Modified At: 2020-08-12 13:39:56
 # @Description: Blueprint for gsm modem routes.
 
 import re
@@ -25,7 +25,7 @@ def modem_data():
     data = {}
     try:
         result = subprocess.run(
-            ['mmcli', '-m', 0],
+            ['mmcli', '-m', '0'],
             capture_output=True,
             check=True
         )
