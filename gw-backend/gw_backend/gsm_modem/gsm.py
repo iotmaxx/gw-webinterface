@@ -4,7 +4,7 @@
 # @Email: alittysw@gmail.com
 # @Create At: 2020-08-07 11:02:53
 # @Last Modified By: Andre Litty
-# @Last Modified At: 2020-08-07 11:14:14
+# @Last Modified At: 2020-08-12 13:24:56
 # @Description: Blueprint for gsm modem routes.
 
 import re
@@ -18,7 +18,7 @@ from gw_backend.config.constants import API_PATH
 from .constants import PATH_SUFFIX
 
 
-DELIMITER_DELIMITER_REX = '[-]{2,36}'
+DELIMITER_REX = '[-]{2,36}'
 gsm_modem_route = Blueprint('gsm_modem', __name__)
 
 def get_modem_info():
