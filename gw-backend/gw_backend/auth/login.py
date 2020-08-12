@@ -4,7 +4,7 @@
 # @Email: alittysw@gmail.com
 # @Create At: 2020-03-21 13:44:03
 # @Last Modified By: Andre Litty
-# @Last Modified At: 2020-08-12 16:02:40
+# @Last Modified At: 2020-08-13 01:37:44
 # @Description: Blueprint for login and token refresh logic.
 import json
 from hashlib import sha3_512
@@ -46,7 +46,7 @@ def login():
         return abort(400)
     if not 'username' in request_data or 'password' not in request_data:
         return abort(400)
-    credentials = load_credentials():
+    credentials = load_credentials()
     if credentials is None:
         return abort(401)
     username = request_data.get('username')
