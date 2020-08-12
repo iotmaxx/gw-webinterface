@@ -4,7 +4,7 @@
 # @Email: alittysw@gmail.com
 # @Create At: 2020-04-10 03:21:53
 # @Last Modified By: Andre Litty
-# @Last Modified At: 2020-04-14 15:14:52
+# @Last Modified At: 2020-08-12 13:14:36
 # @Description: Utils to search and replace file content and get ip address information.
 
 import glob
@@ -47,7 +47,7 @@ def replace_in_file(filename, to_replace, replace_with):
 def get_net_information():
     try:
         addr = subprocess.run(
-            ['ip', 'addr', 'show', 'dev', 'eht0'],
+            ['ip', 'addr', 'show', 'eth0'],
             check=True,
             capture_output=True
         )
