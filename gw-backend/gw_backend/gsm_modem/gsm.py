@@ -4,7 +4,7 @@
 # @Email: alittysw@gmail.com
 # @Create At: 2020-08-07 11:02:53
 # @Last Modified By: Andre Litty
-# @Last Modified At: 2020-08-12 13:24:56
+# @Last Modified At: 2020-08-12 13:31:06
 # @Description: Blueprint for gsm modem routes.
 
 import re
@@ -21,7 +21,7 @@ from .constants import PATH_SUFFIX
 DELIMITER_REX = '[-]{2,36}'
 gsm_modem_route = Blueprint('gsm_modem', __name__)
 
-def get_modem_info():
+def modem_data():
     data = {}
     try:
         result = subprocess.run(
@@ -63,5 +63,5 @@ def get_modem_info():
 @gsm_modem_route.route(API_PATH + PATH_SUFFIX + 'info', methods=['GET'])
 @jwt_required
 def get_modem_info():
-    data = get_modem_info()
+    data = modem_data()
     return jsonify(config)
