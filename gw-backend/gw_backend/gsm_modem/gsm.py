@@ -4,7 +4,7 @@
 # @Email: alittysw@gmail.com
 # @Create At: 2020-08-07 11:02:53
 # @Last Modified By: Andre Litty
-# @Last Modified At: 2020-08-12 13:31:06
+# @Last Modified At: 2020-08-12 13:35:16
 # @Description: Blueprint for gsm modem routes.
 
 import re
@@ -64,4 +64,4 @@ def modem_data():
 @jwt_required
 def get_modem_info():
     data = modem_data()
-    return jsonify(config)
+    return jsonify(data)
