@@ -3,9 +3,12 @@
 # @Author: Andre Litty
 # @Email: alittysw@gmail.com
 # @Create At: 2020-03-21 14:26:14
-# @Last Modified By: DerAndre
-# @Last Modified At: 2020-04-30 16:10:59
+# @Last Modified By: Andre Litty
+# @Last Modified At: 2020-08-13 15:41:21
 # @Description: Logic related to local network configuration.
+
+import threading
+import time
 
 from flask import Blueprint, request, abort, jsonify
 from flask_jwt_extended import jwt_required
@@ -48,6 +51,15 @@ def post_mtu():
         abort(503)
 
 
+def thread_function(ip_address, subnet_mask):
+    """
+    Workaround function to change ip address in separate thread than the resquest is handled
+    Changing ip address in the same thread causes the response to get lost in network
+    """
+    time.sleep(0.3)
+    change_ipv4(ip_address, subnet_mask)
+
+
 @local_network_route.route(API_PATH + PATH_SUFFIX + 'address', methods=['POST', 'GET'])
 @jwt_required
 def post_ip():
@@ -66,9 +78,7 @@ def post_ip():
         ip_address = request_data.get('ipAddress')
         old_address = request_data.get('oldAddress')
         subnet_mask = request_data.get('subnetMask')
-        address_response = change_ipv4(ip_address, subnet_mask)
-        if address_response.returncode != 0:
-            abort(503)
+
         if old_address and len(old_address) > 1:
             search_address = f'http://{old_address}'
             replace_address = f'http://{ip_address}'
@@ -76,10 +86,14 @@ def post_ip():
             if file is not None:
                 replace_in_file(file, search_address, replace_address)
             update_env_file(ip_address)
+        thread = threading.Thread(target=thread_function,
+                                  args=(ip_address, subnet_mask))
+        thread.start()
         return jsonify(
-            ipAddress = ip_address,
-            subnetMask = subnet_mask
+            ipAddress=ip_address,
+            subnetMask=subnet_mask
         )
+
 
 @local_network_route.route(API_PATH + PATH_SUFFIX + 'ipv6Address', methods=['POST'])
 @jwt_required
