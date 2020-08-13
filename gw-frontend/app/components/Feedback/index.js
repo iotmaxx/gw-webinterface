@@ -15,20 +15,27 @@ import {
 import { FormattedMessage } from 'react-intl';
 import messages from './messages';
 
-function Feedback({ show, success, error, callDismiss, msg=null, callback=null }) {
+function Feedback({
+  show,
+  success,
+  error,
+  callDismiss,
+  msg = null,
+  callback = null,
+}) {
   const showToast = () => {
     if (success) {
-      const message = msg == null ? 'Success, your changes have been submitted!' : msg;
+      const message =
+        msg == null ? 'Success, your changes have been submitted!' : msg;
       ToastsStore.success(message);
-    }
-    else if (error) {
-      const message = msg == null ? 'Failure, while submiting your changes!' : msg;
+    } else if (error) {
+      const message =
+        msg == null ? 'Failure, while submiting your changes!' : msg;
       ToastsStore.error(message);
     }
     setTimeout(() => {
       callDismiss();
-      if (callback)
-        callback();
+      if (callback) callback();
     }, 3000);
   };
 
@@ -47,7 +54,9 @@ Feedback.propTypes = {
   show: PropTypes.bool,
   success: PropTypes.bool,
   error: PropTypes.bool,
-  doDismiss: PropTypes.func
+  callDismiss: PropTypes.func,
+  msg: PropTypes.string,
+  callback: PropTypes.func,
 };
 
 export default Feedback;

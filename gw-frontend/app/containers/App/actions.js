@@ -1,4 +1,11 @@
-import { LOGIN, LOGOUT, LOGIN_SUCCESS, SET_ERROR, SET_SUCCESS, DISMISS } from './constants';
+import {
+  LOGIN,
+  LOGOUT,
+  LOGIN_SUCCESS,
+  SET_ERROR,
+  SET_SUCCESS,
+  DISMISS,
+} from './constants';
 
 export function login(username, password) {
   return {
