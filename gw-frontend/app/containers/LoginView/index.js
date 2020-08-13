@@ -39,7 +39,7 @@ export function LoginView({ doLogin, success, error, doDismiss }) {
         error={error}
         callDismiss={doDismiss}
         show={success || error}
-        msg={error ? 'Sorry, you profived empty credentials' : null}
+        msg={error ? 'Sorry, you profived invalid credentials' : null}
       />
     </Centered>
   );

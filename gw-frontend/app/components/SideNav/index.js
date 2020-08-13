@@ -102,21 +102,26 @@ export class SideNav extends React.Component {
                 to={ROUTES.localNetwork.dhcpServer}
                 caption="DHCP Server"
               />
+              {/*
               <MenuDropDownItem
                 to={ROUTES.localNetwork.staticRoutes}
                 caption="Static Routes"
               />
+              */}
             </MenuDropDownGroup>
             <MenuDropDownGroup caption="Wireless Network">
+              {/*
               <MenuDropDownItem
                 to={ROUTES.wifi.radioSetup}
                 caption="Radio Setup"
               />
+              */}
               <MenuDropDownItem to={ROUTES.wifi.sim} caption="SIM" />
               <MenuDropDownItem
                 to={ROUTES.wifi.backupSim}
                 caption="Backup SIM"
               />
+              {/*
               <MenuDropDownItem
                 to={ROUTES.wifi.smsConfig}
                 caption="SMS Configuration"
@@ -134,7 +139,9 @@ export class SideNav extends React.Component {
                 to={ROUTES.wifi.connectionCheck}
                 caption="Connection Check"
               />
+              */}
             </MenuDropDownGroup>
+            {/*
             <MenuDropDownGroup caption="Network Security">
               <MenuDropDownItem
                 to={ROUTES.networkSecurity.general}
@@ -149,6 +156,8 @@ export class SideNav extends React.Component {
                 caption="IP and Port Forwarding"
               />
             </MenuDropDownGroup>
+            */}
+            {/*
             <MenuDropDownGroup caption="VPN">
               <MenuDropdownGroup caption="IPSec" subcategory>
                 <MenuDropDownItem
@@ -195,6 +204,8 @@ export class SideNav extends React.Component {
                 />
               </MenuDropdownGroup>
             </MenuDropDownGroup>
+            */}
+            {/*
             <MenuDropDownGroup caption="I/O">
               <MenuDropDownItem to={ROUTES.io.inputs} caption="Inputs" />
               <MenuDropDownItem to={ROUTES.io.outputs} caption="Outputs" />
@@ -205,6 +216,8 @@ export class SideNav extends React.Component {
               />
               <MenuDropDownItem to={ROUTES.io.comServer} caption="ComSERVER" />
             </MenuDropDownGroup>
+            */}
+            {/*
             <MenuDropDownGroup caption="System">
               <MenuDropDownItem
                 to={ROUTES.system.hardware}
@@ -246,6 +259,7 @@ export class SideNav extends React.Component {
                 caption="Firmware Update"
               />
             </MenuDropDownGroup>
+            */}
           </Wrapper>
         ) : null}
       </div>

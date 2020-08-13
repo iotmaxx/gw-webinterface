@@ -107,7 +107,6 @@ function App(props) {
     if (accessToken !== null && accessToken !== undefined && !props.loggedIn)
       props.doLoginSuccess();
   });
-
   return (
     <MainWrapper>
       <Header />
@@ -172,7 +171,6 @@ function App(props) {
               path={ROUTES.localNetwork.staticRoutes}
               component={LocalNetworkStaticRoutes}
             />
-
             <AuthRoute
               exact
               path={ROUTES.wifi.radioSetup}
