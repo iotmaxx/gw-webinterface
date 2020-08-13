@@ -4,10 +4,12 @@
 # @Email: alittysw@gmail.com
 # @Create At: 2020-03-21 13:44:03
 # @Last Modified By: Andre Litty
-# @Last Modified At: 2020-04-05 20:59:06
+# @Last Modified At: 2020-08-13 01:49:45
 # @Description: Blueprint for login and token refresh logic.
+import json
+from hashlib import sha3_512
 
-from gw_backend.config.constants import API_PATH, TEST_USER, TEST_PASSWORD
+from gw_backend.config.constants import API_PATH
 
 from flask import Blueprint, request, abort, jsonify
 from flask_jwt_extended import (
@@ -29,6 +31,14 @@ def create_token_pair(identity=None):
     }
 
 
+def load_credentials():
+    try:
+        with open('/credentials.json') as credentials:
+            return json.load(credentials)
+    except Exception:
+        return None
+
+
 @auth_route.route(API_PATH + 'auth/login', methods=['POST'])
 def login():
     request_data = request.get_json()
@@ -36,8 +46,14 @@ def login():
         return abort(400)
     if not 'username' in request_data or 'password' not in request_data:
         return abort(400)
-    if not request_data.get('username') == TEST_USER\
-            and not request_data.get('password') == TEST_PASSWORD:
+    credentials = load_credentials()
+    if credentials is None:
+        return abort(401)
+    username = request_data.get('username')
+    password = request_data.get('password')
+    password = password.encode()
+    if username != credentials['username'] or\
+            sha3_512(password).hexdigest() != credentials['password']:
         return abort(401)
     token_pair = create_token_pair(identity=request_data.get('username'))
     return jsonify(token_pair)
