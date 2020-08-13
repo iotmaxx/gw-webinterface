@@ -4,7 +4,7 @@
 # @Email: alittysw@gmail.com
 # @Create At: 2020-03-21 13:44:03
 # @Last Modified By: Andre Litty
-# @Last Modified At: 2020-08-13 01:44:07
+# @Last Modified At: 2020-08-13 01:49:45
 # @Description: Blueprint for login and token refresh logic.
 import json
 from hashlib import sha3_512
@@ -52,8 +52,8 @@ def login():
     username = request_data.get('username')
     password = request_data.get('password')
     password = password.encode()
-    if not username == credentials['username'] and\
-            not sha3_512(password).hexdigest() == credentials['password']:
+    if username != credentials['username'] or\
+            sha3_512(password).hexdigest() != credentials['password']:
         return abort(401)
     token_pair = create_token_pair(identity=request_data.get('username'))
     return jsonify(token_pair)
