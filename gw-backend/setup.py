@@ -4,7 +4,7 @@
 # @Email: alittysw@gmail.com
 # @Create At: 2020-03-23 23:04:49
 # @Last Modified By: Andre Litty
-# @Last Modified At: 2020-04-08 17:52:47
+# @Last Modified At: 2020-08-14 12:21:14
 # @Description: Setupfile to install gw-webserver backend.
 
 from setuptools import setup, find_packages
@@ -19,11 +19,11 @@ setup(
     packages=find_packages(),
     include_package_data=True,
     install_requires=[
-        'flask',
-        'flask-jwt-extended',
-        'psutil',
-        'pytest',
-        'flask-cors',
-        'gw_cli @ git+ssh://git@github.com/iotmaxx/gw-cli.git#egg=gw_cli'
+        # 'flask',
+        # 'flask-jwt-extended',
+        # 'psutil',
+        # 'pytest',
+        # 'flask-cors',
+        # 'gw_cli @ git+ssh://git@github.com/iotmaxx/gw-cli.git#egg=gw_cli'
     ]
 )

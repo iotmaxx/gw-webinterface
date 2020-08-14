@@ -40,5 +40,5 @@ get_current_ip()
 echo "Configuring and installing gw-application..."
 get_current_ip
 set_environment_variables
-build_frontend
-install_backend
+# build_frontend
+# install_backend
