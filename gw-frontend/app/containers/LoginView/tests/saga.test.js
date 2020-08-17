@@ -1,8 +1,8 @@
 import { call, put } from 'redux-saga/effects';
+import request from 'utils/request';
 import { API_URL } from '../../App/constants';
 import { login } from '../saga';
 import { loginSuccess } from '../../App/actions';
-import request from 'utils/request';
 
 test('login saga test', () => {
   const credentials = {
@@ -18,7 +18,7 @@ test('login saga test', () => {
       'Content-Type': 'application/json',
     },
   };
-  const token_pair = {
+  const tokenPair = {
     access: 'asd',
     refresh: 'asdasd',
   };
@@ -27,6 +27,6 @@ test('login saga test', () => {
 
   result = loginSaga.next();
   expect(result.value).toEqual(call(request, requestURL, options));
-  result = loginSaga.next(token_pair);
+  result = loginSaga.next(tokenPair);
   expect(result.value).toEqual(put(loginSuccess()));
 });

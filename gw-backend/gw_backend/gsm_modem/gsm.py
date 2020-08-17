@@ -4,14 +4,16 @@
 # @Email: alittysw@gmail.com
 # @Create At: 2020-08-07 11:02:53
 # @Last Modified By: Andre Litty
-# @Last Modified At: 2020-08-12 13:39:56
+# @Last Modified At: 2020-08-17 16:39:53
 # @Description: Blueprint for gsm modem routes.
 
 import re
 import subprocess
 
-from flask import Blueprint, jsonify
+from flask import Blueprint, jsonify, abort
 from flask_jwt_extended import jwt_required
+
+from gw_cli import set_modem
 
 from gw_backend.config.constants import API_PATH
 
@@ -19,7 +21,8 @@ from .constants import PATH_SUFFIX
 
 
 DELIMITER_REX = '[-]{2,36}'
-gsm_modem_route = Blueprint('gsm_modem', __name__)
+gsm_modem_route = Blueprint('gsm', __name__)
+
 
 def modem_data():
     data = {}
@@ -39,7 +42,7 @@ def modem_data():
 
     for pair in pointers:
         clean_result = result_stdout[pair[0]:pair[1]
-                                    ].replace('\n', '').replace(' ', '')
+                                     ].replace('\n', '').replace(' ', '')
         result_parts = clean_result.split('|')
         data_parts = {}
         last_key = None
@@ -60,8 +63,27 @@ def modem_data():
     return data
 
 
-@gsm_modem_route.route(API_PATH + PATH_SUFFIX + 'info', methods=['GET'])
+@gsm_modem_route.route(API_PATH + PATH_SUFFIX + 'modem', methods=['GET', 'POST'])
 @jwt_required
-def get_modem_info():
-    data = modem_data()
-    return jsonify(data)
+def modem():
+    if request.method == 'GET':
+        data = modem_data()
+        return jsonify(data)
+    else:
+        request_data = request.json()
+        con_name = request_data.get('conName', 'mobile')
+        operator_apn = request_data.get('operatorApn', 'internet')
+        pin = request_data.get('pin', None)
+        user = request_data.get('username', None)
+        password = request_data.get('password', None)
+        response = set_modem(
+            con_name=con_name,
+            operator_apn=operator_apn,
+            pin=pin,
+            user=user,
+            password=password
+        )
+        if response.returncode == 0:
+            return jsonify(success=True)
+        else:
+            return abort(503)

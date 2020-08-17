@@ -1,3 +1,8 @@
+import { takeLatest, call, put } from 'redux-saga/effects';
+
+import request from 'utils/request';
+import history from 'utils/history';
+import { loginSuccess, setSuccess, setError } from '../App/actions';
 import {
   LOGIN,
   LOGOUT,
@@ -6,13 +11,6 @@ import {
   REFRESH_TOKEN,
   ROUTES,
 } from '../App/constants';
-
-import { loginSuccess, setSuccess, setError } from '../App/actions';
-
-import { takeLatest, call, put } from 'redux-saga/effects';
-
-import request from 'utils/request';
-import history from 'utils/history';
 
 export function* login({ username, password }) {
   try {
@@ -26,9 +24,9 @@ export function* login({ username, password }) {
         'Content-Type': 'application/json',
       },
     };
-    const token_pair = yield call(request, requestURL, options);
-    localStorage.setItem(ACCESS_TOKEN, token_pair.access);
-    localStorage.setItem(REFRESH_TOKEN, token_pair.refresh);
+    const tokenPair = yield call(request, requestURL, options);
+    localStorage.setItem(ACCESS_TOKEN, tokenPair.access);
+    localStorage.setItem(REFRESH_TOKEN, tokenPair.refresh);
     history.push(ROUTES.dashboard);
     yield put(loginSuccess());
     yield put(setSuccess());
