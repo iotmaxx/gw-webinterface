@@ -145,6 +145,7 @@ const withSaga = injectSaga({
   saga,
   mode: DAEMON,
 });
+
 const withReducer = injectReducer({
   key: 'LocalNetworkIpConfig',
   reducer: LocalNetworkReducer,

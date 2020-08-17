@@ -72,6 +72,7 @@ export class SideNav extends React.Component {
                 to={ROUTES.status.networkConnection}
                 caption="Network Connection"
               />
+              {/*
               <MenuDropDownItem
                 to={ROUTES.status.ioStatus}
                 caption="I/O Status"
@@ -88,6 +89,7 @@ export class SideNav extends React.Component {
                 to={ROUTES.status.dhcpLease}
                 caption="DHCP Leases"
               />
+              */}
               <MenuDropDownItem
                 to={ROUTES.status.systemInfo}
                 caption="System Info"

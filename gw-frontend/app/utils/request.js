@@ -2,14 +2,14 @@ import jwt from 'jwt-decode';
 import {
   API_URL,
   ACCESS_TOKEN,
-  REFRESH_TOKEN
+  REFRESH_TOKEN,
 } from '../containers/App/constants';
 
 function parseJSON(response) {
   if (response.status === 204 || response.status === 205) {
     return { status: response.status };
   }
-  return response.json()
+  return response.json();
 }
 
 async function checkStatus(response) {
@@ -38,13 +38,13 @@ export default async function request(url, options) {
         window.location.reload();
       }
       /* refresh access token */
-      const token_pair = await doRefreshToken(refreshToken);
-      localStorage.setItem(ACCESS_TOKEN, token_pair.access);
-      localStorage.setItem(REFRESH_TOKEN, token_pair.refresh);
+      const tokenPair = await doRefreshToken(refreshToken);
+      localStorage.setItem(ACCESS_TOKEN, tokenPair.access);
+      localStorage.setItem(REFRESH_TOKEN, tokenPair.refresh);
       const newHeader = {
         Accept: 'application/json',
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${token_pair.access}`,
+        Authorization: `Bearer ${tokenPair.access}`,
       };
       /* make api call */
       return fetch(url, Object.assign(options, { headers: newHeader }))
