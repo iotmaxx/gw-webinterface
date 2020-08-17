@@ -4,7 +4,7 @@
  * @Email: alittysw@gmail.com
  * @Create At: 2020-08-17 13:05:00
  * @Last Modified By: Andre Litty
- * @Last Modified At: 2020-08-17 15:46:34
+ * @Last Modified At: 2020-08-17 21:47:51
  * @Description: This is description.
  */
 
@@ -37,8 +37,9 @@ export function successSetModem() {
   };
 }
 
-export function successGetModemInfo() {
+export function successGetModemInfo(modemInfo) {
   return {
     type: SUCCESS_GET_MODEM_INFO,
+    modemInfo,
   };
 }

@@ -7,9 +7,9 @@ import { successGetModemInfo, successSetModem } from './actions';
 import { API_URL, ACCESS_TOKEN } from '../App/constants';
 import { setError, setSuccess } from '../App/actions';
 
-export function* setModem(conName, operatorApn) {
+export function* setModem(conName, operatorApn, pin, username, password) {
   try {
-    const data = { conName, operatorApn };
+    const data = { conName, operatorApn, pin, username, password };
     const requestURL = `${API_URL}${GSM_PATH_SUFFIX}modem`;
     const accessToken = localStorage.getItem(ACCESS_TOKEN);
     const options = {
@@ -21,8 +21,8 @@ export function* setModem(conName, operatorApn) {
         Authorization: `Bearer ${accessToken}`,
       },
     };
-    const response = yield call(request, requestURL, options);
-    yield put(successSetModem(response.hostname));
+    yield call(request, requestURL, options);
+    yield put(successSetModem());
     yield put(setSuccess());
   } catch (error) {
     console.log(error);
