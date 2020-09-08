@@ -4,7 +4,7 @@
 # @Email: alittysw@gmail.com
 # @Create At: 2020-03-21 14:26:14
 # @Last Modified By: Andre Litty
-# @Last Modified At: 2020-08-13 15:41:21
+# @Last Modified At: 2020-09-08 11:29:24
 # @Description: Logic related to local network configuration.
 
 import threading
@@ -80,10 +80,17 @@ def post_ip():
         subnet_mask = request_data.get('subnetMask')
 
         if old_address and len(old_address) > 1:
-            search_address = f'http://{old_address}'
-            replace_address = f'http://{ip_address}'
-            file = find_file_content(search_address)
-            if file is not None:
+            for string in [old_address, f'http://{old_address}']:
+                js_file = find_file_content(string)
+                if js_file is not None:
+                    if string.find('://') != -1:
+                        search_address = f'http://{old_address}'
+                        replace_address = f'http://{ip_address}'
+                    else:
+                        search_address = old_address
+                        replace_address = ip_address
+                    break
+            if js_file is not None:
                 replace_in_file(file, search_address, replace_address)
             update_env_file(ip_address)
         thread = threading.Thread(target=thread_function,
