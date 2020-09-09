@@ -4,7 +4,7 @@
 # @Email: alittysw@gmail.com
 # @Create At: 2020-04-10 03:21:53
 # @Last Modified By: Andre Litty
-# @Last Modified At: 2020-09-08 11:05:09
+# @Last Modified At: 2020-09-09 11:09:37
 # @Description: Utils to search and replace file content and get ip address information.
 
 import glob
@@ -21,7 +21,7 @@ IP_REX = 'inet [0-9]+.[0-9]+.[0-9]+.[0-9]+/[0-9]+'
 
 def find_file_content(search_string):
     try:
-        for js_file in glob.glob('static/*.js'):
+        for js_file in glob.glob('../static/*.js'):
             with open(js_file, 'rb', 0) as file, mmap.mmap(
                     file.fileno(),
                     0,
