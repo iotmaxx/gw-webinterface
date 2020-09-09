@@ -4,7 +4,7 @@
 # @Email: alittysw@gmail.com
 # @Create At: 2020-03-21 14:26:14
 # @Last Modified By: Andre Litty
-# @Last Modified At: 2020-09-08 11:29:24
+# @Last Modified At: 2020-09-09 12:34:38
 # @Description: Logic related to local network configuration.
 
 import threading
@@ -91,7 +91,7 @@ def post_ip():
                         replace_address = ip_address
                     break
             if js_file is not None:
-                replace_in_file(file, search_address, replace_address)
+                replace_in_file(js_file, search_address, replace_address)
             update_env_file(ip_address)
         thread = threading.Thread(target=thread_function,
                                   args=(ip_address, subnet_mask))
