@@ -50,11 +50,15 @@ export function LocalNetworkIpConfig({
   }, []);
 
   const submit = values => {
-    if (values.hostname !== hostname) doSetHostname(values.hostname);
-    if (values.ipAddress !== ipAddress || values.subnetMask !== subnetMask)
+    if (values.hostname !== hostname && values.hostname.length > 0)
+      doSetHostname(values.hostname);
+    if (
+      (values.ipAddress !== ipAddress && values.ipAddress.length > 0) ||
+      (values.subnetMask !== subnetMask && values.subnetMask.length > 0)
+    )
       doSetAddress(values.ipAddress, values.subnetMask, ipAddress);
-    if (values.mtu !== mtu) doSetMTU(mtu);
-    if (values.ipv6Address !== ipv6Address)
+    if (values.mtu !== mtu && values.mtu.length > 0) doSetMTU(mtu);
+    if (values.ipv6Address !== ipv6Address && values.ipv6Address.length > 0)
       doSetIpv6Address(values.ipv6Address);
   };
 
@@ -93,7 +97,7 @@ LocalNetworkIpConfig.propTypes = {
   doGetAddress: PropTypes.func,
   doSetIpv6Address: PropTypes.func,
   doDismiss: PropTypes.func,
-  mtu: PropTypes.number,
+  mtu: PropTypes.any,
   hostname: PropTypes.string,
   ipAddress: PropTypes.string,
   subnetMask: PropTypes.string,

@@ -7,10 +7,10 @@ import {
 } from './constants';
 
 const initialState = {
-  mtu: 1500,
-  hostname: 'localhost',
-  ipAddress: '127.0.0.1',
-  subnetMask: '255.255.255.0',
+  mtu: '',
+  hostname: '',
+  ipAddress: '',
+  subnetMask: '',
   ipv6Address: '',
 };
 
