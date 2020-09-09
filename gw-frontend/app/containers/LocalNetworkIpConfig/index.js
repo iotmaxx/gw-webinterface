@@ -97,7 +97,7 @@ LocalNetworkIpConfig.propTypes = {
   doGetAddress: PropTypes.func,
   doSetIpv6Address: PropTypes.func,
   doDismiss: PropTypes.func,
-  mtu: PropTypes.number,
+  mtu: PropTypes.any,
   hostname: PropTypes.string,
   ipAddress: PropTypes.string,
   subnetMask: PropTypes.string,

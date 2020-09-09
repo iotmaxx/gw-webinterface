@@ -7,7 +7,7 @@ import {
 } from './constants';
 
 const initialState = {
-  mtu: null,
+  mtu: '',
   hostname: '',
   ipAddress: '',
   subnetMask: '',

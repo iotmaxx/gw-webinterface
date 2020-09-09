@@ -8,6 +8,7 @@ import {
   SUCCESS_SET_HOSTNAME,
   SUCCESS_SET_MTU,
   SUCCESS_SET_IPV6_ADDRESS,
+  SUCCESS_GET_ADDRESS,
 } from './constants';
 
 export function setHostname(hostname) {
@@ -63,7 +64,7 @@ export function successSetAddress(ipAddress, subnetMask) {
 
 export function successGetAddress(ipAddress, subnetMask, mtu, hostname) {
   return {
-    type: SUCCESS_SET_ADDRESS,
+    type: SUCCESS_GET_ADDRESS,
     ipAddress,
     subnetMask,
     mtu,

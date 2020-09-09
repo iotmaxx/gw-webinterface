@@ -37,7 +37,6 @@ export function WirelessNetworkSim({ doSetModem }) {
   };
 
   const submit = values => {
-    console.log(values);
     doSetModem(values.apn, values.pin, values.username, values.password);
     ToastsStore.success('Success, your changes have been submitted!');
   };
