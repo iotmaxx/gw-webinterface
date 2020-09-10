@@ -4,13 +4,13 @@
 # @Email: alittysw@gmail.com
 # @Create At: 2020-08-07 11:02:53
 # @Last Modified By: Andre Litty
-# @Last Modified At: 2020-08-17 16:39:53
+# @Last Modified At: 2020-09-10 11:01:12
 # @Description: Blueprint for gsm modem routes.
 
 import re
 import subprocess
 
-from flask import Blueprint, jsonify, abort
+from flask import Blueprint, request, jsonify, abort
 from flask_jwt_extended import jwt_required
 
 from gw_cli import set_modem
