@@ -4,13 +4,13 @@
 # @Email: alittysw@gmail.com
 # @Create At: 2020-08-07 11:02:53
 # @Last Modified By: Andre Litty
-# @Last Modified At: 2020-08-17 16:39:53
+# @Last Modified At: 2020-09-10 12:09:05
 # @Description: Blueprint for gsm modem routes.
 
 import re
 import subprocess
 
-from flask import Blueprint, jsonify, abort
+from flask import Blueprint, request, jsonify, abort
 from flask_jwt_extended import jwt_required
 
 from gw_cli import set_modem
@@ -60,6 +60,10 @@ def modem_data():
             if data[parent_key][child_key].find(',') != -1:
                 new_data = data[parent_key][child_key].split(',')
                 data[parent_key][child_key] = new_data
+    for number_key in ['3GPP', '3GPPEPS']:
+        if number_key in data:
+            new_key = number_key[1:]
+            data[new_key] = data.pop(number_key)
     return data
 
 
