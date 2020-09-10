@@ -4,7 +4,7 @@
  * @Email: alittysw@gmail.com
  * @Create At: 2020-08-17 13:15:14
  * @Last Modified By: Andre Litty
- * @Last Modified At: 2020-09-08 12:49:38
+ * @Last Modified At: 2020-09-10 11:15:01
  * @Description: This is description.
  */
 
@@ -29,7 +29,7 @@ function GsmReducer(state = initialState, action) {
     case SUCCESS_GET_MODEM_INFO:
       return {
         ...state,
-        ...action.payload,
+        ...action.modemInfo,
       };
     default:
       return state;
