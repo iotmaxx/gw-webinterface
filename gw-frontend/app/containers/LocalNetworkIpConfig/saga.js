@@ -1,5 +1,16 @@
+/*
+ * @Script: saga.js
+ * @Author: Andre Litty
+ * @Email: alittysw@gmail.com
+ * @Create At: 2020-09-14 17:14:34
+ * @Last Modified By: Andre Litty
+ * @Last Modified At: 2020-09-14 17:14:34
+ * @Description: This is description.
+ */
+
 import { takeLatest, call, put } from 'redux-saga/effects';
 import request from 'utils/request';
+
 import {
   SET_HOSTNAME,
   SET_ADDRESS,

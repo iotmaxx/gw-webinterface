@@ -30,10 +30,6 @@ export function StatusRadio({
   const [values, setValues] = useState([]);
 
   useEffect(() => {
-    doGetModemInfo();
-  }, []);
-
-  useEffect(() => {
     const val = [
       {
         caption: 'Provider',
@@ -65,7 +61,8 @@ export function StatusRadio({
       },
     ];
     setValues(val);
-  }, [provider, networkStatus, signalLevel, packetData, sim]);
+    doGetModemInfo();
+  }, []);
 
   return <StatusOverview caption="Radio Status" values={values} />;
 }

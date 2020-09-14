@@ -14,9 +14,9 @@ import Feedback from 'components/Feedback';
 
 import injectSaga from 'utils/injectSaga';
 import { DAEMON } from 'utils/constants';
+import injectReducer from 'utils/injectReducer';
 import saga from './saga';
 
-import injectReducer from 'utils/injectReducer';
 import LocalDhcpServerReducer from './reducers';
 
 import {
@@ -40,10 +40,10 @@ export function LocalNetworkDhcpServer({
   doSetEndIpRange,
   doSetLeaseTime,
   doDismiss,
-  doGetDhcoConfig,
+  doGetDhcpConfig,
 }) {
   useEffect(() => {
-    doGetDhcoConfig();
+    doGetDhcpConfig();
   }, []);
 
   const submit = values => {
@@ -85,7 +85,7 @@ LocalNetworkDhcpServer.propTypes = {
   doSetEndIpRange: PropTypes.func,
   doSetLeaseTime: PropTypes.func,
   doDismiss: PropTypes.func,
-  doGetDhcoConfig: PropTypes.func,
+  doGetDhcpConfig: PropTypes.func,
 };
 
 function mapDispatchToProps(dispatch) {
@@ -105,22 +105,20 @@ function mapDispatchToProps(dispatch) {
     doDismiss: () => {
       dispatch(dismiss());
     },
-    doGetDhcoConfig: () => {
+    doGetDhcpConfig: () => {
       dispatch(getDhcpConfig());
     },
   };
 }
 
-const mapStateToProps = state => {
-  return {
-    domainName: state.LocalNetworkDhcpServer.domainName,
-    beginIpRange: state.LocalNetworkDhcpServer.beginIpRange,
-    endIpRange: state.LocalNetworkDhcpServer.endIpRange,
-    leaseTime: state.LocalNetworkDhcpServer.leaseTime,
-    success: state.App.success,
-    error: state.App.error,
-  };
-};
+const mapStateToProps = state => ({
+  domainName: state.LocalNetworkDhcpServer.domainName,
+  beginIpRange: state.LocalNetworkDhcpServer.beginIpRange,
+  endIpRange: state.LocalNetworkDhcpServer.endIpRange,
+  leaseTime: state.LocalNetworkDhcpServer.leaseTime,
+  success: state.App.success,
+  error: state.App.error,
+});
 
 const withConnect = connect(
   mapStateToProps,
