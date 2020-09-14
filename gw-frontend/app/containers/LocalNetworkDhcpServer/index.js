@@ -47,11 +47,14 @@ export function LocalNetworkDhcpServer({
   }, []);
 
   const submit = values => {
-    if (values.domainName !== domainName) doSetDomainName(values.domainName);
-    if (values.beginIpRange !== beginIpRange)
+    if (values.domainName !== domainName && values.domainName.length > 0)
+      doSetDomainName(values.domainName);
+    if (values.beginIpRange !== beginIpRange && values.beginIpRange.length > 0)
       doSetBeginIpRange(values.beginIpRange);
-    if (values.endIpRange !== endIpRange) doSetEndIpRange(endIpRange);
-    if (values.leaseTime !== leaseTime) doSetLeaseTime(leaseTime);
+    if (values.endIpRange !== endIpRange && values.endIpRange.length > 0)
+      doSetEndIpRange(endIpRange);
+    if (values.leaseTime !== leaseTime && values.leaseTime > 0)
+      doSetLeaseTime(leaseTime);
   };
 
   return (
