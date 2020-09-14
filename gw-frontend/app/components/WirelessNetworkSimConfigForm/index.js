@@ -53,7 +53,7 @@ function WirelessNetworkSimConfigForm({ submit, formTitle }) {
   const [auth, setAuth] = useState(AUTHENTICATION[0]);
 
   const schema = Yup.object({
-    pin: YUP_VALIDATORS.positiveNumber,
+    pin: Yup.string(),
     apn: Yup.string().required('Required'),
     username: Yup.string(),
     password: Yup.string(),
