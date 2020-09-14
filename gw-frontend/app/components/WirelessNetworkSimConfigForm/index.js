@@ -14,7 +14,6 @@ import * as Yup from 'yup';
 import FormFieldError from 'components/FormFieldError';
 
 import {
-  YUP_VALIDATORS,
   FormWrapper,
   CenterButton,
   LightTableRow,
@@ -34,6 +33,7 @@ const CheckboxWrapper = styled.input`
   vertical-align: text-bottom;
 `;
 
+/*
 const PROVIDERS = [
   'auto',
   '26201 - T-Mobile D',
@@ -42,18 +42,17 @@ const PROVIDERS = [
   '26207 - o2-de',
   '26208 - o2-de',
 ];
+*/
 
 const AUTHENTICATION = ['None', 'PAP only', 'CHAP only', 'PAP/CHAP'];
 
-// TODO: Remove Mockup Auth and Providers
-// TODO: Add Country
 function WirelessNetworkSimConfigForm({ submit, formTitle }) {
+  // const [provider, setProvider] = useState(PROVIDERS[0]);
   const [roamingEnabled, setRoamingEnabled] = useState(true);
-  const [provider, setProvider] = useState(PROVIDERS[0]);
   const [auth, setAuth] = useState(AUTHENTICATION[0]);
 
   const schema = Yup.object({
-    pin: YUP_VALIDATORS.positiveNumber,
+    pin: Yup.string(),
     apn: Yup.string().required('Required'),
     username: Yup.string(),
     password: Yup.string(),
@@ -79,9 +78,11 @@ function WirelessNetworkSimConfigForm({ submit, formTitle }) {
     setRoamingEnabled(event.target.checked);
   };
 
+  /*
   const changeProvider = event => {
     setProvider(event.target.value);
   };
+  */
 
   const changeAuth = event => {
     setAuth(event.target.value);
@@ -120,6 +121,7 @@ function WirelessNetworkSimConfigForm({ submit, formTitle }) {
               />
             </LabelCell>
           </DarkTableRow>
+          {/*
           <LightTableRow>
             <LabelCell>
               <Label text="Provider" labelFor="provider" />
@@ -138,6 +140,7 @@ function WirelessNetworkSimConfigForm({ submit, formTitle }) {
               </select>
             </InputCell>
           </LightTableRow>
+          */}
           <DarkTableRow>
             <LabelCell>
               <Label text="APN" labelFor="apn" />

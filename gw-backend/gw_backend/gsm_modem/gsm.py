@@ -4,7 +4,7 @@
 # @Email: alittysw@gmail.com
 # @Create At: 2020-08-07 11:02:53
 # @Last Modified By: Andre Litty
-# @Last Modified At: 2020-09-10 12:09:05
+# @Last Modified At: 2020-09-14 13:59:02
 # @Description: Blueprint for gsm modem routes.
 
 import re
@@ -74,7 +74,7 @@ def modem():
         data = modem_data()
         return jsonify(data)
     else:
-        request_data = request.json()
+        request_data = request.get_json()
         con_name = request_data.get('conName', 'mobile')
         operator_apn = request_data.get('operatorApn', 'internet')
         pin = request_data.get('pin', None)
