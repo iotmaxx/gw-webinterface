@@ -1,3 +1,13 @@
+/*
+ * @Script: saga.js
+ * @Author: Andre Litty
+ * @Email: alittysw@gmail.com
+ * @Create At: 2020-09-14 17:19:44
+ * @Last Modified By: Andre Litty
+ * @Last Modified At: 2020-09-14 17:19:44
+ * @Description: This is description.
+ */
+
 import { call, put, takeLatest } from 'redux-saga/effects';
 import request from 'utils/request';
 
@@ -44,7 +54,6 @@ export function* getModemInfo() {
     };
     const response = yield call(request, requestURL, options);
     yield put(successGetModemInfo(response));
-    yield put(setSuccess());
   } catch (error) {
     console.log(error);
     yield put(setError());

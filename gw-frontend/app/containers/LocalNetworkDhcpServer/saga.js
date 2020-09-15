@@ -1,3 +1,16 @@
+/*
+ * @Script: saga.js
+ * @Author: Andre Litty
+ * @Email: alittysw@gmail.com
+ * @Create At: 2020-09-14 17:14:05
+ * @Last Modified By: Andre Litty
+ * @Last Modified At: 2020-09-14 17:14:05
+ * @Description: This is description.
+ */
+
+import { takeLatest, call, put } from 'redux-saga/effects';
+import request from 'utils/request';
+
 import {
   SET_DOMAIN_NAME,
   SET_BEGIN_IP_RANGE,
@@ -17,10 +30,6 @@ import {
 
 import { API_URL, ACCESS_TOKEN } from '../App/constants';
 import { setSuccess, setError } from '../App/actions';
-
-import { takeLatest, call, put } from 'redux-saga/effects';
-
-import request from 'utils/request';
 
 export function* setDomainName({ domainName }) {
   try {

@@ -65,7 +65,7 @@ export function StatusRadio({
       },
     ];
     setValues(val);
-  }, [provider, networkStatus, signalLevel, packetData, sim]);
+  }, [provider, networkStatus, signalLevel, packetData]);
 
   return <StatusOverview caption="Radio Status" values={values} />;
 }

@@ -4,7 +4,7 @@
  *
  */
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
@@ -12,10 +12,10 @@ import { compose } from 'redux';
 import StatusOverview from 'components/StatusOverview';
 
 import injectReducer from 'utils/injectReducer';
-import SystemInfoReducer from './reducers';
 
 import injectSaga from 'utils/injectSaga';
 import { DAEMON } from 'utils/constants';
+import SystemInfoReducer from './reducers';
 import saga from './saga';
 
 import { getSystemInfo } from './actions';
