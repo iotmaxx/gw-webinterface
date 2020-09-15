@@ -64,6 +64,7 @@ export function StatusNetworkConnections({
   }, []);
 
   useEffect(() => {
+    const ipv6Value = ipv6Address || 'N/A';
     const lanValues = [
       {
         caption: 'Link #1',
@@ -79,7 +80,7 @@ export function StatusNetworkConnections({
       },
       {
         caption: 'IPv6 Address',
-        value: ipv6Address,
+        value: ipv6Value,
       },
     ];
     setValues(lanValues);
