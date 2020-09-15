@@ -4,73 +4,81 @@
  *
  */
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 
 import StatusOverview from 'components/StatusOverview';
 
+import { getNetworkInfo } from './actions';
+
 const WIFI_VALUES = [
   {
     caption: 'Link',
-    value: 'TCP/IP connected',
+    value: 'N/A',
   },
   {
     caption: 'IP Address',
-    value: '209.168.145.154',
+    value: 'N/A',
   },
   {
     caption: 'Netmask',
-    value: '255.255.255.255',
+    value: 'N/A',
   },
   {
     caption: 'DNS Server',
-    value: '139.7.30.126',
+    value: 'N/A',
   },
   {
     caption: 'Sec. DNS Server',
-    value: '139.7.30.125',
+    value: 'N/A',
   },
   {
     caption: 'RX Bytes',
-    value: 'unknown',
+    value: 'N/A',
   },
   {
     caption: 'TX Bytes',
-    value: 'unknown',
-  },
-];
-
-const LAN_VALUES = [
-  {
-    caption: 'Link #1',
-    value: 'connected',
-  },
-  {
-    caption: 'Link #2',
-    value: 'connected',
-  },
-  {
-    caption: 'IP Address',
-    value: '192.168.0.1',
-  },
-  {
-    caption: 'Netmask',
-    value: '255.255.255.255',
-  },
-  {
-    caption: 'IP Address',
-    value: 'fe80::5054:ff:fea6:a808/64',
-  },
-  {
-    caption: 'IP Address',
-    value: '2a01:4f8:201:860f:5054:ff:fea6:a808/64',
+    value: 'N/A',
   },
 ];
 
 // TODO: Adjust table title to meet menu point
-export function StatusNetworkConnections() {
+export function StatusNetworkConnections({
+  doGetNetworkInfo,
+  ipAddress,
+  subnetMask,
+  ipv6Address,
+}) {
+  const [values, setValues] = useState([]);
+
+  useEffect(() => {
+    doGetNetworkInfo();
+  }, []);
+
+  useEffect(() => {
+    const lanValues = [
+      {
+        caption: 'Link #1',
+        value: 'connected',
+      },
+      {
+        caption: 'IP Address',
+        value: ipAddress,
+      },
+      {
+        caption: 'Netmask',
+        value: subnetMask,
+      },
+      {
+        caption: 'IPv6 Address',
+        value: ipv6Address,
+      },
+    ];
+    setValues(lanValues);
+  }, [ipAddress, subnetMask, ipv6Address]);
+
   const networkData = {
     wifi: {
       caption: 'Wireless Network',
@@ -78,7 +86,7 @@ export function StatusNetworkConnections() {
     },
     lan: {
       caption: 'Local Network',
-      values: LAN_VALUES,
+      values,
     },
   };
   return (
@@ -93,17 +101,28 @@ export function StatusNetworkConnections() {
 }
 
 StatusNetworkConnections.propTypes = {
-  dispatch: PropTypes.func.isRequired,
+  doGetNetworkInfo: PropTypes.func,
+  ipAddress: PropTypes.string,
+  subnetMask: PropTypes.string,
+  ipv6Address: PropTypes.string,
 };
+
+const mapStateToProps = state => ({
+  ipAddress: state.StatusNetworkConnections.ipAddress,
+  subnetMask: state.StatusNetworkConnections.subnetMask,
+  ipv6Address: state.StatusNetworkConnections.ipv6Address,
+});
 
 function mapDispatchToProps(dispatch) {
   return {
-    dispatch,
+    doGetNetworkInfo: () => {
+      dispatch(getNetworkInfo());
+    },
   };
 }
 
 const withConnect = connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps,
 );
 
