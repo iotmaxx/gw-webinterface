@@ -9,8 +9,14 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 
+import injectSaga from 'utils/injectSaga';
+import injectReducer from 'utils/injectReducer';
+import { DAEMON } from 'utils/constants';
+
 import StatusOverview from 'components/StatusOverview';
 
+import StatusNetworkConnectionsReducer from './reducers';
+import saga from './saga';
 import { getNetworkInfo } from './actions';
 
 const WIFI_VALUES = [
@@ -126,4 +132,19 @@ const withConnect = connect(
   mapDispatchToProps,
 );
 
-export default compose(withConnect)(StatusNetworkConnections);
+const withReducer = injectReducer({
+  key: 'StatusNetworkConnections',
+  reducer: StatusNetworkConnectionsReducer,
+});
+
+const withSaga = injectSaga({
+  key: 'StatusNetworkConnections',
+  saga,
+  mode: DAEMON,
+});
+
+export default compose(
+  withReducer,
+  withSaga,
+  withConnect,
+)(StatusNetworkConnections);
