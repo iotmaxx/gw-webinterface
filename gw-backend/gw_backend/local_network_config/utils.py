@@ -4,7 +4,7 @@
 # @Email: alittysw@gmail.com
 # @Create At: 2020-04-10 03:21:53
 # @Last Modified By: Andre Litty
-# @Last Modified At: 2020-09-09 12:54:30
+# @Last Modified At: 2020-09-16 00:10:05
 # @Description: Utils to search and replace file content and get ip address information.
 
 import glob
@@ -18,6 +18,7 @@ import pathlib
 
 MTU_REX = 'mtu [0-9]+'
 IP_REX = 'inet [0-9]+.[0-9]+.[0-9]+.[0-9]+/[0-9]+'
+IPV6_REX = 'inet6 [0-9a-fA-F:]*/[1-9]+'
 
 
 def find_file_content(search_string):
@@ -61,6 +62,8 @@ def get_net_information():
         mtu = mtu.split(' ')[-1]
         ipv4 = re.search(IP_REX, addr).group()
         ipv4 = ipv4.split(' ')[-1]
+        ipv6 = re.search(IPV6_REX, addr).group()
+        ipv6 = ipv6.split(' ')[-1]
         nic = ipaddress.IPv4Interface(ipv4)
         netmask = nic.netmask.compressed
         netmask_prefix = nic.with_prefixlen.split('/')[-1]
@@ -71,7 +74,8 @@ def get_net_information():
             'ipAddress': ip,
             'subnetMask': netmask,
             'subnetMaskPrefix': netmask_prefix,
-            'mtu': mtu
+            'mtu': mtu,
+            'ipv6Address': ipv6
         }
     except Exception:
         return None
