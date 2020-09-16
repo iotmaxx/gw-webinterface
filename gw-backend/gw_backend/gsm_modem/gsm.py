@@ -4,7 +4,7 @@
 # @Email: alittysw@gmail.com
 # @Create At: 2020-08-07 11:02:53
 # @Last Modified By: Andre Litty
-# @Last Modified At: 2020-09-14 13:59:02
+# @Last Modified At: 2020-09-16 02:19:57
 # @Description: Blueprint for gsm modem routes.
 
 import re
@@ -21,6 +21,7 @@ from .constants import PATH_SUFFIX
 
 
 DELIMITER_REX = '[-]{2,36}'
+COLOR_ENCODING_REX = '\\x1b\\[\d+m'
 gsm_modem_route = Blueprint('gsm', __name__)
 
 
@@ -57,6 +58,12 @@ def modem_data():
 
     for parent_key in data.keys():
         for child_key in data[parent_key]:
+            color_encoding = re.findall(
+                COLOR_ENCODING_REX, data[parent_key][child_key])
+            if len(color_encoding) == 2:
+                cleared_value = data[parent_key][child_key].replace(
+                    color_encoding[0], '').replace(color_encoding[1], '')
+                data[parent_key][child_key] = cleared_value
             if data[parent_key][child_key].find(',') != -1:
                 new_data = data[parent_key][child_key].split(',')
                 data[parent_key][child_key] = new_data
