@@ -119,11 +119,11 @@ export class SideNav extends React.Component {
               />
               */}
               <MenuDropDownItem to={ROUTES.wifi.sim} caption="SIM" />
+              {/*
               <MenuDropDownItem
                 to={ROUTES.wifi.backupSim}
                 caption="Backup SIM"
               />
-              {/*
               <MenuDropDownItem
                 to={ROUTES.wifi.smsConfig}
                 caption="SMS Configuration"

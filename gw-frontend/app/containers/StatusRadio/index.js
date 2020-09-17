@@ -55,17 +55,9 @@ export function StatusRadio({
         caption: 'SIM #1 IMSI',
         value: sim,
       },
-      {
-        caption: 'Local area code',
-        value: 'N/A',
-      },
-      {
-        caption: 'Cell ID',
-        value: 'N/A',
-      },
     ];
     setValues(val);
-  }, [provider, networkStatus, signalLevel, packetData]);
+  }, [provider, networkStatus, signalLevel, packetData, sim]);
 
   return <StatusOverview caption="Radio Status" values={values} />;
 }
