@@ -4,7 +4,7 @@
  * @Email: alittysw@gmail.com
  * @Create At: 2020-09-16 00:58:13
  * @Last Modified By: Andre Litty
- * @Last Modified At: 2020-09-16 01:04:54
+ * @Last Modified At: 2020-09-17 15:30:24
  * @Description: This is description.
  */
 
@@ -19,7 +19,7 @@ import { LOCAL_NETWORK_PATH_SUFFIX } from '../LocalNetworkIpConfig/constants';
 
 function* getNetworkInfo() {
   try {
-    const requestURL = `${API_URL}${LOCAL_NETWORK_PATH_SUFFIX}address`;
+    const requestURL = `${API_URL}${LOCAL_NETWORK_PATH_SUFFIX}address/all`;
     const accessToken = localStorage.getItem(ACCESS_TOKEN);
     const options = {
       method: 'GET',
