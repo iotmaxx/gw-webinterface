@@ -4,7 +4,7 @@
  * @Email: alittysw@gmail.com
  * @Create At: 2020-09-16 00:51:58
  * @Last Modified By: Andre Litty
- * @Last Modified At: 2020-09-17 15:46:40
+ * @Last Modified At: 2020-09-17 16:20:02
  * @Description: This is description.
  */
 
@@ -12,14 +12,14 @@ import { SUCCESS_GET_NETWORK_INFO } from './constants';
 
 const initialState = {
   lan: {
-    lanIpAddress: '',
-    lanSubnetMask: '',
-    lanIpv6Address: '',
+    ipAddress: '',
+    subnetMask: '',
+    ipv6Address: '',
   },
   wan: {
-    wanIpAddress: 'N/A',
-    wanSubnetMask: 'N/A',
-    wanIpv6Address: 'N/A',
+    ipAddress: 'N/A',
+    subnetMask: 'N/A',
+    ipv6Address: 'N/A',
   },
 };
 
@@ -28,12 +28,16 @@ function StatusNetworkConnectionsReducer(state = initialState, action) {
     case SUCCESS_GET_NETWORK_INFO:
       return {
         ...state,
-        lanIpAddress: action.payload.lan.ipAddress,
-        lanSubnetMask: action.payload.lan.subnetMask,
-        lanIpv6Address: action.payload.lan.ipv6Address,
-        wanIpAddress: action.payload.wan.ipAddress,
-        wanSubnetMask: action.payload.wan.subnetMask,
-        wanIpv6Address: action.payload.wan.ipv6Address,
+        lan: {
+          ipAddress: action.payload.lan.ipAddress,
+          subnetMask: action.payload.lan.subnetMask,
+          ipv6Address: action.payload.lan.ipv6Address,
+        },
+        wan: {
+          ipAddress: action.payload.wan.ipAddress,
+          subnetMask: action.payload.wan.subnetMask,
+          ipv6Address: action.payload.wan.ipv6Address,
+        },
       };
     default:
       return state;
