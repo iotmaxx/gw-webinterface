@@ -4,7 +4,7 @@
  * @Email: alittysw@gmail.com
  * @Create At: 2020-09-16 00:51:58
  * @Last Modified By: Andre Litty
- * @Last Modified At: 2020-09-17 15:46:40
+ * @Last Modified At: 2020-09-17 16:15:58
  * @Description: This is description.
  */
 
@@ -28,12 +28,16 @@ function StatusNetworkConnectionsReducer(state = initialState, action) {
     case SUCCESS_GET_NETWORK_INFO:
       return {
         ...state,
-        lanIpAddress: action.payload.lan.ipAddress,
-        lanSubnetMask: action.payload.lan.subnetMask,
-        lanIpv6Address: action.payload.lan.ipv6Address,
-        wanIpAddress: action.payload.wan.ipAddress,
-        wanSubnetMask: action.payload.wan.subnetMask,
-        wanIpv6Address: action.payload.wan.ipv6Address,
+        lan: {
+          lanIpAddress: action.payload.lan.ipAddress,
+          lanSubnetMask: action.payload.lan.subnetMask,
+          lanIpv6Address: action.payload.lan.ipv6Address,
+        },
+        wan: {
+          wanIpAddress: action.payload.wan.ipAddress,
+          wanSubnetMask: action.payload.wan.subnetMask,
+          wanIpv6Address: action.payload.wan.ipv6Address,
+        },
       };
     default:
       return state;
