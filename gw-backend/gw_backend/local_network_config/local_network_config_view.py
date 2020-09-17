@@ -4,7 +4,7 @@
 # @Email: alittysw@gmail.com
 # @Create At: 2020-03-21 14:26:14
 # @Last Modified By: Andre Litty
-# @Last Modified At: 2020-09-09 12:34:38
+# @Last Modified At: 2020-09-17 15:46:02
 # @Description: Logic related to local network configuration.
 
 import threading
@@ -60,11 +60,23 @@ def thread_function(ip_address, subnet_mask):
     change_ipv4(ip_address, subnet_mask)
 
 
+@local_network_route.route(API_PATH + PATH_SUFFIX + 'address/all', methods=['GET'])
+@jwt_required
+def get_all_network_information():
+    lan_info = get_net_information('eth0')
+    wan_info = get_net_information('wwan0')
+    response = {
+        'lan': lan_info,
+        'wan': wan_info
+    }
+    return jsonify(response)
+
+
 @local_network_route.route(API_PATH + PATH_SUFFIX + 'address', methods=['POST', 'GET'])
 @jwt_required
 def post_ip():
     if request.method == 'GET':
-        net_info = get_net_information()
+        net_info = get_net_information('eth0')
         if net_info is not None:
             return jsonify(net_info)
         else:
