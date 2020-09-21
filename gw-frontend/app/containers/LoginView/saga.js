@@ -29,7 +29,6 @@ export function* login({ username, password }) {
     localStorage.setItem(REFRESH_TOKEN, tokenPair.refresh);
     history.push(ROUTES.dashboard);
     yield put(loginSuccess());
-    yield put(setSuccess());
   } catch (error) {
     console.log(error);
     yield put(setError());
