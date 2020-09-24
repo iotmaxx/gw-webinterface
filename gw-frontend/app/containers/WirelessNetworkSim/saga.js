@@ -4,7 +4,7 @@
  * @Email: alittysw@gmail.com
  * @Create At: 2020-09-14 17:19:44
  * @Last Modified By: Andre Litty
- * @Last Modified At: 2020-09-14 17:19:44
+ * @Last Modified At: 2020-09-24 11:48:12
  * @Description: This is description.
  */
 
@@ -17,9 +17,9 @@ import { successGetModemInfo, successSetModem } from './actions';
 import { API_URL, ACCESS_TOKEN } from '../App/constants';
 import { setError, setSuccess } from '../App/actions';
 
-export function* setModem(conName, operatorApn, pin, username, password) {
+export function* setModem({ operatorApn, pin, username, password }) {
   try {
-    const data = { conName, operatorApn, pin, username, password };
+    const data = { operatorApn, pin, username, password };
     const requestURL = `${API_URL}${GSM_PATH_SUFFIX}modem`;
     const accessToken = localStorage.getItem(ACCESS_TOKEN);
     const options = {
