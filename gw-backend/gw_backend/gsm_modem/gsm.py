@@ -4,11 +4,12 @@
 # @Email: alittysw@gmail.com
 # @Create At: 2020-08-07 11:02:53
 # @Last Modified By: Andre Litty
-# @Last Modified At: 2020-09-16 02:19:57
+# @Last Modified At: 2020-11-18 13:24:02
 # @Description: Blueprint for gsm modem routes.
 
 import re
 import subprocess
+import yaml
 
 from flask import Blueprint, request, jsonify, abort
 from flask_jwt_extended import jwt_required
@@ -74,6 +75,15 @@ def modem_data():
     return data
 
 
+def modem_credentials(yaml_path='yaml_template.yml'):
+    with open(yaml_path, 'r') as yaml_file:
+        config = yaml.safe_load(yaml_file)
+    if config:
+        return config.get('modem')
+    else:
+        return None
+
+
 @gsm_modem_route.route(API_PATH + PATH_SUFFIX + 'modem', methods=['GET', 'POST'])
 @jwt_required
 def modem():
@@ -98,3 +108,10 @@ def modem():
             return jsonify(success=True)
         else:
             return abort(503)
+
+
+@gsm_modem_route.route(API_PATH + PATH_SUFFIX + 'modem/credentials', methods=['GET'])
+@jwt_required
+def modem_credentials():
+    data = modem_credentials()
+    return jsonify(data)
