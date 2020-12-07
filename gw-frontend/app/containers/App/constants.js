@@ -76,6 +76,7 @@ export const ROUTES = {
     reboot: '/system-reboot',
     firmwareUpdate: '/system-firmware-update',
   },
+  settings: '/settings',
 };
 
 export const MAIN_COLORS = {
@@ -204,3 +205,7 @@ export const DISMISS = 'DISMISS';
 export const port = process.env.HOST_PORT ? process.env.HOST_PORT : 3000;
 const host = process.env.HOST_ADDRESS ? process.env.HOST_ADDRESS : '127.0.0.1';
 export const API_URL = `http://${host}:${port}/api/v1/`;
+
+export const { BUILD_TIME } = process.env;
+export const { GIT_REVISION } = process.env;
+export const { VERSION_CODE } = process.env;

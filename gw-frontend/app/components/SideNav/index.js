@@ -13,7 +13,7 @@ import { withRouter } from 'react-router-dom';
 // eslint-disable-next-line import/no-duplicates
 import MenuDropDownGroup from 'components/MenuDropdownGroup';
 // eslint-disable-next-line import/no-duplicates
-import MenuDropdownGroup from 'components/MenuDropdownGroup';
+// import MenuDropdownGroup from 'components/MenuDropdownGroup';
 
 import MenuDropDownItem from 'components/MenuDropdownItem';
 
@@ -262,6 +262,7 @@ export class SideNav extends React.Component {
               />
             </MenuDropDownGroup>
             */}
+            <MenuDropDownItem to={ROUTES.settings} caption="Settings" />
           </Wrapper>
         ) : null}
       </div>

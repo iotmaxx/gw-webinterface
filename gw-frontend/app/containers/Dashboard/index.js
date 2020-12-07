@@ -11,6 +11,8 @@ import { compose } from 'redux';
 
 import styled from 'styled-components';
 
+import { BUILD_TIME, GIT_REVISION, VERSION_CODE } from '../App/constants';
+
 const Wrapper = styled.div`
   margin-top: 20px;
 `;
@@ -24,9 +26,9 @@ export function Dashboard() {
   return (
     <Wrapper>
       <StyledSpan>Welcome to the GW-Gateway dashboard!</StyledSpan>
-      <p>Software-Version: 1.0 alpha</p>
-      <p>Checksum: f954c816fe3a2a69a7ab</p>
-      <p>Build: 01/30/2020 8:01:46 PM</p>
+      <p>Software-Version: {VERSION_CODE}</p>
+      <p>Checksum: {GIT_REVISION}</p>
+      <p>Build: {BUILD_TIME}</p>
     </Wrapper>
   );
 }

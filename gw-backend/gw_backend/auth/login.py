@@ -4,7 +4,7 @@
 # @Email: alittysw@gmail.com
 # @Create At: 2020-03-21 13:44:03
 # @Last Modified By: Andre Litty
-# @Last Modified At: 2020-08-13 01:49:45
+# @Last Modified At: 2020-11-09 01:13:24
 # @Description: Blueprint for login and token refresh logic.
 import json
 from hashlib import sha3_512
@@ -21,6 +21,8 @@ from flask_jwt_extended import (
 
 auth_route = Blueprint('auth', __name__)
 
+CREDENTIALS_PATH = '/credentials.json'
+
 
 def create_token_pair(identity=None):
     access_token = create_access_token(identity=identity)
@@ -33,7 +35,7 @@ def create_token_pair(identity=None):
 
 def load_credentials():
     try:
-        with open('/credentials.json') as credentials:
+        with open(CREDENTIALS_PATH) as credentials:
             return json.load(credentials)
     except Exception:
         return None
@@ -65,3 +67,19 @@ def refresh_token():
     current_user = get_jwt_identity()
     token_pair = create_token_pair(identity=current_user)
     return jsonify(token_pair)
+
+
+@auth_route.route(API_PATH + 'auth/reset_password', methods=['POST'])
+@jwt_refresh_token_required
+def reset_password():
+    request_data = request.get_json()
+    password = request_data.get('password')
+    password = sha3_512(password).hexdigest()
+    credentials = load_credentials()
+    if credentials is None:
+        return abort(400)
+    credentials['password'] = password
+    with open(CREDENTIALS_PATH) as credentials_file:
+        json.dump(credentials, credentials_file, indent=4)
+    response = {'success': True}
+    return jsonify(response)

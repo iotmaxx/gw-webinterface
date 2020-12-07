@@ -4,6 +4,29 @@
 
 const path = require('path');
 const webpack = require('webpack');
+const childProcess = require('child_process');
+
+const GIT_REVISION = childProcess
+  .execSync('git rev-parse HEAD')
+  .toString()
+  .trim();
+
+const getBuildTime = () => {
+  const today = new Date();
+  const date = `0${today.getDate()}`.slice(-2);
+  const month = `0${today.getMonth() + 1}`.slice(-2);
+  const year = today.getFullYear();
+  const hours = today.getHours();
+  const minutes = today.getMinutes();
+  const seconds = today.getSeconds();
+  return `${year}-${month}-${date} ${hours}:${minutes}:${seconds}`;
+};
+
+const VERSION_CODE = childProcess
+  .execSync('git describe --tags --long')
+  .toString()
+  .trim()
+  .split('-')[0];
 
 module.exports = options => ({
   mode: options.mode,
@@ -115,6 +138,9 @@ module.exports = options => ({
       NODE_ENV: JSON.stringify(process.env.NODE_ENV),
       HOST_ADDRESS: JSON.stringify(process.env.HOST_ADDRESS),
       HOST_PORT: JSON.stringify(process.env.HOST_PORT),
+      GIT_REVISION: JSON.stringify(GIT_REVISION),
+      BUILD_TIME: JSON.stringify(getBuildTime()),
+      VERSION_CODE: JSON.stringify(VERSION_CODE),
     }),
   ]),
   resolve: {

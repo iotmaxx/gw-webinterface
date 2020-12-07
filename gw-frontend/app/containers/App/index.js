@@ -62,6 +62,7 @@ import WirelessNetworkRadioSetup from 'containers/WirelessNetworkRadioSetup/Load
 import WirelessNetworkSim from 'containers/WirelessNetworkSim/Loadable';
 import WirelessNetworkSmsConfig from 'containers/WirelessNetworkSmsConfig/Loadable';
 import WirelessNetworkStaticRoutes from 'containers/WirelessNetworkStaticRoutes/Loadable';
+import SettingsView from 'containers/SettingsView/Loadable';
 
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 
@@ -340,7 +341,7 @@ function App(props) {
               path={ROUTES.system.firmwareUpdate}
               component={SystemFirmwareUpdate}
             />
-
+            <AuthRoute exact path={ROUTES.settings} component={SettingsView} />
             <Route component={NotFoundPage} />
           </Switch>
         </ContentWrapper>

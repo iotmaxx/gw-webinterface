@@ -15,7 +15,7 @@ const Input = styled.input`
   margin-bottom: 0.2em;
 `;
 
-function FormikInput({ formik, type, name, placeholder, value }) {
+function FormikInput({ formik, type, name, placeholder, value, ...props }) {
   return (
     <Input
       type={type}
@@ -23,6 +23,7 @@ function FormikInput({ formik, type, name, placeholder, value }) {
       placeholder={placeholder}
       value={value}
       {...formik.getFieldProps({ name })}
+      {...props}
     />
   );
 }
