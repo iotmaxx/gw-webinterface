@@ -1,44 +1,55 @@
 import {
-  GET_SETTINGS,
-  GET_SETTINGS_SUCCESS,
-  GET_SETTINGS_ERROR,
-  SET_PASSWORD,
-  SET_PASSWORD_SUCCESS,
-  SET_PASSWORD_ERROR,
+  GET_USER,
+  GET_USER_SUCCESS,
+  GET_USER_ERROR,
+  SET_CREDENTIALS,
+  SET_CREDENTIALS_SUCCESS,
+  SET_CREDENTIALS_ERROR,
+  UPDATE_USERNAME,
 } from './constants';
 
-export function getSettings() {
+export function getUser() {
   return {
-    type: GET_SETTINGS,
+    type: GET_USER,
   };
 }
 
-export function getSettingsSuccess() {
+export function getUserSuccess(username) {
   return {
-    type: GET_SETTINGS_SUCCESS,
+    type: GET_USER_SUCCESS,
+    username,
   };
 }
 
-export function getSettingsError() {
+export function getUserError() {
   return {
-    type: GET_SETTINGS_ERROR,
+    type: GET_USER_ERROR,
   };
 }
 
-export function setPassword() {
+export function updateUsername(username) {
   return {
-    type: SET_PASSWORD,
+    type: UPDATE_USERNAME,
+    username,
   };
 }
 
-export function setPasswordSuccess() {
+export function setCredentials(username, password) {
   return {
-    type: SET_PASSWORD_SUCCESS,
+    type: SET_CREDENTIALS,
+    username,
+    password,
   };
 }
 
-export function setPasswordError() {
+export function setCredentialsSuccess() {
   return {
-    type: SET_PASSWORD_ERROR,
+    type: SET_CREDENTIALS_SUCCESS,
+  };
+}
+
+export function setCredentialsError() {
+  return {
+    type: SET_CREDENTIALS_ERROR,
   };
 }

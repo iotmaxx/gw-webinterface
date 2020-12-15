@@ -19,7 +19,6 @@ import {
   LabelCell,
   CenterButton,
   FormWrapper,
-  TableHead,
   TableTitle,
 } from 'containers/App/constants';
 
@@ -29,8 +28,15 @@ import Input from '../FormikInput';
 // import { FormattedMessage } from 'react-intl';
 // import messages from './messages';
 
-function ResetPasswordForm({ submit, user, password, setPassword }) {
+function ResetPasswordForm({
+  submit,
+  username,
+  password,
+  setPassword,
+  setUsername,
+}) {
   const schema = Yup.object({
+    username: Yup.string(),
     password: Yup.string()
       .required('Required')
       .min(6),
@@ -38,7 +44,7 @@ function ResetPasswordForm({ submit, user, password, setPassword }) {
 
   const formik = useFormik({
     initialValues: {
-      user,
+      username,
       password,
     },
     onSubmit: values => {
@@ -53,10 +59,24 @@ function ResetPasswordForm({ submit, user, password, setPassword }) {
       <TableTitle>Settings</TableTitle>
       <table>
         <tbody>
-          <DarkTableRow colSpan={2}>
-            <TableHead>
-              <p>User: {user}</p>
-            </TableHead>
+          <DarkTableRow>
+            <LabelCell>
+              <Label text="Username" labelFor="username" />
+            </LabelCell>
+            <InputCell>
+              <Input
+                type="text"
+                name="username"
+                placeholder="Username"
+                value={username}
+                formik={formik}
+                onChange={e => setUsername(e.target.value)}
+              />
+              <FormFieldError
+                touched={formik.touched.username}
+                errors={formik.errors.username}
+              />
+            </InputCell>
           </DarkTableRow>
           <LightTableRow>
             <LabelCell>
@@ -66,14 +86,14 @@ function ResetPasswordForm({ submit, user, password, setPassword }) {
               <Input
                 type="password"
                 name="password"
-                placeholder="password"
+                placeholder="Password"
                 value={password}
                 formik={formik}
                 onChange={e => setPassword(e.target.value)}
               />
               <FormFieldError
-                touched={formik.touched.hostname}
-                errors={formik.errors.hostname}
+                touched={formik.touched.password}
+                errors={formik.errors.password}
               />
             </InputCell>
           </LightTableRow>
@@ -86,9 +106,11 @@ function ResetPasswordForm({ submit, user, password, setPassword }) {
 
 ResetPasswordForm.propTypes = {
   submit: PropTypes.func,
-  user: PropTypes.string,
+  username: PropTypes.string,
   password: PropTypes.string,
+  initialUsername: PropTypes.string,
   setPassword: PropTypes.func,
+  setUsername: PropTypes.func,
 };
 
 export default ResetPasswordForm;

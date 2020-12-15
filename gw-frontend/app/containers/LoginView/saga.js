@@ -2,7 +2,7 @@ import { takeLatest, call, put } from 'redux-saga/effects';
 
 import request from 'utils/request';
 import history from 'utils/history';
-import { loginSuccess, setSuccess, setError } from '../App/actions';
+import { loginSuccess, setError } from '../App/actions';
 import {
   LOGIN,
   LOGOUT,

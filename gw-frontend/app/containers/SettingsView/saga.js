@@ -4,28 +4,28 @@
  * @Email: alittysw@gmail.com
  * @Create At: 2020-11-18 17:51:24
  * @Last Modified By: Andre Litty
- * @Last Modified At: 2020-11-18 18:00:15
+ * @Last Modified At: 2020-12-15 01:26:54
  * @Description: This is description.
  */
 
 import { takeLatest, call, put } from 'redux-saga/effects';
 import request from 'utils/request';
 
-import { GET_SETTINGS, SET_PASSWORD } from './constants';
+import { GET_USER, SET_CREDENTIALS } from './constants';
 
 import {
-  getSettingsSuccess,
-  getSettingsError,
-  setPasswordError,
-  setPasswordSuccess,
+  getUserSuccess,
+  getUserError,
+  setCredentialsSuccess,
+  setCredentialsError,
 } from './actions';
 
 import { API_URL, ACCESS_TOKEN } from '../App/constants';
 import { setError, setSuccess } from '../App/actions';
 
-export function* getSettings() {
+export function* getUser() {
   try {
-    const requestURL = `${API_URL}auth/login`;
+    const requestURL = `${API_URL}auth/user`;
     const accessToken = localStorage.getItem(ACCESS_TOKEN);
     const options = {
       method: 'GET',
@@ -36,16 +36,16 @@ export function* getSettings() {
       },
     };
     const response = yield call(request, requestURL, options);
-    yield put(getSettingsSuccess(response.user));
+    yield put(getUserSuccess(response.user));
   } catch (error) {
     console.log(error);
-    yield put(getSettingsError());
+    yield put(getUserError());
   }
 }
 
-export function* setPassword({ password }) {
+export function* setCredentials({ username, password }) {
   try {
-    const data = { password };
+    const data = { username, password };
     const requestURL = `${API_URL}auth/reset_password`;
     const accessToken = localStorage.getItem(ACCESS_TOKEN);
     const options = {
@@ -59,22 +59,21 @@ export function* setPassword({ password }) {
     };
     const response = yield call(request, requestURL, options);
     if (response.success === true) {
-      yield put(setPasswordSuccess());
+      yield put(setCredentialsSuccess(response.user));
       yield put(setSuccess());
     } else {
-      yield put(setPasswordError());
+      yield put(setCredentialsError());
     }
-    yield put(setError());
   } catch (error) {
     console.log(error);
-    yield put(setPasswordError());
+    yield put(setCredentialsError());
     yield put(setError());
   }
 }
 
 export default function* rootSaga() {
   yield [
-    takeLatest(GET_SETTINGS, getSettings),
-    takeLatest(SET_PASSWORD, setPassword),
+    yield takeLatest(GET_USER, getUser),
+    yield takeLatest(SET_CREDENTIALS, setCredentials),
   ];
 }
