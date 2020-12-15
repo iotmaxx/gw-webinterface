@@ -5,7 +5,7 @@
  */
 
 import React, { useEffect, useState } from 'react';
-import PropTypes, { func } from 'prop-types';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 // import styled from 'styled-components';
@@ -21,14 +21,15 @@ import { dismiss } from '../App/actions';
 
 import saga from './saga';
 import SettingsViewReducer from './reducers';
-import { getSettings, setPassword } from './actions';
+import { getUser, setCredentials, updateUsername } from './actions';
 // import messages from './messages';
 // import { FormattedMessage } from 'react-intl';
 
 function SettingsView({
   user,
-  doSetPassword,
-  doGetSettings,
+  doSetCredentials,
+  doUpdateUsername,
+  doGetUser,
   error,
   success,
   doDismiss,
@@ -36,17 +37,22 @@ function SettingsView({
   const [password, updatePassword] = useState('');
 
   useEffect(() => {
-    doGetSettings();
+    doGetUser();
     updatePassword('');
   }, []);
+
+  const submit = values => {
+    doSetCredentials(values.username, values.password);
+  };
 
   return (
     <div>
       <ResetPasswordForm
-        submit={doSetPassword}
-        user={user}
+        submit={submit}
+        username={user}
         password={password}
         setPassword={updatePassword}
+        setUsername={doUpdateUsername}
       />
       ;
       <Feedback
@@ -62,22 +68,26 @@ function SettingsView({
 SettingsView.propTypes = {
   error: PropTypes.bool,
   success: PropTypes.bool,
-  doSetPassword: PropTypes.func,
-  doGetSettings: PropTypes.func,
+  doSetCredentials: PropTypes.func,
+  doGetUser: PropTypes.func,
   user: PropTypes.string,
   doDismiss: PropTypes.func,
+  doUpdateUsername: PropTypes.func,
 };
 
 function mapDispatchToProps(dispatch) {
   return {
-    doSetPassword: password => {
-      dispatch(setPassword(password));
+    doSetCredentials: (username, password) => {
+      dispatch(setCredentials(username, password));
     },
-    doGetSettings: () => {
-      dispatch(getSettings());
+    doGetUser: () => {
+      dispatch(getUser());
     },
     doDismiss: () => {
       dispatch(dismiss());
+    },
+    doUpdateUsername: username => {
+      dispatch(updateUsername(username));
     },
   };
 }

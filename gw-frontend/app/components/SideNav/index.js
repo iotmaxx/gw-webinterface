@@ -262,7 +262,9 @@ export class SideNav extends React.Component {
               />
             </MenuDropDownGroup>
             */}
-            <MenuDropDownItem to={ROUTES.settings} caption="Settings" />
+            <MenuDropDownGroup caption="Settings">
+              <MenuDropDownItem to={ROUTES.settings} caption="Credentials" />
+            </MenuDropDownGroup>
           </Wrapper>
         ) : null}
       </div>

@@ -26,7 +26,7 @@ const Centered = styled.div`
 
 export function LoginView({ doLogin, success, error, doDismiss }) {
   const submit = values => {
-    if (values.name.length !== 0 || values.password.length !== 0) {
+    if (values.name.length !== 0 && values.password.length !== 0) {
       doLogin(values.name, values.password);
     }
   };
