@@ -9,6 +9,7 @@ build_frontend()
     echo "Building production version for gw-webinterface frontend..."
     FRONTEND_PATH=$HOME_PATH"/gw-frontend"
     cd $FRONTEND_PATH
+    npm run clean
     npm install
     npm run build
 }
@@ -33,12 +34,12 @@ get_current_ip()
 {
     IP_REGEX=[0-9]+.[0-9]+.[0-9]+.[0-9]+
     address=`ip addr show dev eth0 | grep inet | grep -Eo $IP_REGEX/ | grep -Eo $IP_REGEX`
-    echo HOST_ADDRESS=$address > .env
+    echo HOST_ADDRESS=192.168.1.1 > .env
     echo HOST_PORT=$PORT >> .env
 }
 
 echo "Configuring and installing gw-application..."
 get_current_ip
 set_environment_variables
-# build_frontend
-# install_backend
+build_frontend
+install_backend

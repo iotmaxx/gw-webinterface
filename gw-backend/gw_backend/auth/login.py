@@ -8,6 +8,8 @@
 # @Description: Blueprint for login and token refresh logic.
 import json
 from hashlib import sha3_512
+from pathlib import Path
+import os
 
 from gw_backend.config.constants import API_PATH
 
@@ -22,7 +24,7 @@ from flask_jwt_extended import (
 
 auth_route = Blueprint('auth', __name__)
 
-CREDENTIALS_PATH = '/credentials.json'
+CREDENTIALS_PATH = os.path.dirname(os.path.abspath(__file__)) + "/credentials.json"
 
 
 def create_token_pair(identity=None):
@@ -49,10 +51,10 @@ def login():
         return abort(400)
     if not 'username' in request_data or 'password' not in request_data:
         return abort(400)
-    credentials = load_credentials()
+    credentials = load_credentials()    
     if credentials is None:
         return abort(401)
-    username = request_data.get('username')
+    username = request_data.get('username')    
     password = request_data.get('password')
     password = password.encode()
     if username != credentials['username'] or\
