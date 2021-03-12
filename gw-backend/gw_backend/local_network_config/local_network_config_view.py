@@ -18,7 +18,7 @@ from gw_backend.config.constants import API_PATH
 from gw_cli import change_hostname, change_mtu, change_ipv4
 
 from .constants import PATH_SUFFIX
-from .utils import find_file_content, replace_in_file, get_net_information, update_env_file
+from .utils import find_file_content, replace_in_file, replace_in_files, get_net_information, update_env_file
 
 local_network_route = Blueprint('local_network', __name__)
 
@@ -56,8 +56,11 @@ def thread_function(ip_address, subnet_mask):
     Workaround function to change ip address in separate thread than the resquest is handled
     Changing ip address in the same thread causes the response to get lost in network
     """
-    time.sleep(0.3)
+    time.sleep(3)
     change_ipv4(ip_address, subnet_mask)
+
+def thread_replace_function(search_address, replace_address):
+    replace_in_files(search_address, replace_address)
 
 
 @local_network_route.route(API_PATH + PATH_SUFFIX + 'address/all', methods=['GET'])
@@ -97,17 +100,24 @@ def post_ip():
                 if js_file is not None:
                     if string.find('://') != -1:
                         search_address = f'http://{old_address}'
-                        replace_address = f'http://{ip_address}'
+                        replace_address = f'http://{ip_address}'                        
                     else:
                         search_address = old_address
                         replace_address = ip_address
                     break
-            if js_file is not None:
-                replace_in_file(js_file, search_address, replace_address)
-            update_env_file(ip_address)
+                #if js_file is not None:
+                    #replace_in_file(js_file, search_address, replace_address)
+            #update_env_file(ip_address)
+
+        #thread_replace = threading.Thread(target=thread_replace_function,
+                                  #args=(search_address, replace_address))
+        #thread_replace.start()
+        replace_in_files(search_address, replace_address)
         thread = threading.Thread(target=thread_function,
                                   args=(ip_address, subnet_mask))
         thread.start()
+
+        
         return jsonify(
             ipAddress=ip_address,
             subnetMask=subnet_mask

@@ -79,7 +79,7 @@ export function* setBeginIpRange({ beginIpRange }) {
 
 export function* setEndIpRange({ endIpRange }) {
   try {
-    const data = { endIpRange };
+    const data = { endIpRange };    
     const requestURL = `${API_URL}${DHCP_PATH_SUFFIX}endIpRange`;
     const accessToken = localStorage.getItem(ACCESS_TOKEN);
     const options = {

@@ -8,9 +8,9 @@ import {
 
 const initialState = {
   domainName: 'localhost',
-  beginIpRange: '127.0.0.1',
-  endIpRange: '127.0.0.254',
-  leaseTime: '1d',
+  beginIpRange: '1',
+  endIpRange: '254',
+  leaseTime: '7200',
 };
 
 function LocalDhcpServerReducer(state = initialState, action) {

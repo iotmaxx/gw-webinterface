@@ -31,10 +31,10 @@ def create_app():
     CORS(app)
     env = os.environ.get('FLASK_ENV', 'development')
 
-    if env == 'development':
-        app.config.from_object(DevelopmentSettings())
-    else:
-        app.config.from_object(ProductionSettings())
+    #if env == 'development':
+    app.config.from_object(DevelopmentSettings())
+    #else:
+    #    app.config.from_object(ProductionSettings())
     jwt = JWTManager(app)
 
     from gw_backend.auth.login import auth_route

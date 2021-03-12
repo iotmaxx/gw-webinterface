@@ -52,9 +52,9 @@ export function LocalNetworkDhcpServer({
     if (values.beginIpRange !== beginIpRange && values.beginIpRange.length > 0)
       doSetBeginIpRange(values.beginIpRange);
     if (values.endIpRange !== endIpRange && values.endIpRange.length > 0)
-      doSetEndIpRange(endIpRange);
+      doSetEndIpRange(values.endIpRange);
     if (values.leaseTime !== leaseTime && values.leaseTime > 0)
-      doSetLeaseTime(leaseTime);
+      doSetLeaseTime(values.leaseTime);
   };
 
   return (
