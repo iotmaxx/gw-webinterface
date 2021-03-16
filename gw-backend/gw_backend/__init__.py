@@ -28,6 +28,8 @@ def create_app():
     )
 
     app = Flask(__name__)
+    app.config["JWT_ACCESS_TOKEN_EXPIRES"] = False
+    app.config["JWT_REFRESH_TOKEN_EXPIRES"] = False
     CORS(app)
     env = os.environ.get('FLASK_ENV', 'development')
 
