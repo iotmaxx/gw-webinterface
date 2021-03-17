@@ -3,11 +3,13 @@ import {
   SET_BEGIN_IP_RANGE,
   SET_END_IP_RANGE,
   SET_LEASE_TIME,
+  SET_ENABLE_DHCP_SERVER,
   GET_DHCP_CONFIG,
   SUCCESS_SET_DOMAIN_NAME,
   SUCCESS_SET_BEGIN_IP_RANGE,
   SUCCESS_SET_END_IP_RANGE,
   SUCCESS_SET_LEASE_TIME,
+  SUCCESS_ENABLE_DHCP_SERVER,
   SUCCESS_GET_DHCP_CONFIG,
 } from './constants';
 
@@ -36,6 +38,20 @@ export function setLeaseTime(leaseTime) {
   return {
     type: SET_LEASE_TIME,
     leaseTime,
+  };
+}
+
+export function setEnableDHCPServer(enableDHCPServer) {
+  return {
+    type: SET_ENABLE_DHCP_SERVER,
+    enableDHCPServer,
+  };
+}
+
+export function successSetEnableDHCPServer(enableDHCPServer) {
+  return {
+    type: SUCCESS_ENABLE_DHCP_SERVER,
+    enableDHCPServer,
   };
 }
 
@@ -78,6 +94,7 @@ export function successGetDhcpConfig(
   beginIpRange,
   endIpRange,
   leaseTime,
+  enableDHCPServer,
 ) {
   return {
     type: SUCCESS_GET_DHCP_CONFIG,
@@ -85,5 +102,6 @@ export function successGetDhcpConfig(
     beginIpRange,
     endIpRange,
     leaseTime,
+    enableDHCPServer,
   };
 }

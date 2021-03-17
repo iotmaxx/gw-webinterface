@@ -12,7 +12,7 @@ from flask_jwt_extended import jwt_required
 
 from gw_backend.config.constants import API_PATH
 
-from gw_cli import change_dhcp_server, get_dhcp_server_config
+from gw_cli import change_dhcp_server, get_dhcp_server_config, swap_dhcp_state
 
 from .constants import PATH_SUFFIX
 
@@ -30,7 +30,7 @@ def post_domain_name():
     if not config:
         abort(400)
     change_dhcp_server(
-        request_data.get('domainName'),
+        str(request_data.get('domainName')),
         config[0],
         config[1],
         config[2]
@@ -50,7 +50,7 @@ def post_begin_ip_range():
         abort(400)
     change_dhcp_server(
         config[3],
-        request_data.get('beginIpRange'),
+        str(request_data.get('beginIpRange')),
         config[1],
         config[2]
         )
@@ -70,7 +70,7 @@ def post_end_ip_range():
     change_dhcp_server(
         config[3],
         config[0],
-        request_data.get('endIpRange'),
+        str(request_data.get('endIpRange')),
         config[2]
         )
     resp = {'endIpRange': request_data.get('endIpRange')}
@@ -90,9 +90,22 @@ def post_lease_time():
         config[3],
         config[0],
         config[1],
-        request_data.get('leaseTime')
+        str(request_data.get('leaseTime'))
         )
     resp = {'leaseTime': request_data.get('leaseTime')}
+    return jsonify(resp)
+
+@dhcp_config_route.route(API_PATH + PATH_SUFFIX + 'enableDHCPServer', methods=['POST'])
+@jwt_required
+def post_enable_DHCP_server():
+    request_data = request.get_json()
+    config = get_dhcp_server_config()
+    if not 'enableDHCPServer' in request_data:
+        abort(400)
+    if not config:
+        abort(400)
+    swap_dhcp_state(request_data.get('enableDHCPServer'))
+    resp = {'enableDHCPServer': request_data.get('enableDHCPServer')}
     return jsonify(resp)
 
 
@@ -100,12 +113,20 @@ def post_lease_time():
 @jwt_required
 def get_dhcp_config():
     config = get_dhcp_server_config()
+
+    if config[4] == 'false':
+        flag = False
+    else:
+        flag = True
+
+
     if not config:
         abort(503)
     resp = {
-        'beginIpRange': config[0],
-        'endIpRange': config[1],
-        'leaseTime': config[2],
-        'domainName': config[3],
+        'beginIpRange': str(config[0]),
+        'endIpRange': str(config[1]),
+        'leaseTime': str(config[2]),
+        'domainName': str(config[3]),
+        'enableDHCPServer': flag,
     }
     return jsonify(resp)

@@ -12,8 +12,8 @@ import mmap
 import subprocess
 import re
 import ipaddress
-import os
-import pathlib
+import os, fnmatch
+from pathlib import Path
 
 
 MTU_REX = 'mtu [0-9]+'
@@ -23,8 +23,9 @@ IPV6_REX = 'inet6 [0-9a-fA-F:]*/[1-9]+'
 
 def find_file_content(search_string):
     try:
-        path = pathlib.Path(__file__).parent.parent.absolute()
+        path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
         path = str(path) + '/static/*.js'
+        print(path)
         for js_file in glob.glob(path):
             with open(js_file, 'rb', 0) as file, mmap.mmap(
                     file.fileno(),
@@ -46,6 +47,22 @@ def replace_in_file(filename, to_replace, replace_with):
         return True
     except Exception:
         return False
+
+def replace_in_files(to_replace, replace_with):
+    path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    path = str(path) + '/static/'
+    listOfFiles = os.listdir(path)
+    pattern = "*.js"
+    for filename in listOfFiles:
+        
+        if fnmatch.fnmatch(filename, pattern):
+            print(filename)
+            with open(str(path)+str(filename), 'r') as file:
+                contend = file.read()
+            contend = contend.replace(to_replace, replace_with)
+            with open(str(path)+str(filename), 'w') as file:
+                file.write(contend)
+
 
 
 def get_net_information(dev):

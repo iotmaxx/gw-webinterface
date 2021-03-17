@@ -156,7 +156,7 @@ function LocalNetworkIpConfigForm({
                 errors={formik.errors.mtu}
               />
             </InputCell>
-          </DarkTableRow>
+          </DarkTableRow>{/*
           <LightTableRow>
             <LabelCell>
               <Label text="Enable IPv6" labelFor="enableIPv6" />
@@ -168,7 +168,8 @@ function LocalNetworkIpConfigForm({
               </Select>
             </InputCell>
           </LightTableRow>
-          {enableIPv6 ? (
+*/}
+          {/*enableIPv6 ? (
             <DarkTableRow>
               <LabelCell>
                 <Label text="IPv6 static address" labelFor="ipAddressV6" />
@@ -187,7 +188,7 @@ function LocalNetworkIpConfigForm({
                 />
               </InputCell>
             </DarkTableRow>
-          ) : null}
+          ) : null*/}
         </tbody>
       </table>
       <CenterButton type="submit">Apply</CenterButton>

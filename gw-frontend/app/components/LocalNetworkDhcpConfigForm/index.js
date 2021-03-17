@@ -4,10 +4,12 @@
  *
  */
 
-import React from 'react';
-import PropTypes from 'prop-types';
+ import React, { useState } from 'react';
+ import styled from 'styled-components';
+ import PropTypes from 'prop-types';
+ 
 
-import { useFormik } from 'formik';
+import { FormikProvider, useFormik } from 'formik';
 import * as Yup from 'yup';
 
 import FormFieldError from 'components/FormFieldError';
@@ -17,6 +19,7 @@ import {
   LightTableRow,
   DarkTableRow,
   InputCell,
+  Select,
   LabelCell,
   CenterButton,
   FormWrapper,
@@ -25,20 +28,34 @@ import {
 
 import Label from '../Label';
 import Input from '../FormikInput';
+import { Field } from 'formik';
+
+
+const CheckboxWrapper = styled.input`
+  margin-left: 10px;
+  height: 20px;
+  width: 20px;
+  vertical-align: text-bottom;
+`;
+
+
+
 
 function LocalNetworkDhcpConfigForm({
   submit,
   domainName,
+  leaseTime,
   beginIpRange,
   endIpRange,
-  leaseTime,
+  enableDHCPServer,   
 }) {
   const schema = Yup.object({
     domainName: Yup.string().required('Required'),
     leaseTime: Yup.string().required('Required'),
-    beginIpRange: YUP_VALIDATORS.ipV4Field,
-    endIpRange: YUP_VALIDATORS.ipV4Field,
-  });
+    beginIpRange: Yup.string().required('Required'),
+    endIpRange: Yup.string().required('Required'),
+    enableDHCPServer: Yup.boolean(),    
+    });
 
   const formik = useFormik({
     initialValues: {
@@ -46,6 +63,7 @@ function LocalNetworkDhcpConfigForm({
       leaseTime,
       beginIpRange,
       endIpRange,
+      enableDHCPServer,
     },
     onSubmit: values => {
       submit(values);
@@ -53,6 +71,15 @@ function LocalNetworkDhcpConfigForm({
     validationSchema: schema,
     enableReinitialize: true,
   });
+
+  const [DHCPServer, eDHCPServer] = useState(true);
+
+  const toggleSelect = event => {
+    //enableDHCPServer = event.target.checked
+    eDHCPServer(event.target.checked);    
+   // if (value === true) eDHCPServer(true);
+   // if (value === false) eDHCPServer(false);
+  };
 
   return (
     <FormWrapper onSubmit={formik.handleSubmit}>
@@ -82,9 +109,9 @@ function LocalNetworkDhcpConfigForm({
             </LabelCell>
             <InputCell>
               <Input
-                type="text"
+                type="number"
                 name="leaseTime"
-                placeholder="1d 5h 30m"
+                placeholder="7200"
                 formik={formik}
               />
               <FormFieldError
@@ -101,7 +128,7 @@ function LocalNetworkDhcpConfigForm({
               <Input
                 type="text"
                 name="beginIpRange"
-                placeholder="192.168.1.1"
+                placeholder="20"
                 formik={formik}
               />
               <FormFieldError
@@ -112,13 +139,13 @@ function LocalNetworkDhcpConfigForm({
           </LightTableRow>
           <DarkTableRow>
             <LabelCell>
-              <Label text="End IP Range" labelFor="endIpRange" />
+              <Label text="IP Pool Size" labelFor="endIpRange" />
             </LabelCell>
             <InputCell>
               <Input
                 type="text"
                 name="endIpRange"
-                placeholder="192.168.1.255"
+                placeholder="253"
                 formik={formik}
               />
               <FormFieldError
@@ -127,6 +154,22 @@ function LocalNetworkDhcpConfigForm({
               />
             </InputCell>
           </DarkTableRow>
+          <LightTableRow>
+          <LabelCell>
+              <Label text="Enable DHCP" labelFor="enableDHCPServer" />
+            </LabelCell>
+            <InputCell>
+            <FormikProvider>
+              <Input
+                type="checkbox"
+                name="enableDHCPServer"
+                checked={formik.values.enableDHCPServer}                  
+                //onPress={() => setFieldValue("enableDHCPServer", DHCPServer)}                                             
+                formik={formik}
+              />    
+              </FormikProvider>        
+            </InputCell>          
+          </LightTableRow>
         </tbody>
       </table>
       <CenterButton type="submit">Apply</CenterButton>
@@ -137,9 +180,10 @@ function LocalNetworkDhcpConfigForm({
 LocalNetworkDhcpConfigForm.propTypes = {
   submit: PropTypes.func,
   domainName: PropTypes.string,
+  leaseTime: PropTypes.string,
   beginIpRange: PropTypes.string,
   endIpRange: PropTypes.string,
-  leaseTime: PropTypes.string,
+  enableDHCPServer: PropTypes.bool,
 };
 
 export default LocalNetworkDhcpConfigForm;

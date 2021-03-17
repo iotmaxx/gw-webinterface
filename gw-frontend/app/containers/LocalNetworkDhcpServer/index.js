@@ -24,6 +24,7 @@ import {
   setBeginIpRange,
   setEndIpRange,
   setLeaseTime,
+  setEnableDHCPServer,
   getDhcpConfig,
 } from './actions';
 import { dismiss } from '../App/actions';
@@ -33,12 +34,14 @@ export function LocalNetworkDhcpServer({
   beginIpRange,
   endIpRange,
   leaseTime,
+  enableDHCPServer,
   success,
   error,
   doSetDomainName,
   doSetBeginIpRange,
   doSetEndIpRange,
   doSetLeaseTime,
+  doSetEnableDHCPServer,
   doDismiss,
   doGetDhcpConfig,
 }) {
@@ -52,9 +55,12 @@ export function LocalNetworkDhcpServer({
     if (values.beginIpRange !== beginIpRange && values.beginIpRange.length > 0)
       doSetBeginIpRange(values.beginIpRange);
     if (values.endIpRange !== endIpRange && values.endIpRange.length > 0)
-      doSetEndIpRange(endIpRange);
+      doSetEndIpRange(values.endIpRange);
     if (values.leaseTime !== leaseTime && values.leaseTime > 0)
-      doSetLeaseTime(leaseTime);
+      doSetLeaseTime(values.leaseTime);
+    if (values.enableDHCPServer !== enableDHCPServer)
+      doSetEnableDHCPServer(values.enableDHCPServer);
+    
   };
 
   return (
@@ -65,6 +71,7 @@ export function LocalNetworkDhcpServer({
         beginIpRange={beginIpRange}
         endIpRange={endIpRange}
         leaseTime={leaseTime}
+        enableDHCPServer={enableDHCPServer}
       />
       <Feedback
         success={success}
@@ -81,12 +88,14 @@ LocalNetworkDhcpServer.propTypes = {
   beginIpRange: PropTypes.string,
   endIpRange: PropTypes.string,
   leaseTime: PropTypes.string,
+  enableDHCPServer: PropTypes.bool,
   success: PropTypes.bool,
   error: PropTypes.bool,
   doSetDomainName: PropTypes.func,
   doSetBeginIpRange: PropTypes.func,
   doSetEndIpRange: PropTypes.func,
   doSetLeaseTime: PropTypes.func,
+  doSetEnableDHCPServer: PropTypes.func,
   doDismiss: PropTypes.func,
   doGetDhcpConfig: PropTypes.func,
 };
@@ -105,6 +114,9 @@ function mapDispatchToProps(dispatch) {
     doSetLeaseTime: leaseTime => {
       dispatch(setLeaseTime(leaseTime));
     },
+    doSetEnableDHCPServer: enableDHCPServer => {
+      dispatch(setEnableDHCPServer(enableDHCPServer));
+    },
     doDismiss: () => {
       dispatch(dismiss());
     },
@@ -119,6 +131,7 @@ const mapStateToProps = state => ({
   beginIpRange: state.LocalNetworkDhcpServer.beginIpRange,
   endIpRange: state.LocalNetworkDhcpServer.endIpRange,
   leaseTime: state.LocalNetworkDhcpServer.leaseTime,
+  enableDHCPServer: state.LocalNetworkDhcpServer.enableDHCPServer,
   success: state.App.success,
   error: state.App.error,
 });
