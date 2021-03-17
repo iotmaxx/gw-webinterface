@@ -48,14 +48,6 @@ export function WirelessNetworkSim({ doSetModem }) {
       ) : (
         <PukForm clickHandler={clickHandler} />
       )}
-      <br />
-      <label htmlFor="simEnabled">SIM card enabled?</label>
-      <input
-        name="simEnabled"
-        checked={simEnabled}
-        onChange={event => toggleCheckbox(event)}
-        type="checkbox"
-      />
       <ToastsContainer
         store={ToastsStore}
         position={ToastsContainerPosition.BOTTOM_RIGHT}
