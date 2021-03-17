@@ -12,7 +12,7 @@ from flask_jwt_extended import jwt_required
 
 from gw_backend.config.constants import API_PATH
 
-from gw_cli import change_dhcp_server, get_dhcp_server_config
+from gw_cli import change_dhcp_server, get_dhcp_server_config, swap_dhcp_state
 
 from .constants import PATH_SUFFIX
 
@@ -95,11 +95,31 @@ def post_lease_time():
     resp = {'leaseTime': request_data.get('leaseTime')}
     return jsonify(resp)
 
+@dhcp_config_route.route(API_PATH + PATH_SUFFIX + 'enableDHCPServer', methods=['POST'])
+@jwt_required
+def post_enable_DHCP_server():
+    request_data = request.get_json()
+    config = get_dhcp_server_config()
+    if not 'enableDHCPServer' in request_data:
+        abort(400)
+    if not config:
+        abort(400)
+    swap_dhcp_state(request_data.get('enableDHCPServer'))
+    resp = {'enableDHCPServer': request_data.get('enableDHCPServer')}
+    return jsonify(resp)
+
 
 @dhcp_config_route.route(API_PATH + PATH_SUFFIX + 'config', methods=['GET'])
 @jwt_required
 def get_dhcp_config():
     config = get_dhcp_server_config()
+
+    if config[4] == 'false':
+        flag = False
+    else:
+        flag = True
+
+
     if not config:
         abort(503)
     resp = {
@@ -107,5 +127,6 @@ def get_dhcp_config():
         'endIpRange': str(config[1]),
         'leaseTime': str(config[2]),
         'domainName': str(config[3]),
+        'enableDHCPServer': flag,
     }
     return jsonify(resp)

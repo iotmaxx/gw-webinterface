@@ -25,7 +25,7 @@ const StyledSpan = styled.span`
 export function Dashboard() {
   return (
     <Wrapper>
-      <StyledSpan>Welcome to the GW-Gateway dashboard!</StyledSpan>
+      <StyledSpan>Welcome to the IoTmaxx-Gateway dashboard!</StyledSpan>
       <p>Software-Version: {VERSION_CODE}</p>
       <p>Checksum: {GIT_REVISION}</p>
       <p>Build: {BUILD_TIME}</p>

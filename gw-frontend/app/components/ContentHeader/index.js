@@ -1,4 +1,4 @@
-/**
+/*
  *
  * ContentHeader
  *
@@ -30,8 +30,8 @@ const UpdateTime = styled.p`
 function ContentHeader() {
   return (
     <Wrapper>
-      <ContentHeaderTitle>Gateway: GW4100</ContentHeaderTitle>
-      <UpdateTime>Last update:13:43:48</UpdateTime>
+      <ContentHeaderTitle>Gateway: GW4XXXX</ContentHeaderTitle>
+      <UpdateTime></UpdateTime>
     </Wrapper>
   );
 }
